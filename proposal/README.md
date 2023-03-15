@@ -26,14 +26,14 @@ For this project, we have decided that it will be an android app as two of our g
 By giving users a much more concrete, visual manner of tracking and executing goals, we hope that our users will be able to better adhere to their chosen goals. We also hope to give our users a sense of progression and accomplishment as they complete their goals and are slowly able to build up a list of accomplishments. As our application is developed to be as flexible as possible, users are able to define their goals no matter how small or large they may be.
 
 ### Operations	
-Account registration (name, email, username, password)
-Login
-Forgot password
-Create/edit/delete goals
-Add tasks to be done (can specify when tasks need to be finished or leave time to finish indefinite)
-Generate progress report for all goals or specified goals
-Generate schedules and time zones to work on tasks (optimizes how much time should be spent on each task each day based on priority of task set by user)
-Dashboard of upcoming activities and deadlines as well as progress
-Set reminders for activities related to particular goals
-Optionally send motivational messages to user when they are nearing particular goal thresholds (10%, 25%, etc.)
-Export as an ICS file for use with traditional calendar apps.
+- Account registration (name, email, username, password)
+- Login
+- Forgot password
+- Create/edit/delete goals
+- Add tasks to be done (can specify when tasks need to be finished or leave time to finish indefinite)
+- Generate progress report for all goals or specified goals
+- Generate schedules and time zones to work on tasks (optimizes how much time should be spent on each task each day based on priority of task set by user)
+- Dashboard of upcoming activities and deadlines as well as progress
+- Set reminders for activities related to particular goals
+- Optionally send motivational messages to user when they are nearing particular goal thresholds (10%, 25%, etc.)
+- Export as an ICS file for use with traditional calendar apps.

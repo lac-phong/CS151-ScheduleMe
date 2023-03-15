@@ -30,11 +30,9 @@ Account registration (name, email, username, password)
 Login
 Forgot password
 Create/edit/delete goals
-Add tasks to be done 
-> Can specify when tasks need to be finished or leave time to finish indefinite
+Add tasks to be done (can specify when tasks need to be finished or leave time to finish indefinite)
 Generate progress report for all goals or specified goals
-Generate schedules and time zones to work on tasks
-> Optimizes how much time should be spent on each task each day based on priority of task set by user
+Generate schedules and time zones to work on tasks (optimizes how much time should be spent on each task each day based on priority of task set by user)
 Dashboard of upcoming activities and deadlines as well as progress
 Set reminders for activities related to particular goals
 Optionally send motivational messages to user when they are nearing particular goal thresholds (10%, 25%, etc.)

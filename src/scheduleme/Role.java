@@ -14,6 +14,8 @@ public abstract class Role {
 
     /**
      * constructor
+     * 
+     * @param aName - the name of the role
      */
     public Role(String aName) {
         name = aName;

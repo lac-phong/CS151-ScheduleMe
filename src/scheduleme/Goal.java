@@ -55,33 +55,93 @@ public class Goal {
     /**
      * addEntity
      * 
-     * @param aEntity - entity to add to list of entities that have this goal
+     * @param anEntity - entity to add to list of entities that have this goal
      */
-    public void addEntity(Entity aEntity) {
-        entities.add(aEntity);
+    public void addEntity(Entity anEntity) {
+        entities.add(anEntity);
     }
 
     /**
      * removeEntity - remove an entity from this goal
      * 
-     * @param aEntity - entity to remove from list of entities that have this goal
+     * @param anEntity - entity to remove from list of entities that have this goal
      */
-    public void removeEntity(Entity aEntity) {
+    public void removeEntity(Entity anEntity) {
         for (int i = 0; i < entities.size(); i++) {
-            if (entities.get(i) == aEntity) {
-                entities.remove(aEntity);
+            if (entities.get(i) == anEntity) {
+                entities.remove(anEntity);
                 break;
             }
         }
     }
 
     /**
-     * getEntities - return list of entities having this goal
+     * getEntities - return list of entities that have this goal
      * 
-     * @return ArrayList<Entity> - list of entities having this goal
+     * @return ArrayList<Entity> - list of entities that have this goal
      */
     public ArrayList<Entity> getEntities() {
         return entities;
+    }
+
+
+    public void addSubGoal(Goal aGoal) {
+        subGoals.add(aGoal);
+    }
+
+    /**
+     * removeSubGoal - remove a subgoal from this goal
+     * 
+     * @param aGoal - subgoal to remove from list of subgoals for this goal
+     */
+    public void removeSubGoal(Goal aGoal) {
+        for (int i = 0; i < subGoals.size(); i++) {
+            if (subGoals.get(i) == aGoal) {
+                subGoals.remove(aGoal);
+                break;
+            }
+        }
+    }
+
+    /**
+     * getSubGoals - return list of subgoals for this goal
+     * 
+     * @return ArrayList<Goal> - list of subgoals for this goal
+     */
+    public ArrayList<Goal> getSubGoals() {
+        return subGoals;
+    }
+
+    /**
+     * addDependency
+     * 
+     * @param aDependency - dependency to add to list of dependencies for this goal
+     */
+    public void addDependency(Dependency aDependency) {
+        dependencies.add(aDependency);
+    }
+
+    /**
+     * removeDependency - remove a dependency from this goal
+     * 
+     * @param aDependency - dependency to remove from list of dependencies for this goal
+     */
+    public void removeDependency(Dependency aDependency) {
+        for (int i = 0; i < dependencies.size(); i++) {
+            if (dependencies.get(i) == aDependency) {
+                dependencies.remove(aDependency);
+                break;
+            }
+        }
+    }
+
+    /**
+     * getDependencies - return list of dependencies for this goal
+     * 
+     * @return ArrayList<Dependency> - list of dependencies for this goal
+     */
+    public ArrayList<Dependency> getDependencies() {
+        return dependencies;
     }
 
     /**

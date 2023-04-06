@@ -9,5 +9,10 @@
 package scheduleme;
 
 public class AdminRole extends Role {
-
+    /**
+     * constructor
+     */
+    public AdminRole(String aName) {
+        super(aName);
+    }
 }

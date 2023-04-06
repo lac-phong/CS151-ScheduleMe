@@ -21,7 +21,8 @@ public class User extends Entity {
     private String resetPasswordCode;
     private Date resetPasswordDeadline;
 
-    public User(String aFirstName, String aLastName, String aEmail, String aPhone, String aUsername, String aPassword) {
+    public User(String aFirstName, String aLastName, String aEmail, String aPhone, String aUsername, String aPassword, Role aRole, Boolean aIsDisabled) {
+        super(aUsername, aRole, aIsDisabled);
         firstName = aFirstName;
         lastName = aLastName;
         email = aEmail;

@@ -9,5 +9,12 @@
 package scheduleme;
 
 public class UserRole extends Role {
-
+    /**
+     * constructor
+     * 
+     * @param aName - the name of the role
+     */
+    public UserRole(String aName) {
+        super(aName);
+    }
 }

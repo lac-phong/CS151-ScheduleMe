@@ -1,5 +1,6 @@
 /*
  * Entity.java
+ * 
  * Represents a entity using the system (a group or an individual).
  * 
  * VERSION HISTORY

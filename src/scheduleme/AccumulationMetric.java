@@ -1,5 +1,6 @@
 /*
  * AccumulationMetric.java
+ * 
  * Represents a metric consisting of a group of other metrics.
  * For example, a goal to exercise 5 times per week might be made up of 5 individual metrics, one for each day of the week.
  * 

@@ -1,5 +1,6 @@
 /*
  * Priority.java
+ * 
  * The priority of a goal.
  * 
  * VERSION HISTORY

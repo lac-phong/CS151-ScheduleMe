@@ -1,6 +1,8 @@
 /*
  * UserRole.java
  * 
+ * Represents normal (unprivileged) role
+ * 
  * VERSION HISTORY
  * v0.0.1   20230321   TAM   initial implementation
  *  

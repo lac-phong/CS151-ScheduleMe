@@ -1,5 +1,6 @@
 /*
  * Role.java
+ * 
  * The base class for all roles in ScheduleMe.
  * 
  * VERSION HISTORY

@@ -1,5 +1,6 @@
 /*
  * Dependency.java
+ * 
  * Represents a dependent goal.
  * 
  * VERSION HISTORY

@@ -1,5 +1,6 @@
 /*
  * Metric.java
+ * 
  * Base class for all metric classes
  * 
  * VERSION HISTORY

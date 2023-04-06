@@ -1,5 +1,6 @@
 /*
  * BooleanMetric.java
+ * 
  * Represents a boolean metric (yes/no, done/not-done). For example, a goal to take out the trash.
  * 
  * VERSION HISTORY

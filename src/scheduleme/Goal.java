@@ -1,6 +1,7 @@
 /*
  * Goal.java
- * Class that represents a goal
+ * 
+ * Represents a goal.
  * 
  * VERSION HISTORY
  * v0.0.1   20230321   TAM   initial implementation

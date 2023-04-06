@@ -1,5 +1,6 @@
 /*
  * DoubleMetric.java
+ * 
  * Represents a metric identified by a double value. For example, a goal of saving $30.95.
  * 
  * VERSION HISTORY

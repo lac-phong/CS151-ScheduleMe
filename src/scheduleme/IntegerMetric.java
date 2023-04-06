@@ -1,5 +1,6 @@
 /*
  * IntegerMetric.java
+ * 
  * Represents a metric having an integer value. For example, a goal of exercising 5 times per week.
  * 
  * VERSION HISTORY

@@ -24,7 +24,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             goalsDisplay = "You have no goals right now, ";
         }
         else {
-            goalsDisplay = "Here are your goals,";
+            goalsDisplay = "Here are your goals, ";
         }
 
         // Create components

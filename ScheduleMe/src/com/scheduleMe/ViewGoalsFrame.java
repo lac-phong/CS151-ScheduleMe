@@ -18,8 +18,17 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         setTitle("View Goals");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
+        String goalsDisplay;
+
+        if (goals.isEmpty()){
+            goalsDisplay = "You have no goals right now, ";
+        }
+        else {
+            goalsDisplay = "Here are your goals,";
+        }
+
         // Create components
-        JLabel goalsLabel = new JLabel("Here are your goals, " + currentUser.getFirstName() + ":");
+        JLabel goalsLabel = new JLabel(goalsDisplay + currentUser.getFirstName() + ":");
         goalsLabel.setFont(new Font(goalsLabel.getFont().getName(), Font.PLAIN, 20));
         goalsLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
 

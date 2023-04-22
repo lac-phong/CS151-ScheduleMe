@@ -84,8 +84,6 @@ public class HomeFrame extends JFrame implements ActionListener {
 
             dispose();
 
-            currentUser.goals.add(new Goal("test","Financial", "Test", LocalDate.of(2023,12,15)));
-
 
             new ViewGoalsFrame(currentUser);
 

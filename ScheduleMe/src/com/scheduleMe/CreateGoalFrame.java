@@ -88,13 +88,16 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             String name = nameField.getText();
             String category = (String) categoryComboBox.getSelectedItem();
             String description = descriptionArea.getText();
-            LocalDate dueDate = LocalDate.parse(dueDateSpinner.getValue().toString().substring(0, 10)); // this crashes right here, will fix
+            LocalDate dueDate = LocalDate.of(2023, 12,15); // hard coded so we need to change this.
 
-            // Create new goal with user input
+
+
             Goal newGoal = new Goal(name, category, description, dueDate);
-            // Add goal to database or data structure
-            // ...
-            dispose();
+
+            JOptionPane.showMessageDialog(this, name + " created!");
+
+            currentUser.goals.add(newGoal); // maybe pass in anonymous declaration?
+
         }
     }
 }

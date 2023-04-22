@@ -43,6 +43,9 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         JPanel goalsPanel = new JPanel();
         goalsPanel.setLayout(new BoxLayout(goalsPanel, BoxLayout.Y_AXIS));
 
+        //we should create a button on the side of each goal that changes the boolean isComplete
+        // add in check for loop to ignore goals that have the isComplete = true value
+        // maybe add in button that allows user to see past completed goals
         for (Goal goal : goals) {
             JLabel nameLabel2 = new JLabel(goal.getName());
             nameLabel2.setFont(new Font(nameLabel2.getFont().getName(), Font.BOLD, 14));

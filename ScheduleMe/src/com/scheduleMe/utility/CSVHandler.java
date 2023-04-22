@@ -29,8 +29,7 @@ public class CSVHandler {
 
         writer.close();
     }
-    //upon start up, the mainframe constructor will call this method in order to populate the
-    //accounts hashmap
+
     public static Map<String, User> CSVToHashMap(String fileName) throws IOException {
         HashMap<String, User> users = new HashMap<>();
         BufferedReader reader = new BufferedReader(new FileReader(fileName));

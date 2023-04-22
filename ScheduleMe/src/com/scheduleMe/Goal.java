@@ -8,6 +8,8 @@ public class Goal {
     private String description;
     private LocalDate dueDate;
 
+    private boolean isComplete;
+
     public Goal(String name, String category, String description, LocalDate dueDate) {
         this.name = name;
         this.category = category;

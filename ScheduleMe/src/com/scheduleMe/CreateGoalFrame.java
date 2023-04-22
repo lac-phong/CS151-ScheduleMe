@@ -33,6 +33,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
         JSpinner.DateEditor dateEditor = new JSpinner.DateEditor(dueDateSpinner, "yyyy-MM-dd");
         dueDateSpinner.setEditor(dateEditor);
 
+
         JButton backButton = new JButton("Back");
         backButton.addActionListener(this);
         JButton createButton = new JButton("Create Goal");

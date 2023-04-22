@@ -78,10 +78,20 @@ public class HomeFrame extends JFrame implements ActionListener {
             new CreateGoalFrame(currentUser);
             // handle add goal button click
             System.out.println("Add Goal button clicked");
+
         } else if (e.getSource() == viewGoalsButton) {
             // handle view goals button click
+
+            dispose();
+
+            currentUser.goals.add(new Goal("test","Financial", "Test", LocalDate.of(2023,12,15)));
+
+
+            new ViewGoalsFrame(currentUser);
+
             System.out.println("View Current Goals button clicked");
         } else if (e.getSource() == logoutButton) {
+
             // handle logout button click
             System.out.println("Logout button clicked");
             this.dispose(); // close the current frame

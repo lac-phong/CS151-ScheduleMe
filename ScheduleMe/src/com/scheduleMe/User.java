@@ -17,6 +17,7 @@ public class User {
         this.email = email;
         this.firstName = firstName;
         this.lastName = lastName;
+        goals = new ArrayList<>();
     }
 
     public String getUsername() {

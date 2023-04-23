@@ -52,19 +52,37 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             JLabel categoryLabel = new JLabel("Category: " + goal.getCategory());
             JLabel descriptionLabel = new JLabel("Description: " + goal.getDescription());
             JLabel dueDateLabel = new JLabel("Due Date: " + goal.getDueDate().toString());
+            JButton editButton, completeButton, deleteButton;
+
+            JPanel goalContainer = new JPanel();
+            goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
 
             JPanel goalPanel = new JPanel();
-            goalPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+            goalPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
             goalPanel.setLayout(new BoxLayout(goalPanel, BoxLayout.Y_AXIS));
             goalPanel.add(nameLabel2);
             goalPanel.add(categoryLabel);
             goalPanel.add(descriptionLabel);
             goalPanel.add(dueDateLabel);
-            goalPanel.add(Box.createVerticalStrut(10));
+            goalContainer.add(goalPanel);
 
-            goalsPanel.add(goalPanel);
+            JPanel optionsPanel = new JPanel();
+            optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+            optionsPanel.setBorder(new EmptyBorder(5, 0, 10, 0));
+            editButton = new JButton("Edit");
+            editButton.addActionListener(this);
+            optionsPanel.add(editButton);
+            completeButton = new JButton("Complete Task");
+            completeButton.addActionListener(this);
+            optionsPanel.add(completeButton);
+            deleteButton = new JButton("Delete");
+            deleteButton.addActionListener(this);
+            optionsPanel.add(deleteButton); 
+            goalContainer.add(optionsPanel);
+
+            goalsPanel.add(goalContainer);
+            goalsPanel.add(Box.createVerticalStrut(10));
         }
-
 
         JScrollPane scrollPane = new JScrollPane(goalsPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());

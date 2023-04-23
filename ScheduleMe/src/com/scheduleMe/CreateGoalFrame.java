@@ -97,7 +97,8 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             JOptionPane.showMessageDialog(this, name + " created!");
 
             currentUser.goals.add(newGoal); // maybe pass in anonymous declaration?
-
+            dispose();
+            new HomeFrame(currentUser);
         }
     }
 }

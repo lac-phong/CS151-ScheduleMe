@@ -8,7 +8,7 @@
  *  
  */
 
-package scheduleme;
+package Backend;
 
 public class IntegerMetric extends Metric<Integer> {
 /**

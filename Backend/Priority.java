@@ -8,7 +8,7 @@
  *  
  */
 
-package scheduleme;
+package Backend;
 
 public enum Priority {
     VERY_LOW,

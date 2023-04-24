@@ -9,7 +9,7 @@
  *  
  */
 
-package scheduleme;
+package Backend;
 
 import java.util.ArrayList;
 

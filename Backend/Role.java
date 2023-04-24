@@ -8,7 +8,7 @@
  *  
  */
 
-package scheduleme;
+package Backend;
 
 public abstract class Role {
     private String name;    // The name of the role

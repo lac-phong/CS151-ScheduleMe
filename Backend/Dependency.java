@@ -8,7 +8,7 @@
  *  
  */
 
-package scheduleme;
+package Backend;
 
 public class Dependency {
     private String name;            // The name of the dependent goal

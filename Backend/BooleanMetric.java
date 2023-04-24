@@ -8,7 +8,7 @@
  *  
  */
 
-package scheduleme;
+package Backend;
 
 public class BooleanMetric extends Metric<Boolean> {
     /**

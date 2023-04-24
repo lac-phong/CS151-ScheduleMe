@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public class ViewGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
     private final ArrayList<Goal> goals;
+    
 
     public ViewGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
@@ -52,19 +53,41 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             JLabel categoryLabel = new JLabel("Category: " + goal.getCategory());
             JLabel descriptionLabel = new JLabel("Description: " + goal.getDescription());
             JLabel dueDateLabel = new JLabel("Due Date: " + goal.getDueDate().toString());
+            JButton editButton, completeButton, deleteButton;
+            
+
+            JPanel goalContainer = new JPanel();
+            goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
 
             JPanel goalPanel = new JPanel();
-            goalPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
+            goalPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
             goalPanel.setLayout(new BoxLayout(goalPanel, BoxLayout.Y_AXIS));
             goalPanel.add(nameLabel2);
             goalPanel.add(categoryLabel);
             goalPanel.add(descriptionLabel);
             goalPanel.add(dueDateLabel);
-            goalPanel.add(Box.createVerticalStrut(10));
+            goalContainer.add(goalPanel);
 
-            goalsPanel.add(goalPanel);
+            JPanel optionsPanel = new JPanel();
+            optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
+            optionsPanel.setBorder(new EmptyBorder(5, 0, 10, 0));
+            editButton = new JButton("Edit");
+            editButton.addActionListener(this);
+            optionsPanel.add(editButton);
+            completeButton = new JButton("Complete Task");
+            completeButton.addActionListener(this);
+            optionsPanel.add(completeButton);
+            deleteButton = new JButton("Delete");
+            deleteButton.addActionListener(this);
+            optionsPanel.add(deleteButton);
+            completeButton.setActionCommand("complete_" + Integer.toString(goals.indexOf(goal)));
+            editButton.setActionCommand("edit_" + Integer.toString(goals.indexOf(goal)));
+            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));  
+            goalContainer.add(optionsPanel);
+
+            goalsPanel.add(goalContainer);
+            goalsPanel.add(Box.createVerticalStrut(10));
         }
-
 
         JScrollPane scrollPane = new JScrollPane(goalsPanel);
         scrollPane.setBorder(BorderFactory.createEmptyBorder());
@@ -90,6 +113,23 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Back")) {
             dispose();
             new HomeFrame(currentUser);
+        }
+        if (e.getActionCommand().startsWith("edit_")) {
+            int index = Integer.parseInt(e.getActionCommand().substring(5));
+            Goal goal = goals.get(index);
+            goals.remove(index);
+            dispose();
+            new CreateGoalFrame(currentUser, goal, index);
+
+        }
+        if (e.getActionCommand().startsWith("complete_")) {
+            int index = Integer.parseInt(e.getActionCommand().substring(9));
+        }
+        if (e.getActionCommand().startsWith("delete_")) {
+            int index = Integer.parseInt(e.getActionCommand().substring(7));
+            goals.remove(index);
+            dispose();
+            new ViewGoalsFrame(currentUser);
         }
     }
 }

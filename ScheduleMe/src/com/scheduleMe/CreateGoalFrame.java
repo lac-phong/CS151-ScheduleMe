@@ -165,7 +165,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
 
 
 
-            Goal newGoal = new Goal(name, category, description, dueDate);
+            Goal newGoal = new Goal(name, description, dueDate);
 
             JOptionPane.showMessageDialog(this, name + " created!");
 
@@ -180,7 +180,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
 
 
 
-            Goal editedGoal = new Goal(name, category, description, dueDate);
+            Goal editedGoal = new Goal(name, description, dueDate);
 
             currentUser.goals.add(Integer.parseInt(e.getActionCommand().substring(10)),editedGoal); // maybe pass in anonymous declaration?
             dispose();

@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 public class CareerGoal extends Goal{
 
-    public CareerGoal(String name, String category, String description, LocalDate dueDate) {
-        super(name, category, description, dueDate);
+    public CareerGoal(String name, String description, LocalDate dueDate) {
+        super(name, description, dueDate);
         //TODO Auto-generated constructor stub
     }
     

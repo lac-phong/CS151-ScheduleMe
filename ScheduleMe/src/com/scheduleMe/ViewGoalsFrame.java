@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class ViewGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
     private final ArrayList<Goal> goals;
+    private final ArrayList<Goal> completedGoals;
     
 
     public ViewGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
         goals = currentUser.goals;
+        completedGoals = currentUser.completedGoals;
 
         setTitle("View Goals");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -35,10 +37,13 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
 
         JButton backButton = new JButton("Back");
         backButton.addActionListener(this);
+        JButton completedGoalsButton = new JButton("Completed Goals");
+        completedGoalsButton.addActionListener(this);
 
         JPanel buttonPanel = new JPanel(new GridLayout(1, 2, 10, 10));
         buttonPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
         buttonPanel.add(backButton);
+        buttonPanel.add(completedGoalsButton);
 
         // Create goals list panel
         JPanel goalsPanel = new JPanel();
@@ -113,6 +118,9 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().equals("Back")) {
             dispose();
             new HomeFrame(currentUser);
+        } else if (e.getActionCommand().equals("Completed Goals")) {
+            dispose();
+            new CompletedGoalsFrame(currentUser);
         }
         if (e.getActionCommand().startsWith("edit_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(5));
@@ -124,6 +132,11 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         }
         if (e.getActionCommand().startsWith("complete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(9));
+            Goal goal = goals.get(index);
+            goals.remove(index);
+            completedGoals.add(goal);
+            dispose();
+            new ViewGoalsFrame(currentUser);
         }
         if (e.getActionCommand().startsWith("delete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(7));

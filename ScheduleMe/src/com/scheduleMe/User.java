@@ -10,6 +10,7 @@ public class User {
     private String lastName;
 
     public ArrayList<Goal> goals;
+    public ArrayList<Goal> completedGoals;
 
     public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
@@ -18,6 +19,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         goals = new ArrayList<>();
+        completedGoals = new ArrayList<>();
     }
 
     public String getUsername() {

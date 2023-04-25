@@ -1,8 +1,9 @@
 package com.scheduleMe;
 
 import java.time.LocalDate;
+import java.util.Locale.Category;
 
-public class Goal {
+public abstract class Goal {
     private String name;
     private String category;
     private String description;
@@ -38,6 +39,22 @@ public class Goal {
 
     public boolean getIsComplete() {
         return isComplete;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCategory(String category){
+        this.category = category;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setDueDate(LocalDate date) {
+        this.dueDate = date;
     }
 
     public void setComplete(boolean isComplete){

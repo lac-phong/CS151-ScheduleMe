@@ -162,11 +162,25 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             String category = (String) categoryComboBox.getSelectedItem();
             String description = descriptionArea.getText();
             Date date = (Date) dueDateSpinner.getValue();
-            LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); // hard coded so we need to change this.
+            LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            Goal newGoal;
 
-
-
-            Goal newGoal = new Goal(name, description, dueDate);
+            if (category.equals("Financial")) {
+                newGoal = new FinancialGoal(name, description, dueDate);
+            } else if (category.equals("Community Involvement")) {
+                newGoal = new CommunityGoal(name, description, dueDate);
+            } else if (category.equals("Personal Growth")) {
+                newGoal = new PersonalGoal(name, description, dueDate);
+            } else if (category.equals("Career")) {
+                newGoal = new CareerGoal(name, description, dueDate);
+            } else if (category.equals("Educational")) {
+                newGoal = new EducationalGoal(name, description, dueDate);
+            } else if (category.equals("Relationship")) {
+                newGoal = new RelationshipGoal(name, description, dueDate);
+            } else {
+                newGoal = new PhysicalGoal(name, description, dueDate);
+            }
+            newGoal.setCategory(category);
 
             JOptionPane.showMessageDialog(this, name + " created!");
 
@@ -174,16 +188,17 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             dispose();
             new HomeFrame(currentUser);
         } else if (e.getActionCommand().startsWith("finaledit_")) {
+            Goal goal = currentUser.goals.get(Integer.parseInt(e.getActionCommand().substring(10)));
             String name = nameField.getText();
             String category = (String) categoryComboBox.getSelectedItem();
             String description = descriptionArea.getText();
-            LocalDate dueDate = LocalDate.of(2023, 12,15); // hard coded so we need to change this.
+            Date date = (Date) dueDateSpinner.getValue();
+            LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 
-
-
-            Goal editedGoal = new Goal(name, description, dueDate);
-
-            currentUser.goals.add(Integer.parseInt(e.getActionCommand().substring(10)),editedGoal); // maybe pass in anonymous declaration?
+            goal.setName(name);
+            goal.setCategory(category);
+            goal.setDescription(description);
+            goal.setDueDate(dueDate);
             dispose();
             new ViewGoalsFrame(currentUser);
         }

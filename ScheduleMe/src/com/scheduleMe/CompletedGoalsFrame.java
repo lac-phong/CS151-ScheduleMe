@@ -10,11 +10,13 @@ import java.util.ArrayList;
 public class CompletedGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
     private final ArrayList<Goal> goals;
+    private final ArrayList<Goal> incompleteGoals;
     
 
     public CompletedGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
         goals = currentUser.completedGoals;
+        incompleteGoals = currentUser.goals;
 
         setTitle("View Completed Goals");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -53,7 +55,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             JLabel categoryLabel = new JLabel("Category: " + goal.getCategory());
             JLabel descriptionLabel = new JLabel("Description: " + goal.getDescription());
             JLabel dueDateLabel = new JLabel("Completed Date: " + goal.getCompleteDate().toString());
-            JButton deleteButton;
+            JButton incompleteButton, deleteButton;
             
 
             JPanel goalContainer = new JPanel();
@@ -68,14 +70,21 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             goalPanel.add(dueDateLabel);
             goalContainer.add(goalPanel);
 
+            JPanel optionsContainer = new JPanel();
+            optionsContainer.setLayout(new BorderLayout());
             JPanel optionsPanel = new JPanel();
-            optionsPanel.setLayout(new BorderLayout());
+            optionsPanel.setLayout(new BoxLayout(optionsPanel, BoxLayout.Y_AXIS));
             optionsPanel.setBorder(new EmptyBorder(5, 0, 10, 0));
+            incompleteButton = new JButton("Incomplete");
+            incompleteButton.addActionListener(this);
             deleteButton = new JButton("Delete");
             deleteButton.addActionListener(this);
-            optionsPanel.add(deleteButton, BorderLayout.CENTER);
+            optionsPanel.add(incompleteButton);
+            optionsPanel.add(deleteButton);
+            optionsContainer.add(optionsPanel, BorderLayout.CENTER);
+            incompleteButton.setActionCommand("incomplete_" + Integer.toString(goals.indexOf(goal)));  
             deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));  
-            goalContainer.add(optionsPanel);
+            goalContainer.add(optionsContainer);
 
             goalsPanel.add(goalContainer);
             goalsPanel.add(Box.createVerticalStrut(10));
@@ -110,7 +119,14 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             int index = Integer.parseInt(e.getActionCommand().substring(7));
             goals.remove(index);
             dispose();
-            new ViewGoalsFrame(currentUser);
+            new CompletedGoalsFrame(currentUser);
+        } else if (e.getActionCommand().startsWith("incomplete_")){
+            int index = Integer.parseInt(e.getActionCommand().substring(11));
+            Goal goal = goals.get(index);
+            goals.remove(index);
+            incompleteGoals.add(goal);
+            dispose();
+            new CompletedGoalsFrame(currentUser);
         }
     }
 }

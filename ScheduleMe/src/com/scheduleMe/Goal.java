@@ -36,6 +36,10 @@ public class Goal {
         return completedDate;
     }
 
+    public boolean getIsComplete() {
+        return isComplete;
+    }
+
     public void setComplete(boolean isComplete){
         this.isComplete = isComplete;
     }

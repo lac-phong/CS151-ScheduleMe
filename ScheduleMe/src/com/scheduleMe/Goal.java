@@ -7,12 +7,11 @@ public class Goal {
     private String category;
     private String description;
     private LocalDate dueDate;
-
+    private LocalDate completedDate;
     private boolean isComplete;
 
-    public Goal(String name, String category, String description, LocalDate dueDate) {
+    public Goal(String name, String description, LocalDate dueDate) {
         this.name = name;
-        this.category = category;
         this.description = description;
         this.dueDate = dueDate;
     }
@@ -21,7 +20,7 @@ public class Goal {
         return name;
     }
 
-    public String getCategory() {
+    public String getCategory(){
         return category;
     }
 
@@ -31,6 +30,18 @@ public class Goal {
 
     public LocalDate getDueDate() {
         return dueDate;
+    }
+
+    public LocalDate getCompleteDate() {
+        return completedDate;
+    }
+
+    public void setComplete(boolean isComplete){
+        this.isComplete = isComplete;
+    }
+
+    public void setCompleteDate(LocalDate completed){
+        completedDate = completed;
     }
 
     @Override

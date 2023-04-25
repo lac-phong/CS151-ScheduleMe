@@ -161,11 +161,12 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             String name = nameField.getText();
             String category = (String) categoryComboBox.getSelectedItem();
             String description = descriptionArea.getText();
-            LocalDate dueDate = LocalDate.of(2023, 12,15); // hard coded so we need to change this.
+            Date date = (Date) dueDateSpinner.getValue();
+            LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); // hard coded so we need to change this.
 
 
 
-            Goal newGoal = new Goal(name, category, description, dueDate);
+            Goal newGoal = new Goal(name, description, dueDate);
 
             JOptionPane.showMessageDialog(this, name + " created!");
 
@@ -180,7 +181,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
 
 
 
-            Goal editedGoal = new Goal(name, category, description, dueDate);
+            Goal editedGoal = new Goal(name, description, dueDate);
 
             currentUser.goals.add(Integer.parseInt(e.getActionCommand().substring(10)),editedGoal); // maybe pass in anonymous declaration?
             dispose();

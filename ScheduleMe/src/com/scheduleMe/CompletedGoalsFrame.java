@@ -52,7 +52,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             nameLabel2.setFont(new Font(nameLabel2.getFont().getName(), Font.BOLD, 14));
             JLabel categoryLabel = new JLabel("Category: " + goal.getCategory());
             JLabel descriptionLabel = new JLabel("Description: " + goal.getDescription());
-            JLabel dueDateLabel = new JLabel("Due Date: " + goal.getDueDate().toString());
+            JLabel dueDateLabel = new JLabel("Completed Date: " + goal.getCompleteDate().toString());
             JButton deleteButton;
             
 

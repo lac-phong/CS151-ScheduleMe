@@ -32,6 +32,18 @@ public class Goal {
         return dueDate;
     }
 
+    public LocalDate getCompleteDate() {
+        return completedDate;
+    }
+
+    public void setComplete(boolean isComplete){
+        this.isComplete = isComplete;
+    }
+
+    public void setCompleteDate(LocalDate completed){
+        completedDate = completed;
+    }
+
     @Override
     public String toString() {
         return name;

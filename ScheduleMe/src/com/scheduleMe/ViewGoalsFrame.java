@@ -6,6 +6,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class ViewGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
@@ -133,6 +134,8 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().startsWith("complete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(9));
             Goal goal = goals.get(index);
+            goal.setComplete(true);
+            goal.setCompleteDate(LocalDate.now());
             goals.remove(index);
             completedGoals.add(goal);
             dispose();

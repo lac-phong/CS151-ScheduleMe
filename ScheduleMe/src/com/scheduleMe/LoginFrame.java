@@ -15,8 +15,8 @@ public class LoginFrame extends JFrame implements ActionListener {
 
     private HashMap<String, User> users;
 
-    public LoginFrame(HashMap<String, User> users) {
-        this.users = users;
+    public LoginFrame() throws IOException {
+        users = UserList.getInstance();
 
 
         setTitle("Login");

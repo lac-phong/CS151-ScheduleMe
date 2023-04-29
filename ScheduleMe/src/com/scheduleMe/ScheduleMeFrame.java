@@ -56,12 +56,22 @@ public class ScheduleMeFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == signUpButton) {
             dispose();
-            SignUpFrame signUpFrame = new SignUpFrame(users);
+            SignUpFrame signUpFrame = null;
+            try {
+                signUpFrame = new SignUpFrame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             signUpFrame.setVisible(true);
             System.out.println("Sign Up button clicked");
         } else if (e.getSource() == loginButton) {
             dispose();
-            LoginFrame loginFrame = new LoginFrame(users);
+            LoginFrame loginFrame = null;
+            try {
+                loginFrame = new LoginFrame();
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             loginFrame.setVisible(true);
             System.out.println("Log In button clicked");
         }

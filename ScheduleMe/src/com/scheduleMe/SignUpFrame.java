@@ -20,8 +20,8 @@ public class SignUpFrame extends JFrame implements ActionListener {
 
     private HashMap<String, User> users;
 
-    public SignUpFrame(HashMap<String, User> users) {
-        this.users = users;
+    public SignUpFrame() throws IOException {
+        users = UserList.getInstance();
         setTitle("Sign Up");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.setSize(600,1200);

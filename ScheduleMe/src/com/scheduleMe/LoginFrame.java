@@ -78,6 +78,8 @@ public class LoginFrame extends JFrame implements ActionListener {
                 }
             } catch (NullPointerException ex) {
                 JOptionPane.showMessageDialog(this, "No such username!");
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
             }
 
 

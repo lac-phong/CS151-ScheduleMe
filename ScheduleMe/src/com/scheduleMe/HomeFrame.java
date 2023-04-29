@@ -1,5 +1,8 @@
 package com.scheduleMe;
 
+import com.scheduleMe.utility.goalsCSVHandler.FinancialGoalsCSVHandler;
+import com.scheduleMe.utility.goalsCSVHandler.GoalsCSVHandler;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,8 +18,9 @@ public class HomeFrame extends JFrame implements ActionListener {
 
     private User currentUser;
 
-    public HomeFrame(User user) {
+    public HomeFrame(User user) throws IOException {
         currentUser = user;
+        populateGoals();
         setTitle("ScheduleMe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -100,5 +104,10 @@ public class HomeFrame extends JFrame implements ActionListener {
             }
         }
     }
-
+    private void populateGoals() throws IOException {
+        if (currentUser.goals.isEmpty()) {
+            GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
+            goalsCSVHandler.performRead(currentUser);
+        }
+    }
 }

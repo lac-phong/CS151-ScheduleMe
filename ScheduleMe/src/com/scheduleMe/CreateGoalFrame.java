@@ -1,9 +1,12 @@
 package com.scheduleMe;
 
+import com.scheduleMe.utility.goalsCSVHandler.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -156,7 +159,11 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Back")) {
             dispose();
-            new HomeFrame(currentUser);
+            try {
+                new HomeFrame(currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getActionCommand().equals("Create Goal")) {
             String name = nameField.getText();
             String category = (String) categoryComboBox.getSelectedItem();
@@ -165,28 +172,47 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             Goal newGoal;
 
+            GoalsCSVHandler goalsCSVHandler = null; //prepare assignment for goalhandler
+
             if (category.equals("Financial")) {
                 newGoal = new FinancialGoal(name, description, dueDate);
+                goalsCSVHandler = new FinancialGoalsCSVHandler();
             } else if (category.equals("Community Involvement")) {
                 newGoal = new CommunityGoal(name, description, dueDate);
+                goalsCSVHandler = new CommunityGoalsCSVHandler();
             } else if (category.equals("Personal Growth")) {
                 newGoal = new PersonalGoal(name, description, dueDate);
+                goalsCSVHandler = new PersonalGoalsCSVHandler();
             } else if (category.equals("Career")) {
                 newGoal = new CareerGoal(name, description, dueDate);
+                goalsCSVHandler = new CareerGoalsCSVHandler();
             } else if (category.equals("Educational")) {
                 newGoal = new EducationalGoal(name, description, dueDate);
+                goalsCSVHandler = new EducationalGoalsCSVHandler();
             } else if (category.equals("Relationship")) {
                 newGoal = new RelationshipGoal(name, description, dueDate);
+                goalsCSVHandler = new RelationshipGoalsCSVHandler();
             } else {
                 newGoal = new PhysicalGoal(name, description, dueDate);
+                goalsCSVHandler = new PhysicalGoalsCSVHandler();
             }
             newGoal.setCategory(category);
 
             JOptionPane.showMessageDialog(this, name + " created!");
 
-            currentUser.goals.add(newGoal); // maybe pass in anonymous declaration?
+            UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
+            try {
+                goalsCSVHandler.performWrite(newGoal, currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+
             dispose();
-            new HomeFrame(currentUser);
+            try {
+                new HomeFrame(currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getActionCommand().startsWith("finaledit_")) {
             Goal goal = currentUser.goals.get(Integer.parseInt(e.getActionCommand().substring(10)));
             String name = nameField.getText();

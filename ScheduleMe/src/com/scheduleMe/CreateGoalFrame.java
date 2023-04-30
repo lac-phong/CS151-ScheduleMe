@@ -35,7 +35,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
     private String[] timeFrames = {"Daily", "Weekly", "Monthly", "Yearly"};
     private JComboBox<String> timeFrameComboBox = new JComboBox<>(timeFrames);
     private JSpinner timeFreqSpinner;
-            
+
 
     public CreateGoalFrame(User currentUser) {
         this.currentUser =currentUser;
@@ -45,7 +45,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
         physicalComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         relationshipComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         educationalComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-        
+
         categoryComponents.put("Financial", Arrays.asList(actionLabel, financialComboBox));
         categoryComponents.put("Physical", Arrays.asList(actionLabel, physicalComboBox));
         categoryComponents.put("Relationship", Arrays.asList(actionLabel, relationshipComboBox));
@@ -307,7 +307,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                } 
+                }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
             }
             formPanel.revalidate();
@@ -328,7 +328,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
         physicalComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         relationshipComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         educationalComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
-        
+
         categoryComponents.put("Financial", Arrays.asList(actionLabel, financialComboBox));
         categoryComponents.put("Physical", Arrays.asList(actionLabel, physicalComboBox));
         categoryComponents.put("Relationship", Arrays.asList(actionLabel, relationshipComboBox));
@@ -601,7 +601,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                } 
+                }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
             }
             formPanel.revalidate();
@@ -660,10 +660,9 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 Date date = (Date) dueDateSpinner.getValue();
                 LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 newGoal.setInterval(new DefiniteGoal(dueDate));
-            } 
+            }
 
             JOptionPane.showMessageDialog(this, name + " created!");
-            currentUser.goals.add(newGoal);
             UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
             try {
                 goalsCSVHandler.performWrite(newGoal, currentUser);
@@ -696,7 +695,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             } else if (category.equals("General")) {
                 goal.setType(new GeneralGoal());
             }
-            
+
             String interval = (String) timeComboBox.getSelectedItem();
             if (interval.equals("Indefinite")) {
                 String timeFrame = (String) timeFrameComboBox.getSelectedItem();

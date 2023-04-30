@@ -51,39 +51,4 @@ class ReadFinancialGoal implements GoalsReadBehavior{
 
      }
 }
-class ReadCommunityGoal implements GoalsReadBehavior{
-     @Override
-     public void ReadFromCSV(User user) throws IOException {
-          System.out.println("Read Community Goal!");
-     }
-}
-class ReadEducationalGoal implements GoalsReadBehavior{
-     @Override
-     public void ReadFromCSV(User user) throws IOException {
-          System.out.println("Read Educational Goal!");
-     }
-}
-class ReadCareerGoal implements GoalsReadBehavior{
-     @Override
-     public void ReadFromCSV(User user) throws IOException {
-          System.out.println("Read Career Goal!");
-     }
-}
-class ReadPhysicalGoal implements GoalsReadBehavior{
-     @Override
-     public void ReadFromCSV(User user) throws IOException {
-          System.out.println("Read Physical Goal!");
-     }
-}
-class ReadPersonalGoal implements GoalsReadBehavior{
-     @Override
-     public void ReadFromCSV(User user) throws IOException {
-          System.out.println("Read Personal Goal!");
-     }
-}
-class ReadRelationshipGoal implements GoalsReadBehavior{
-     @Override
-     public void ReadFromCSV(User user) throws IOException {
-          System.out.println("Read Relationship Goal!");
-     }
-}
+

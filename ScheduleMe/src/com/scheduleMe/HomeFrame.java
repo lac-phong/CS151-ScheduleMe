@@ -1,7 +1,7 @@
 package com.scheduleMe;
 
 import com.scheduleMe.utility.goalsCSVHandler.FinancialGoalsCSVHandler;
-import com.scheduleMe.utility.goalsCSVHandler.GoalsCSVHandler;
+import com.scheduleMe.utility.goalsCSVHandler.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -108,6 +108,11 @@ public class HomeFrame extends JFrame implements ActionListener {
         if (currentUser.goals.isEmpty()) {
             GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
             goalsCSVHandler.performRead(currentUser);
+            goalsCSVHandler.setGoalsReadBehavior(new ReadCareerGoal());
+            goalsCSVHandler.performRead(currentUser);
         }
+    }
+    private void findNextGoal(){
+
     }
 }

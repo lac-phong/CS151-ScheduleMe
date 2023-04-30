@@ -23,7 +23,12 @@ public class HomeFrame extends JFrame implements ActionListener {
     public HomeFrame(User user) throws IOException {
         currentUser = user;
         populateGoals();
-        goalToDisplay = findNextGoal();
+        if (!currentUser.goals.isEmpty()){
+            goalToDisplay = findNextGoal();
+        }
+        else {
+            goalToDisplay = null;
+        }
         setTitle("ScheduleMe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -39,9 +44,13 @@ public class HomeFrame extends JFrame implements ActionListener {
             timeOfDay = "Evening";
         }
 
+        if (goalToDisplay != null){
+
+        }
         greetingLabel = new JLabel("Good " + timeOfDay + ", ");
         greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
         greetingLabel.setHorizontalAlignment(JLabel.LEFT);
+
 
         nameLabel = new JLabel(user.getFirstName());
         nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
@@ -108,17 +117,11 @@ public class HomeFrame extends JFrame implements ActionListener {
     private void populateGoals() throws IOException {
         if (currentUser.goals.isEmpty()) {
             GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
-            goalsCSVHandler.performRead(currentUser);
-            goalsCSVHandler.setGoalsReadBehavior(new ReadCareerGoal());
-            goalsCSVHandler.performRead(currentUser);
+            goalsCSVHandler.performRead(currentUser);;
         }
     }
 
     private Goal findNextGoal() throws IOException {
-//        Random rand = new Random();
-//        int index = rand.nextInt(UserList.getGoalList(currentUser).size());
-//
-//        Goal homeScreenDisplayGoal = UserList.getGoalList(currentUser).get(index);
         LocalDate closestDate = null;
         long closestDiff = Long.MAX_VALUE;
         Goal homeScreenDisplayGoal = null;

@@ -49,7 +49,7 @@ class ReadFinancialGoal implements GoalsReadBehavior{
                     LocalDate dueDate = LocalDate.parse(dueDateString, formatter);
                     newGoal.setInterval(new DefiniteGoal(dueDate));
                }
-               
+               //TODO change this code so that is sets to relevant behavior of the class, we don't need this if statement
                if (category.equals("Financial")) {
                     newGoal.setType(new FinancialGoal(activity));
                 } else if (category.equals("Educational")) {
@@ -67,5 +67,6 @@ class ReadFinancialGoal implements GoalsReadBehavior{
           reader.close();
 
      }
+     //TODO write code to edit and delete from csv
 }
 

@@ -73,13 +73,7 @@ class WriteFinancialGoal implements GoalsWriteBehavior{
         writer.close();
     }
 }
-class WriteCommunityGoal implements GoalsWriteBehavior{
 
-    @Override
-    public void writeToCSV(Goal goal, User user) throws IOException {
-        System.out.println("Wrote community Goal!");
-    }
-}
 class WriteEducationalGoal implements GoalsWriteBehavior{
 
     @Override
@@ -88,14 +82,7 @@ class WriteEducationalGoal implements GoalsWriteBehavior{
 
     }
 }
-class WriteCareerGoal implements GoalsWriteBehavior{
 
-    @Override
-    public void writeToCSV(Goal goal, User user) throws IOException {
-        System.out.println("Wrote Career Goal!");
-
-    }
-}
 class WritePhysicalGoal implements GoalsWriteBehavior{
 
     @Override

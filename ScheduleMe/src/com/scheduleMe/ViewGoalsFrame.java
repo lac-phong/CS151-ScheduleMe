@@ -147,7 +147,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             int index = Integer.parseInt(e.getActionCommand().substring(5));
             Goal goal = goals.get(index);
             dispose();
-            new CreateGoalFrame(currentUser, goal, index);
+            new EditGoalFrame(currentUser, goal, index);
 
         }
         if (e.getActionCommand().startsWith("complete_")) {

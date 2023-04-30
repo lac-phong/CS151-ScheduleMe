@@ -9,6 +9,5 @@ public interface GoalsWriteBehavior {
 
      void deleteFromCSV(Goal goal, User user) throws IOException;
 
-     void modifyGoalInCSV(Goal goal, User user) throws IOException;
 }
 

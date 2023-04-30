@@ -92,8 +92,5 @@ public class WriteRelationshipGoal implements GoalsWriteBehavior {
         }
     }
 
-    @Override
-    public void modifyGoalInCSV(Goal goal, User user) throws IOException {
 
-    }
 }

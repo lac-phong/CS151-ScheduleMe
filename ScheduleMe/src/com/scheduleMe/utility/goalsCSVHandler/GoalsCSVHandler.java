@@ -17,6 +17,8 @@ public abstract class GoalsCSVHandler {
         goalsWriteBehavior.deleteFromCSV(goal, user);
     }
 
+
+
     public   void performRead(User user) throws IOException {
         goalsReadBehavior.ReadFromCSV(user);
     }

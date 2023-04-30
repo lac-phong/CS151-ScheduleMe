@@ -9,7 +9,6 @@ import java.io.*;
 
 public class WritePersonalGoal implements GoalsWriteBehavior {
 
-    @Override
     public void writeToCSV(Goal goal, User user) throws IOException {
         System.out.println("Wrote Personal Goal!");
         String csvFilePath = user.getUsername() + "_Personal_goals.csv";
@@ -67,8 +66,4 @@ public class WritePersonalGoal implements GoalsWriteBehavior {
     public void deleteFromCSV(Goal goal, User user) throws IOException {
     }
 
-    @Override
-    public void modifyGoalInCSV(Goal goal, User user) throws IOException {
-
-    }
 }

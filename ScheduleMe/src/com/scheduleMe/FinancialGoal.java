@@ -1,12 +1,32 @@
 package com.scheduleMe;
 
-import java.time.LocalDate;
+public class FinancialGoal implements GoalType {
+    private final String category = "Financial";
+    private String activity;
 
-public class FinancialGoal extends Goal{
+    public FinancialGoal(String activity) {
+        this.activity = activity;
+    }
 
-    public FinancialGoal(String name, String description, LocalDate dueDate) {
-        super(name, description, dueDate);
-        //TODO Auto-generated constructor stub
+    @Override
+    public String getCategory() {
+        return category;
+    }
+
+    @Override
+    public String getActivity() {
+        return activity;
+    }
+
+    @Override
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
+    @Override
+    public void trackActivity() {
+        // TODO Auto-generated method stub
+        
     }
     
 }

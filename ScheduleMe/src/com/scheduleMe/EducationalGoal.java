@@ -1,12 +1,32 @@
 package com.scheduleMe;
 
-import java.time.LocalDate;
+public class EducationalGoal implements GoalType {
+    private final String category = "Educational";
+    private String activity;
 
-public class EducationalGoal extends Goal{
+    public EducationalGoal(String activity) {
+        this.activity = activity;
+    }
 
-    public EducationalGoal(String name, String description, LocalDate dueDate) {
-        super(name, description, dueDate);
-        //TODO Auto-generated constructor stub
+    @Override
+    public String getCategory() {
+        return category;
+    }
+
+    @Override
+    public String getActivity() {
+        return activity;
+    }
+
+    @Override
+    public void setActivity(String activity) {
+        this.activity = activity;
+    }
+
+    @Override
+    public void trackActivity() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'trackActivity'");
     }
     
 }

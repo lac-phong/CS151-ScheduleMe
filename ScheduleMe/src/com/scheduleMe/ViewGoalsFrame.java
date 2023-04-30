@@ -56,22 +56,34 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         for (Goal goal : goals) {
             JLabel nameLabel2 = new JLabel(goal.getName());
             nameLabel2.setFont(new Font(nameLabel2.getFont().getName(), Font.BOLD, 14));
-            JLabel categoryLabel = new JLabel("Category: " + goal.getCategory());
+            JLabel categoryLabel = new JLabel("Category: " + goal.getType().getCategory());
             JLabel descriptionLabel = new JLabel("Description: " + goal.getDescription());
-            JLabel dueDateLabel = new JLabel("Due Date: " + goal.getDueDate().toString());
-            JButton editButton, completeButton, deleteButton;
-            
-
-            JPanel goalContainer = new JPanel();
-            goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
+            JLabel activityLabel = new JLabel("Activity: " + goal.getType().getActivity());
 
             JPanel goalPanel = new JPanel();
             goalPanel.setBorder(new EmptyBorder(10, 20, 10, 10));
             goalPanel.setLayout(new BoxLayout(goalPanel, BoxLayout.Y_AXIS));
             goalPanel.add(nameLabel2);
             goalPanel.add(categoryLabel);
+            if (!goal.getType().getCategory().equals("General")) {
+                goalPanel.add(activityLabel);
+            }
             goalPanel.add(descriptionLabel);
-            goalPanel.add(dueDateLabel);
+
+            if (goal.getInterval().getString().equals("Indefinite")) {
+                JLabel recurrenceLabel = new JLabel("Recurrence: " + ((IndefiniteGoal) goal.getInterval()).getRecurrence());
+                JLabel frequencyLabel = new JLabel("Frequency: " + ((IndefiniteGoal) goal.getInterval()).getFreq());
+                goalPanel.add(recurrenceLabel);
+                goalPanel.add(frequencyLabel);
+            } else if (goal.getInterval().getString().equals("Definite")) {
+                JLabel dueDateLabel = new JLabel("Due Date: " + ((DefiniteGoal) goal.getInterval()).getDueDate());
+                goalPanel.add(dueDateLabel);
+            }
+
+            JButton editButton, completeButton, deleteButton;
+            
+            JPanel goalContainer = new JPanel();
+            goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
             goalContainer.add(goalPanel);
 
             JPanel optionsPanel = new JPanel();
@@ -133,8 +145,10 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().startsWith("complete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(9));
             Goal goal = goals.get(index);
-            goal.setComplete(true);
-            goal.setCompleteDate(LocalDate.now());
+            goal.getInterval().setIsComplete(true);
+            if (goal.getInterval().getString().equals("Definite")) {
+                ((DefiniteGoal) goal.getInterval()).setCompleteDate(LocalDate.now());
+            }
             goals.remove(index);
             completedGoals.add(goal);
             dispose();

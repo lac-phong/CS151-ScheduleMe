@@ -1,6 +1,8 @@
 package com.scheduleMe.utility.goalsCSVHandler;
 
+import com.scheduleMe.DefiniteGoal;
 import com.scheduleMe.Goal;
+import com.scheduleMe.IndefiniteGoal;
 import com.scheduleMe.User;
 
 import java.io.*;
@@ -24,7 +26,7 @@ class WriteFinancialGoal implements GoalsWriteBehavior{
             BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith(user.getUsername() + "," + goal.getCategory() + "," + goal.getName())) {
+                if (line.startsWith(user.getUsername() + "," + goal.getType().getCategory() + "," + goal.getName())) {
                     rowExists = true;
                     break;
                 }
@@ -41,16 +43,22 @@ class WriteFinancialGoal implements GoalsWriteBehavior{
             }
 
             String username = user.getUsername();
-            String category = goal.getCategory();
+            String category = goal.getType().getCategory();
             String name = goal.getName();
             String description = goal.getDescription();
-            String dueDate = goal.getDueDate().toString();
-            String completedDate = "";
-            String isComplete = String.valueOf(goal.getIsComplete());
+            String activity = goal.getType().getActivity();
+            String interval = goal.getInterval().getString();
+            if (goal.getInterval().getString().equals("Definite")){
+                String dueDate = ((DefiniteGoal) goal.getInterval()).getDueDate().toString();
+                writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + "," + dueDate + "," + "\n");
+            } else {
+            String recurrence = ((IndefiniteGoal) goal.getInterval()).getRecurrence();
+            int frequency = ((IndefiniteGoal) goal.getInterval()).getFreq();
 
-            writer.write(username + "," + category + "," + name + "," + description + "," + dueDate + ","
-                    + completedDate + "," + isComplete + "\n");
+            writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + "," + recurrence + ","
+                    + frequency + "," + "\n");
             System.out.println("Goal added to the CSV file.");
+            }
         } else {
             System.out.println("Goal already exists in the CSV file.");
         }

@@ -124,13 +124,14 @@ public class HomeFrame extends JFrame implements ActionListener {
         Goal homeScreenDisplayGoal = null;
 
         for (Goal goal : UserList.getGoalList(currentUser)) {
-            LocalDate today = LocalDate.now();
-            long diff = Math.abs(ChronoUnit.DAYS.between(goal.getDueDate(), today));
-            if (diff < closestDiff) {
-                closestDiff = diff;
-                closestDate = goal.getDueDate();
-                homeScreenDisplayGoal = goal;
-                //goal.getDueDate()
+            if (goal.getInterval().getString().equals("Definite")){
+                LocalDate today = LocalDate.now();
+                long diff = Math.abs(ChronoUnit.DAYS.between(((DefiniteGoal) goal.getInterval()).getDueDate(), today));
+                if (diff < closestDiff) {
+                    closestDiff = diff;
+                    closestDate = ((DefiniteGoal) goal.getInterval()).getDueDate();
+                    homeScreenDisplayGoal = goal;
+                }
             }
         }
         return homeScreenDisplayGoal;

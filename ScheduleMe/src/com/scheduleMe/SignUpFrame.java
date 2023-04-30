@@ -1,6 +1,6 @@
 package com.scheduleMe;
 
-import com.scheduleMe.utility.CSVHandler;
+import com.scheduleMe.utility.UserCSVHandler;
 
 
 import javax.swing.*;
@@ -111,19 +111,26 @@ public class SignUpFrame extends JFrame implements ActionListener {
             else if (lastName.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Last name is empty!");
             }
+            else if (users.containsKey(username)){
+                JOptionPane.showMessageDialog(this, "Username already taken!");
+            }
             else {
                 User user = new User(username,password,email,firstName,lastName);
                 System.out.println(user.getFirstName());
                 users.put(user.getUsername(),user);
                 try {
-                    CSVHandler.writeUsersToCSV(users);
+                    UserCSVHandler.WriteToCSV(users);
                     System.out.println("wrote!");
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
                 JOptionPane.showMessageDialog(this, "Account created Successfully");
                 dispose();
-                HomeFrame homeFrame = new HomeFrame(user);
+                try {
+                    HomeFrame homeFrame = new HomeFrame(user);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
 
 

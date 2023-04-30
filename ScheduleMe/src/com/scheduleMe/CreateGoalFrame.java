@@ -1,9 +1,12 @@
 package com.scheduleMe;
 
+import com.scheduleMe.utility.goalsCSVHandler.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
@@ -615,26 +618,37 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Back")) {
             dispose();
-            new HomeFrame(currentUser);
+            try {
+                new HomeFrame(currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getActionCommand().equals("Create Goal")) {
             String name = nameField.getText();
             String description = descriptionArea.getText();
+            GoalsCSVHandler goalsCSVHandler = null; //prepare assignment for goalhandler
+
             Goal newGoal = new Goal(name, description);
             String category = (String) categoryComboBox.getSelectedItem();
             if (category.equals("Financial")) {
                 String activity = (String) financialComboBox.getSelectedItem();
                 newGoal.setType(new FinancialGoal(activity));
+                goalsCSVHandler = new FinancialGoalsCSVHandler();
             } else if (category.equals("Educational")) {
                 String activity = (String) financialComboBox.getSelectedItem();
                 newGoal.setType(new EducationalGoal(activity));
+                goalsCSVHandler = new EducationalGoalsCSVHandler();
             } else if (category.equals("Relationship")) {
                 String activity = (String) financialComboBox.getSelectedItem();
                 newGoal.setType(new RelationshipGoal(activity));
+                goalsCSVHandler = new RelationshipGoalsCSVHandler();
             } else if (category.equals("Physical")) {
                 String activity = (String) physicalComboBox.getSelectedItem();
                 newGoal.setType(new PhysicalGoal(activity));
+                goalsCSVHandler = new PhysicalGoalsCSVHandler();
             } else if (category.equals("General")) {
                 newGoal.setType(new GeneralGoal());
+                goalsCSVHandler = new PersonalGoalsCSVHandler();
             }
 
             String interval = (String) timeComboBox.getSelectedItem();
@@ -649,10 +663,19 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             } 
 
             JOptionPane.showMessageDialog(this, name + " created!");
-
             currentUser.goals.add(newGoal);
+            UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
+            try {
+                goalsCSVHandler.performWrite(newGoal, currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             dispose();
-            new HomeFrame(currentUser);
+            try {
+                new HomeFrame(currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getActionCommand().startsWith("finaledit_")) {
             Goal goal = currentUser.goals.get(Integer.parseInt(e.getActionCommand().substring(10)));
             goal.setName(nameField.getText());

@@ -10,9 +10,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class CSVHandler {
+public class UserCSVHandler {
     //Writes the users hashmap into a comma separated values file
-    public static void writeUsersToCSV(HashMap<String, User> users) throws IOException {
+    public static void WriteToCSV(HashMap<String, User> users) throws IOException {
         String csvFilePath = "output.csv";
         FileWriter writer = new FileWriter(csvFilePath);
         writer.write("Username,Password,First_Name,Last_Name,Email\n"); // writes the header row
@@ -44,11 +44,10 @@ public class CSVHandler {
             String email = String.copyValueOf(fields[4].toCharArray());
 
             users.put(username, new User(username, password, email, firstName, lastName));
-
         }
 
         reader.close();
         return users;
-
     }
+
 }

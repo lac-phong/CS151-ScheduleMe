@@ -1,10 +1,14 @@
 package com.scheduleMe;
 
+import com.scheduleMe.utility.goalsCSVHandler.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.time.*;
+import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 public class HomeFrame extends JFrame implements ActionListener {
     private JButton addGoalButton;
@@ -14,9 +18,12 @@ public class HomeFrame extends JFrame implements ActionListener {
     private JLabel nameLabel;
 
     private User currentUser;
+    private Goal goalToDisplay;
 
-    public HomeFrame(User user) {
+    public HomeFrame(User user) throws IOException {
         currentUser = user;
+        populateGoals();
+        goalToDisplay = findNextGoal();
         setTitle("ScheduleMe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -81,10 +88,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 
         } else if (e.getSource() == viewGoalsButton) {
             // handle view goals button click
-
             dispose();
-
-
             new ViewGoalsFrame(currentUser);
 
             System.out.println("View Current Goals button clicked");
@@ -101,4 +105,34 @@ public class HomeFrame extends JFrame implements ActionListener {
         }
     }
 
+    private void populateGoals() throws IOException {
+        if (currentUser.goals.isEmpty()) {
+            GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
+            goalsCSVHandler.performRead(currentUser);
+            goalsCSVHandler.setGoalsReadBehavior(new ReadCareerGoal());
+            goalsCSVHandler.performRead(currentUser);
+        }
+    }
+
+    private Goal findNextGoal() throws IOException {
+//        Random rand = new Random();
+//        int index = rand.nextInt(UserList.getGoalList(currentUser).size());
+//
+//        Goal homeScreenDisplayGoal = UserList.getGoalList(currentUser).get(index);
+        LocalDate closestDate = null;
+        long closestDiff = Long.MAX_VALUE;
+        Goal homeScreenDisplayGoal = null;
+
+        for (Goal goal : UserList.getGoalList(currentUser)) {
+            LocalDate today = LocalDate.now();
+            long diff = Math.abs(ChronoUnit.DAYS.between(goal.getDueDate(), today));
+            if (diff < closestDiff) {
+                closestDiff = diff;
+                closestDate = goal.getDueDate();
+                homeScreenDisplayGoal = goal;
+                //goal.getDueDate()
+            }
+        }
+        return homeScreenDisplayGoal;
+    }
 }

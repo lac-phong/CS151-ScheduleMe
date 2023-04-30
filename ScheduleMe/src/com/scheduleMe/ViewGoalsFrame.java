@@ -5,6 +5,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 
@@ -130,7 +131,11 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Back")) {
             dispose();
-            new HomeFrame(currentUser);
+            try {
+                new HomeFrame(currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
         } else if (e.getActionCommand().equals("Completed Goals")) {
             dispose();
             new CompletedGoalsFrame(currentUser);

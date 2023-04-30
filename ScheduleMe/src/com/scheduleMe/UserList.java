@@ -2,9 +2,10 @@ package com.scheduleMe;
 
 //use the singleton design pattern to handle userlist
 
-import com.scheduleMe.utility.CSVHandler;
+import com.scheduleMe.utility.UserCSVHandler;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class UserList {
@@ -13,10 +14,13 @@ public class UserList {
 
     public static HashMap getInstance() throws IOException {
         if (userHashMap == null) {
-            userHashMap = new HashMap<>(CSVHandler.CSVToHashMap("output.csv"));
+            userHashMap = new HashMap<>(UserCSVHandler.CSVToHashMap("output.csv"));
         }
         return userHashMap;
     }
-
+    //helper method to retrieve goal list
+    public static ArrayList<Goal> getGoalList(User user){
+        return userHashMap.get(user.getUsername()).goals;
+    }
 
 }

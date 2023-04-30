@@ -30,8 +30,15 @@ class WriteFinancialGoal implements GoalsWriteBehavior{
                     rowExists = true;
                     break;
                 }
+
             }
+
             reader.close();
+        }
+        else {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(csvFilePath);
+            writer.close();
         }
 
         FileWriter writer = new FileWriter(csvFilePath, true); // Append to the CSV file

@@ -1,11 +1,9 @@
 package com.scheduleMe.utility;
 
 import com.scheduleMe.User;
+import com.scheduleMe.UserList;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,10 +42,24 @@ public class UserCSVHandler {
             String email = String.copyValueOf(fields[4].toCharArray());
 
             users.put(username, new User(username, password, email, firstName, lastName));
+
+            //create csv files
+
+            String csvFilePath =  username+ "_Financial_goals.csv";
+            File file = new File(csvFilePath);
+            file.createNewFile();
+            FileWriter writer = new FileWriter(csvFilePath);
+            writer.close();
         }
 
         reader.close();
+
+
         return users;
+
+
+
+
     }
 
 }

@@ -61,7 +61,6 @@ class ReadFinancialGoal implements GoalsReadBehavior{
                 } else if (category.equals("General")) {
                     newGoal.setType(new GeneralGoal());
                 }
-
                user.goals.add(newGoal);
           }
 

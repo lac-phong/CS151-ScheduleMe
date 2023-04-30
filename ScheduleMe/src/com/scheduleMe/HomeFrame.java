@@ -44,49 +44,108 @@ public class HomeFrame extends JFrame implements ActionListener {
             timeOfDay = "Evening";
         }
 
+        // If there is a goal to display, show it on homescreen to serve as reminder.
         if (goalToDisplay != null){
 
+            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " going? It is " +
+                    "marked as due on: " + ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate());
+            goalLabel.setFont(new Font("Arial", Font.BOLD, 18));
+            goalLabel.setHorizontalAlignment(JLabel.CENTER);
+
+            JTextArea descriptionArea = new JTextArea(goalToDisplay.getDescription());
+            descriptionArea.setEditable(false);
+            descriptionArea.setLineWrap(true);
+            descriptionArea.setWrapStyleWord(true);
+            JScrollPane descriptionScrollPane = new JScrollPane(descriptionArea);
+
+            JPanel goalDisplayPanel = new JPanel(new BorderLayout(10, 10));
+            goalDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            goalDisplayPanel.add(goalLabel, BorderLayout.NORTH);
+            goalDisplayPanel.add(descriptionScrollPane, BorderLayout.CENTER);
+
+            greetingLabel = new JLabel("Good " + timeOfDay + ", ");
+            greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            greetingLabel.setHorizontalAlignment(JLabel.LEFT);
+
+
+
+
+            nameLabel = new JLabel(user.getFirstName());
+            nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            nameLabel.setHorizontalAlignment(JLabel.LEFT);
+
+            JPanel topPanel = new JPanel(new GridLayout(2, 1));
+            topPanel.add(greetingLabel);
+            topPanel.add(nameLabel);
+
+            // create buttons
+            addGoalButton = new JButton("Add Goal");
+            addGoalButton.addActionListener(this);
+
+            viewGoalsButton = new JButton("View Current Goals");
+            viewGoalsButton.addActionListener(this);
+
+            logoutButton = new JButton("Logout");
+            logoutButton.addActionListener(this);
+
+            JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+            buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            buttonPanel.add(addGoalButton);
+            buttonPanel.add(viewGoalsButton);
+            buttonPanel.add(logoutButton);
+
+            JPanel contentPane = new JPanel(new BorderLayout(10, 10));
+            contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            contentPane.add(topPanel, BorderLayout.NORTH);
+            contentPane.add(goalDisplayPanel, BorderLayout.CENTER);
+            contentPane.add(buttonPanel, BorderLayout.SOUTH);
+
+            setContentPane(contentPane);
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
         }
-        greetingLabel = new JLabel("Good " + timeOfDay + ", ");
-        greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        greetingLabel.setHorizontalAlignment(JLabel.LEFT);
+        else {
 
+            greetingLabel = new JLabel("Good " + timeOfDay + ", ");
+            greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            greetingLabel.setHorizontalAlignment(JLabel.LEFT);
 
-        nameLabel = new JLabel(user.getFirstName());
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        nameLabel.setHorizontalAlignment(JLabel.LEFT);
+            nameLabel = new JLabel(user.getFirstName());
+            nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            nameLabel.setHorizontalAlignment(JLabel.LEFT);
 
-        JPanel topPanel = new JPanel(new GridLayout(2, 1));
-        topPanel.add(greetingLabel);
-        topPanel.add(nameLabel);
+            JPanel topPanel = new JPanel(new GridLayout(2, 1));
+            topPanel.add(greetingLabel);
+            topPanel.add(nameLabel);
 
-        // create buttons
-        addGoalButton = new JButton("Add Goal");
-        addGoalButton.addActionListener(this);
+            // create buttons
+            addGoalButton = new JButton("Add Goal");
+            addGoalButton.addActionListener(this);
 
-        viewGoalsButton = new JButton("View Current Goals");
-        viewGoalsButton.addActionListener(this);
+            viewGoalsButton = new JButton("View Current Goals");
+            viewGoalsButton.addActionListener(this);
 
-        logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(this);
+            logoutButton = new JButton("Logout");
+            logoutButton.addActionListener(this);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        buttonPanel.add(addGoalButton);
-        buttonPanel.add(viewGoalsButton);
+            JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+            buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            buttonPanel.add(addGoalButton);
+            buttonPanel.add(viewGoalsButton);
 
-        JPanel contentPane = new JPanel(new BorderLayout(10, 10));
-        contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        contentPane.add(topPanel, BorderLayout.NORTH);
-        contentPane.add(buttonPanel, BorderLayout.CENTER);
-        contentPane.add(logoutButton, BorderLayout.SOUTH);
+            JPanel contentPane = new JPanel(new BorderLayout(10, 10));
+            contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            contentPane.add(topPanel, BorderLayout.NORTH);
+            contentPane.add(buttonPanel, BorderLayout.CENTER);
+            contentPane.add(logoutButton, BorderLayout.SOUTH);
 
-        setContentPane(contentPane);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+            setContentPane(contentPane);
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
+        }
     }
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addGoalButton) {
 

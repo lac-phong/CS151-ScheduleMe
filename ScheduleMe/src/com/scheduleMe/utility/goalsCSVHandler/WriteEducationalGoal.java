@@ -90,4 +90,9 @@ public class WriteEducationalGoal implements GoalsWriteBehavior {
             writer.close();
         }
     }
+
+    @Override
+    public void modifyGoalInCSV(Goal goal, User user) throws IOException {
+
+    }
 }

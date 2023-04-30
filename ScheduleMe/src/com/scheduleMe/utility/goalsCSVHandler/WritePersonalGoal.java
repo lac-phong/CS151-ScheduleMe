@@ -66,4 +66,9 @@ public class WritePersonalGoal implements GoalsWriteBehavior {
     @Override
     public void deleteFromCSV(Goal goal, User user) throws IOException {
     }
+
+    @Override
+    public void modifyGoalInCSV(Goal goal, User user) throws IOException {
+
+    }
 }

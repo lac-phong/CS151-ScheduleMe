@@ -91,4 +91,9 @@ public class WritePhysicalGoal implements GoalsWriteBehavior {
             writer.close();
         }
     }
+
+    @Override
+    public void modifyGoalInCSV(Goal goal, User user) throws IOException {
+
+    }
 }

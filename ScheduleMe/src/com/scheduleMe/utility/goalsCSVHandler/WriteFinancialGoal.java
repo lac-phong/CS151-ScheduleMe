@@ -90,4 +90,67 @@ public class WriteFinancialGoal implements GoalsWriteBehavior {
             writer.close();
         }
     }
+
+    @Override
+    public void modifyGoalInCSV(Goal goal, User user) throws IOException {
+        System.out.println("Modified Financial Goal!");
+        String csvFilePath = user.getUsername() + "_Financial_goals.csv";
+        File file = new File(csvFilePath);
+        boolean rowExists = false;
+
+        if (file.exists()) {
+            // Read the CSV file to check if the row already exists
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith(user.getUsername() + "," + goal.getType().getCategory() + "," + goal.getName())) {
+                    rowExists = true;
+                    break;
+                }
+
+            }
+            reader.close();
+        } else {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(csvFilePath);
+            writer.close();
+        }
+
+        FileWriter writer = new FileWriter(csvFilePath, false); // Overwrite the CSV file
+
+        // Write the header row
+        writer.write("Username,Category,Name,Description,Activity,Interval,Due_Date,Recurrence,Frequency,Completed_Date,Is_Completed\n");
+
+        // Write all the rows except the one to be modified
+        BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+        String line;
+        while ((line = reader.readLine()) != null) {
+            if (!line.startsWith(user.getUsername() + "," + goal.getType().getCategory() + "," + goal.getName())) {
+                writer.write(line + "\n");
+            }
+        }
+        reader.close();
+
+        // Write the modified row
+        String username = user.getUsername();
+        String category = goal.getType().getCategory();
+        String name = goal.getName();
+        String description = goal.getDescription();
+        String activity = goal.getType().getActivity();
+        String interval = goal.getInterval().getString();
+
+        if (goal.getInterval().getString().equals("Definite")) {
+            String dueDate = ((DefiniteGoal) goal.getInterval()).getDueDate().toString();
+            writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + "\n");
+        } else {
+            String recurrence = ((IndefiniteGoal) goal.getInterval()).getRecurrence();
+            int frequency = ((IndefiniteGoal) goal.getInterval()).getFreq();
+
+            writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + ",,"
+                    + recurrence + "," + frequency +"\n");
+        }
+
+        writer.close();
+    }
+
 }

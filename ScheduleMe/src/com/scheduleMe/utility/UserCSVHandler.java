@@ -73,6 +73,13 @@ public class UserCSVHandler {
                 FileWriter writer = new FileWriter(csvFilePath);
                 writer.close();
             }
+            csvFilePath = username + "_Completed_goals.csv";
+            file = new File(csvFilePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(csvFilePath);
+                writer.close();
+            }
         }
 
         reader.close();

@@ -174,14 +174,19 @@ public class HomeFrame extends JFrame implements ActionListener {
     }
 
     private void populateGoals() throws IOException {
+        GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
         if (currentUser.goals.isEmpty()) {
-            GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
             goalsCSVHandler.performRead(currentUser);
             goalsCSVHandler.setGoalsReadBehavior(new ReadRelationshipGoal());
             goalsCSVHandler.performRead(currentUser);
             goalsCSVHandler.setGoalsReadBehavior(new ReadPhysicalGoal());
             goalsCSVHandler.performRead(currentUser);
             goalsCSVHandler.setGoalsReadBehavior(new ReadEducationalGoal());
+            goalsCSVHandler.performRead(currentUser);
+
+        }
+        if (currentUser.completedGoals.isEmpty()){
+            goalsCSVHandler.setGoalsReadBehavior(new ReadCompletedGoal());
             goalsCSVHandler.performRead(currentUser);
         }
     }

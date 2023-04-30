@@ -9,10 +9,11 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WriteFinancialGoal implements GoalsWriteBehavior {
+public class WriteCompletedGoal implements GoalsWriteBehavior{
+    @Override
     public void writeToCSV(Goal goal, User user) throws IOException {
-        System.out.println("Wrote Financial Goal!");
-        String csvFilePath = user.getUsername() + "_Financial_goals.csv";
+        System.out.println("Wrote Completed Goal!");
+        String csvFilePath = user.getUsername() + "_Completed_goals.csv";
         File file = new File(csvFilePath);
         boolean rowExists = false;
 

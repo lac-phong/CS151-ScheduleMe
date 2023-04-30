@@ -3,7 +3,7 @@ package com.scheduleMe.utility.goalsCSVHandler;
 
 
 public class CompletedGoalsCSVHandler extends  GoalsCSVHandler{
-    CompletedGoalsCSVHandler(){
+    public CompletedGoalsCSVHandler(){
         goalsWriteBehavior = new WriteCompletedGoal();
         goalsReadBehavior = new ReadCompletedGoal();
     }

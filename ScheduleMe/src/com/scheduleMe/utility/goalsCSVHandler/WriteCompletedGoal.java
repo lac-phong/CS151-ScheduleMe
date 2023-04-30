@@ -64,8 +64,8 @@ public class WriteCompletedGoal implements GoalsWriteBehavior{
 
     @Override
     public void deleteFromCSV(Goal goal, User user) throws IOException {
-        System.out.println("Deleted Financial Goal!");
-        String csvFilePath = user.getUsername() + "_Financial_goals.csv";
+        System.out.println("Deleted Completed Goal!");
+        String csvFilePath = user.getUsername() + "_Completed_goals.csv";
         File file = new File(csvFilePath);
 
         if (file.exists()) {

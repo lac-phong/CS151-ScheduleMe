@@ -32,15 +32,8 @@ class ReadFinancialGoal implements GoalsReadBehavior{
 
                String dueDateString = String.copyValueOf(fields[4].toCharArray());
 
-               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd"); // create a formatter
-               LocalDate dueDate = LocalDate.parse(dueDateString, formatter); // parse the string to a LocalDate object
-
-//               LocalDate completedDate;
-//               String isCompleteString = String.copyValueOf(fields[4].toCharArray());
-//               boolean isComplete;
-//               if (isCompleteString.matches("TRUE")){
-//                    isComplete = true;
-//               }
+               DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+               LocalDate dueDate = LocalDate.parse(dueDateString, formatter);
 
                Goal newGoal = new FinancialGoal(name, description, dueDate);
                newGoal.setCategory(category);

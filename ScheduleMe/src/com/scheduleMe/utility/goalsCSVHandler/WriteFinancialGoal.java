@@ -38,12 +38,10 @@ public class WriteFinancialGoal implements GoalsWriteBehavior {
 
         FileWriter writer = new FileWriter(csvFilePath, true); // Append to the CSV file
 
-        //TODO change this code so that it reflects the new attributes of the reimplemented goal
-
         if (!rowExists) {
             // Write the header row if the file is empty
             if (file.length() == 0) {
-                writer.write("Username,Category,Name,Description,Due_Date,Completed_Date,Is_Completed\n");
+                writer.write("Username,Category,Name,Description,Activity,Recurrence,Due_Date,Frequency\n");
             }
 
             String username = user.getUsername();

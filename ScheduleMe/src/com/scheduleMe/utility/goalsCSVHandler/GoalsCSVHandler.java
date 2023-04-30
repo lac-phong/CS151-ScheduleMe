@@ -10,7 +10,7 @@ public abstract class GoalsCSVHandler {
     public  GoalsWriteBehavior goalsWriteBehavior;
     public  GoalsReadBehavior goalsReadBehavior;
 
-    public   void performWrite(Goal goal, User user) throws IOException {
+    public void performWrite(Goal goal, User user) throws IOException {
         goalsWriteBehavior.writeToCSV(goal, user);
     }
     public void performDelete(Goal goal, User user) throws IOException {

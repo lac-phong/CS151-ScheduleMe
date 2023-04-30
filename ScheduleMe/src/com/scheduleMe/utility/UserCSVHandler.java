@@ -45,11 +45,34 @@ public class UserCSVHandler {
 
             //create csv files
 
-            String csvFilePath =  username+ "_Financial_goals.csv";
+            String csvFilePath = username + "_Financial_goals.csv";
             File file = new File(csvFilePath);
-            file.createNewFile();
-            FileWriter writer = new FileWriter(csvFilePath);
-            writer.close();
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(csvFilePath);
+                writer.close();
+            }
+            csvFilePath = username + "_Relationship_goals.csv";
+            file = new File(csvFilePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(csvFilePath);
+                writer.close();
+            }
+            csvFilePath = username + "_Physical_goals.csv";
+            file = new File(csvFilePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(csvFilePath);
+                writer.close();
+            }
+            csvFilePath = username + "_Educational_goals.csv";
+            file = new File(csvFilePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(csvFilePath);
+                writer.close();
+            }
         }
 
         reader.close();

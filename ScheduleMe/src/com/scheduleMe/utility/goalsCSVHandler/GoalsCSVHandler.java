@@ -4,20 +4,25 @@ import com.scheduleMe.Goal;
 import com.scheduleMe.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 public abstract class GoalsCSVHandler {
 
     public  GoalsWriteBehavior goalsWriteBehavior;
     public  GoalsReadBehavior goalsReadBehavior;
 
-    public   void performWrite(Goal goal, User user) throws IOException {
+    public void performWrite(Goal goal, User user) throws IOException {
         goalsWriteBehavior.writeToCSV(goal, user);
     }
+    public void performDelete(Goal goal, User user) throws IOException {
+        goalsWriteBehavior.deleteFromCSV(goal, user);
+    }
+
+
 
     public   void performRead(User user) throws IOException {
         goalsReadBehavior.ReadFromCSV(user);
     }
+
 
     public GoalsWriteBehavior getGoalsWriteBehavior() {
         return goalsWriteBehavior;

@@ -49,23 +49,23 @@ class ReadFinancialGoal implements GoalsReadBehavior{
                     LocalDate dueDate = LocalDate.parse(dueDateString, formatter);
                     newGoal.setInterval(new DefiniteGoal(dueDate));
                }
-               
-               if (category.equals("Financial")) {
-                    newGoal.setType(new FinancialGoal(activity));
-                } else if (category.equals("Educational")) {
-                    newGoal.setType(new EducationalGoal(activity));
-                } else if (category.equals("Relationship")) {
-                    newGoal.setType(new RelationshipGoal(activity));
-                } else if (category.equals("Physical")) {
-                    newGoal.setType(new PhysicalGoal(activity));
-                } else if (category.equals("General")) {
-                    newGoal.setType(new GeneralGoal());
-                }
+               //TODO change this code so that is sets to relevant behavior of the class, we don't need this if statement
+              newGoal.setType(new FinancialGoal(activity));
+//                } else if (category.equals("Educational")) {
+//                    newGoal.setType(new EducationalGoal(activity));
+//                } else if (category.equals("Relationship")) {
+//                    newGoal.setType(new RelationshipGoal(activity));
+//                } else if (category.equals("Physical")) {
+//                    newGoal.setType(new PhysicalGoal(activity));
+//                } else if (category.equals("General")) {
+//                    newGoal.setType(new GeneralGoal());
+//                }
                user.goals.add(newGoal);
           }
 
           reader.close();
 
      }
+     //TODO write code to edit and delete from csv
 }
 

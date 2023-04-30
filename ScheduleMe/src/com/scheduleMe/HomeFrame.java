@@ -23,7 +23,12 @@ public class HomeFrame extends JFrame implements ActionListener {
     public HomeFrame(User user) throws IOException {
         currentUser = user;
         populateGoals();
-        goalToDisplay = findNextGoal();
+        if (!currentUser.goals.isEmpty()){
+            goalToDisplay = findNextGoal();
+        }
+        else {
+            goalToDisplay = null;
+        }
         setTitle("ScheduleMe");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
@@ -39,45 +44,108 @@ public class HomeFrame extends JFrame implements ActionListener {
             timeOfDay = "Evening";
         }
 
-        greetingLabel = new JLabel("Good " + timeOfDay + ", ");
-        greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        greetingLabel.setHorizontalAlignment(JLabel.LEFT);
+        // If there is a goal to display, show it on homescreen to serve as reminder.
+        if (goalToDisplay != null){
 
-        nameLabel = new JLabel(user.getFirstName());
-        nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        nameLabel.setHorizontalAlignment(JLabel.LEFT);
+            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " going? It is " +
+                    "marked as due on: " + ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate());
+            goalLabel.setFont(new Font("Arial", Font.BOLD, 18));
+            goalLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        JPanel topPanel = new JPanel(new GridLayout(2, 1));
-        topPanel.add(greetingLabel);
-        topPanel.add(nameLabel);
+            JTextArea descriptionArea = new JTextArea(goalToDisplay.getDescription());
+            descriptionArea.setEditable(false);
+            descriptionArea.setLineWrap(true);
+            descriptionArea.setWrapStyleWord(true);
+            JScrollPane descriptionScrollPane = new JScrollPane(descriptionArea);
 
-        // create buttons
-        addGoalButton = new JButton("Add Goal");
-        addGoalButton.addActionListener(this);
+            JPanel goalDisplayPanel = new JPanel(new BorderLayout(10, 10));
+            goalDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            goalDisplayPanel.add(goalLabel, BorderLayout.NORTH);
+            goalDisplayPanel.add(descriptionScrollPane, BorderLayout.CENTER);
 
-        viewGoalsButton = new JButton("View Current Goals");
-        viewGoalsButton.addActionListener(this);
+            greetingLabel = new JLabel("Good " + timeOfDay + ", ");
+            greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            greetingLabel.setHorizontalAlignment(JLabel.LEFT);
 
-        logoutButton = new JButton("Logout");
-        logoutButton.addActionListener(this);
 
-        JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
-        buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        buttonPanel.add(addGoalButton);
-        buttonPanel.add(viewGoalsButton);
 
-        JPanel contentPane = new JPanel(new BorderLayout(10, 10));
-        contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
-        contentPane.add(topPanel, BorderLayout.NORTH);
-        contentPane.add(buttonPanel, BorderLayout.CENTER);
-        contentPane.add(logoutButton, BorderLayout.SOUTH);
 
-        setContentPane(contentPane);
-        pack();
-        setLocationRelativeTo(null);
-        setVisible(true);
+            nameLabel = new JLabel(user.getFirstName());
+            nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            nameLabel.setHorizontalAlignment(JLabel.LEFT);
+
+            JPanel topPanel = new JPanel(new GridLayout(2, 1));
+            topPanel.add(greetingLabel);
+            topPanel.add(nameLabel);
+
+            // create buttons
+            addGoalButton = new JButton("Add Goal");
+            addGoalButton.addActionListener(this);
+
+            viewGoalsButton = new JButton("View Current Goals");
+            viewGoalsButton.addActionListener(this);
+
+            logoutButton = new JButton("Logout");
+            logoutButton.addActionListener(this);
+
+            JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+            buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            buttonPanel.add(addGoalButton);
+            buttonPanel.add(viewGoalsButton);
+            buttonPanel.add(logoutButton);
+
+            JPanel contentPane = new JPanel(new BorderLayout(10, 10));
+            contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            contentPane.add(topPanel, BorderLayout.NORTH);
+            contentPane.add(goalDisplayPanel, BorderLayout.CENTER);
+            contentPane.add(buttonPanel, BorderLayout.SOUTH);
+
+            setContentPane(contentPane);
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
+        }
+        else {
+
+            greetingLabel = new JLabel("Good " + timeOfDay + ", ");
+            greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            greetingLabel.setHorizontalAlignment(JLabel.LEFT);
+
+            nameLabel = new JLabel(user.getFirstName());
+            nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
+            nameLabel.setHorizontalAlignment(JLabel.LEFT);
+
+            JPanel topPanel = new JPanel(new GridLayout(2, 1));
+            topPanel.add(greetingLabel);
+            topPanel.add(nameLabel);
+
+            // create buttons
+            addGoalButton = new JButton("Add Goal");
+            addGoalButton.addActionListener(this);
+
+            viewGoalsButton = new JButton("View Current Goals");
+            viewGoalsButton.addActionListener(this);
+
+            logoutButton = new JButton("Logout");
+            logoutButton.addActionListener(this);
+
+            JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
+            buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            buttonPanel.add(addGoalButton);
+            buttonPanel.add(viewGoalsButton);
+
+            JPanel contentPane = new JPanel(new BorderLayout(10, 10));
+            contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+            contentPane.add(topPanel, BorderLayout.NORTH);
+            contentPane.add(buttonPanel, BorderLayout.CENTER);
+            contentPane.add(logoutButton, BorderLayout.SOUTH);
+
+            setContentPane(contentPane);
+            pack();
+            setLocationRelativeTo(null);
+            setVisible(true);
+        }
     }
-
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addGoalButton) {
 
@@ -109,16 +177,16 @@ public class HomeFrame extends JFrame implements ActionListener {
         if (currentUser.goals.isEmpty()) {
             GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
             goalsCSVHandler.performRead(currentUser);
-            goalsCSVHandler.setGoalsReadBehavior(new ReadCareerGoal());
+            goalsCSVHandler.setGoalsReadBehavior(new ReadRelationshipGoal());
+            goalsCSVHandler.performRead(currentUser);
+            goalsCSVHandler.setGoalsReadBehavior(new ReadPhysicalGoal());
+            goalsCSVHandler.performRead(currentUser);
+            goalsCSVHandler.setGoalsReadBehavior(new ReadEducationalGoal());
             goalsCSVHandler.performRead(currentUser);
         }
     }
 
     private Goal findNextGoal() throws IOException {
-//        Random rand = new Random();
-//        int index = rand.nextInt(UserList.getGoalList(currentUser).size());
-//
-//        Goal homeScreenDisplayGoal = UserList.getGoalList(currentUser).get(index);
         LocalDate closestDate = null;
         long closestDiff = Long.MAX_VALUE;
         Goal homeScreenDisplayGoal = null;

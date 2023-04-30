@@ -1,5 +1,8 @@
 package com.scheduleMe;
 
+import com.scheduleMe.utility.goalsCSVHandler.FinancialGoalsCSVHandler;
+import com.scheduleMe.utility.goalsCSVHandler.*;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -144,7 +147,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             int index = Integer.parseInt(e.getActionCommand().substring(5));
             Goal goal = goals.get(index);
             dispose();
-            new CreateGoalFrame(currentUser, goal, index);
+            new EditGoalFrame(currentUser, goal, index);
 
         }
         if (e.getActionCommand().startsWith("complete_")) {
@@ -160,7 +163,21 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             new ViewGoalsFrame(currentUser);
         }
         if (e.getActionCommand().startsWith("delete_")) {
+            GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
             int index = Integer.parseInt(e.getActionCommand().substring(7));
+            if (goals.get(index).getType().getCategory().equals("Relationship")){
+                goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+            } else if (goals.get(index).getType().getCategory().equals("Physical")) {
+                goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+            }
+            else if (goals.get(index).getType().getCategory().equals("Educational")) {
+                goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+            }
+            try {
+                goalsCSVHandler.performDelete(goals.get(index), currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             goals.remove(index);
             dispose();
             new ViewGoalsFrame(currentUser);

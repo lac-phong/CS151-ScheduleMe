@@ -174,7 +174,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
+                //dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
             }
             else {
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -214,7 +214,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                financialComboBox.setSelectedItem(((FinancialGoal) goal.getType()).getActivity());
+                //financialComboBox.setSelectedItem(((FinancialGoal) goal.getType()).getActivity());
             } else if (selectedCategory.equals("Physical")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();

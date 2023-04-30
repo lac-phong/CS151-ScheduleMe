@@ -154,7 +154,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                     formPanel.add(component);
                 }
                 //timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
-                timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
+               // timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
             } else if (selectedTime.equals("Definite")){
                 List<Component> components = timeComponents.get(selectedTime);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -272,7 +272,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                relationshipComboBox.setSelectedItem(((RelationshipGoal) goal.getType()).getActivity());
+                //relationshipComboBox.setSelectedItem(((RelationshipGoal) goal.getType()).getActivity());
             } else if (selectedCategory.equals("Educational")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -301,7 +301,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                educationalComboBox.setSelectedItem(((EducationalGoal) goal.getType()).getActivity());
+               // educationalComboBox.setSelectedItem(((EducationalGoal) goal.getType()).getActivity());
             }
             else {
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());

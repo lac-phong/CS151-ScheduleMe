@@ -16,11 +16,15 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
     private final ArrayList<Goal> goals;
     private final ArrayList<Goal> completedGoals;
+    private int startIndex = 0;
+    private int endIndex;
+    private JLabel rangeLabel;
     
 
     public ViewGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
         goals = currentUser.goals;
+        endIndex = Math.min(4, goals.size() - 1);
         completedGoals = currentUser.completedGoals;
 
         setTitle("View Goals");
@@ -54,9 +58,11 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         JPanel goalsPanel = new JPanel();
         goalsPanel.setLayout(new BoxLayout(goalsPanel, BoxLayout.Y_AXIS));
 
-        //we should create a button on the side of each goal that changes the boolean isComplete
-        // add in check for loop to ignore goals that have the isComplete = true value
-        // maybe add in button that allows user to see past completed goals
+//        rangeLabel = new JLabel("Showing goals " + (startIndex + 1) + "-" + (endIndex + 1) + " of " + goals.size());
+//        rangeLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
+//        goalsPanel.add(rangeLabel);
+
+
         for (Goal goal : goals) {
             JLabel nameLabel2 = new JLabel(goal.getName());
             nameLabel2.setFont(new Font(nameLabel2.getFont().getName(), Font.BOLD, 14));
@@ -175,7 +181,6 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 throw new RuntimeException(ex);
             }
             UserList.getGoalList(currentUser).remove(index);
-            //TODO write complete goal to CSV!!!!
             completedGoals.add(goal);
             dispose();
             new ViewGoalsFrame(currentUser);

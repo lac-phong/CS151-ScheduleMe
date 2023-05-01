@@ -8,7 +8,6 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
-import java.util.Random;
 
 public class HomeFrame extends JFrame implements ActionListener {
     private JButton addGoalButton;

@@ -45,7 +45,7 @@ Tyler Moquin
 
 # How to run code
 
-# Using Github
+# Using GitHub
 To install this project, install it locally using terminal with these commands:
 
     $ git clone ....

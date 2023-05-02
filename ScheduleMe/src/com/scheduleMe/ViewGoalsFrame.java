@@ -19,7 +19,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
     private int startIndex = 0;
     private int endIndex;
     private JLabel rangeLabel;
-    
+
 
     public ViewGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
@@ -91,7 +91,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             }
 
             JButton editButton, completeButton, deleteButton;
-            
+
             JPanel goalContainer = new JPanel();
             goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
             goalContainer.add(goalPanel);
@@ -110,7 +110,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             optionsPanel.add(deleteButton);
             completeButton.setActionCommand("complete_" + Integer.toString(goals.indexOf(goal)));
             editButton.setActionCommand("edit_" + Integer.toString(goals.indexOf(goal)));
-            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));  
+            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));
             goalContainer.add(optionsPanel);
 
             goalsPanel.add(goalContainer);

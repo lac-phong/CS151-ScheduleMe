@@ -20,8 +20,8 @@ public class ReadCompletedGoal implements GoalsReadBehavior {
         while ((line = reader.readLine()) != null) {
 
             String[] fields = line.split(",");
-            String category = String.copyValueOf(fields[1].toCharArray());
-            String name = String.copyValueOf(fields[2].toCharArray());
+            String category = String.copyValueOf(fields[2].toCharArray());
+            String name = String.copyValueOf(fields[1].toCharArray());
             String description = String.copyValueOf(fields[3].toCharArray());
             String activity = String.copyValueOf(fields[4].toCharArray());
             String interval = String.copyValueOf(fields[5].toCharArray());
@@ -37,7 +37,18 @@ public class ReadCompletedGoal implements GoalsReadBehavior {
                 LocalDate dueDate = LocalDate.parse(dueDateString, formatter);
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
-            newGoal.setType(new EducationalGoal(activity));
+
+            if (category.equals("Financial")){
+                newGoal.setType(new FinancialGoal(activity));
+            } else if (category.equals("Educational")) {
+                newGoal.setType(new EducationalGoal(activity));
+            } else if (category.equals("Relationship")) {
+                newGoal.setType(new RelationshipGoal(activity));
+            } else if (category.equals("Physical")) {
+                newGoal.setType(new PhysicalGoal(activity));
+            } else if (category.equals("General")) {
+                newGoal.setType(new GeneralGoal());
+            }
             user.completedGoals.add(newGoal);
         }
 

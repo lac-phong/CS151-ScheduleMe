@@ -6,7 +6,7 @@ ScheduleMe is an application designed to help users maintain and track goals mad
 * [Contributions to code](#Contributions-to-code)
 * [Problems](#Problems)
 * [Previous Works](#Previous-works)
-* [Assumpitions](#Assumpitions)
+* [Assumptions](#Assumptions)
 * [Operations](#Operations)
 * [Solution](#Solution)
 * [How to run code](#How-to-run-code)
@@ -30,7 +30,7 @@ Tyler Moquin
 
 ## Previous works
 
-## Assumpitions
+## Assumptions
 
 ## Functionality
 

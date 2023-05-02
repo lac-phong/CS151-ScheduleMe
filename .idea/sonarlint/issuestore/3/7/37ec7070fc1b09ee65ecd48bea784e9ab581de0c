@@ -1,0 +1,12 @@
+
+`	java:S112?"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ
+`	java:S112I"FDefine and throw a dedicated exception instead of using a generic one.(¼ÿ¾¹ÿÿÿÿÿ
+t	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ê£Üóûÿÿÿÿ
+B
+java:S1948"'Make "users" transient or serializable.(ò‡µ”ÿÿÿÿÿ
+\
+java:S3252"AUse static access with "javax.swing.SwingConstants" for "CENTER".(©ÔÕ¬úÿÿÿÿ
+N	java:S106B"9Replace this use of System.out or System.err by a logger.(‡–—È
+S	java:S106L"9Replace this use of System.out or System.err by a logger.(•óßüÿÿÿÿ
+D
+java:S1068")Remove this unused "users" private field.(ò‡µ”ÿÿÿÿÿ

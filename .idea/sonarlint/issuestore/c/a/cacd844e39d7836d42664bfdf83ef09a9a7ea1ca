@@ -1,0 +1,11 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(Χ¥ό
+n
+java:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(δ‡ƒύÿÿÿÿ8ψ‚ύ0
+U
+java:S1854"8Remove this useless assignment to local variable "line".(ίΖΊ8ϋ‚ύ0
+^
+java:S1854"<Remove this useless assignment to local variable "category".(£σε€ϊÿÿÿÿ8ϋ‚ύ0
+N	java:S106"9Replace this use of System.out or System.err by a logger.(ι™χ€
+O
+java:S1481"-Remove this unused "category" local variable.(£σε€ϊÿÿÿÿ8ÿ‚ύ0

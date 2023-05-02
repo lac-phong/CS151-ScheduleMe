@@ -1,0 +1,14 @@
+
+o	java:S120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(×¥˜ü
+n
+java:S2095"LUse try-with-resources or close this "BufferedReader" in a "finally" clause.(ä‡ƒŸýÿÿÿÿ8ù›×œý0
+U
+java:S1854"8Remove this useless assignment to local variable "line".(ßšÆº8û›×œý0
+^
+java:S1854"<Remove this useless assignment to local variable "category".(£óå€úÿÿÿÿ8û›×œý0
+U	java:S106"9Replace this use of System.out or System.err by a logger.(ÿ™‚¶8ü›×œý0
+O
+java:S1481"-Remove this unused "category" local variable.(£óå€úÿÿÿÿ8þ›×œý0
+O
+java:S1135'"2Complete the task associated to this TODO comment.(Ãï¦–8€œ×œý0
+]	java:S125)"<This block of commented-out lines of code should be removed.(ë«àÖùÿÿÿÿ8œ×œý0

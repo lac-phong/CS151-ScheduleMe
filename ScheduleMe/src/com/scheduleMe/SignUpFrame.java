@@ -125,6 +125,11 @@ public class SignUpFrame extends JFrame implements ActionListener {
                     throw new RuntimeException(ex);
                 }
                 JOptionPane.showMessageDialog(this, "Account created Successfully");
+                try {
+                    UserCSVHandler.generateCSV(user);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
                 dispose();
                 try {
                     HomeFrame homeFrame = new HomeFrame(user);

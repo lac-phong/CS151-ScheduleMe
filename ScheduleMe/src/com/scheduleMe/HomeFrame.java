@@ -49,21 +49,35 @@ public class HomeFrame extends JFrame implements ActionListener {
         // If there is a goal to display, show it on homescreen to serve as reminder.
         if (goalToDisplay != null){
 
-            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " goal going? It is " +
-                    "marked as due on: " + ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate());
+            LocalDate today = LocalDate.now();
+            LocalDate dueDate = ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate();
+            Period period = Period.between(today, dueDate);
+            int daysUntilDue = period.getDays();
+            String stringDaysUntilDue;
+            if (daysUntilDue == 0){
+                stringDaysUntilDue = "It is due today!";
+            } else if (daysUntilDue == 1) {
+                stringDaysUntilDue = "It is due tomorrow!";
+            } else {
+                stringDaysUntilDue = "It is due in " + daysUntilDue + " days!";
+            }
+
+            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " goal, " +goalToDisplay.getName() + " going? " +
+                    stringDaysUntilDue);
             goalLabel.setFont(new Font("Arial", Font.BOLD, 18));
             goalLabel.setHorizontalAlignment(JLabel.CENTER);
 
-            JTextArea descriptionArea = new JTextArea("Description: " + goalToDisplay.getDescription());
-            descriptionArea.setEditable(false);
-            descriptionArea.setLineWrap(true);
-            descriptionArea.setWrapStyleWord(true);
-            JScrollPane descriptionScrollPane = new JScrollPane(descriptionArea);
+            JLabel descriptionLabel = new JLabel("Description: " + goalToDisplay.getDescription());
+
+            JLabel activityLabel = new JLabel("Activity: " + goalToDisplay.getType().getActivity());
+            JPanel goalToDisplayPanel = new JPanel();
+            goalToDisplayPanel.add(descriptionLabel);
+            goalToDisplayPanel.add(activityLabel);
 
             JPanel goalDisplayPanel = new JPanel(new BorderLayout(10, 10));
             goalDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
             goalDisplayPanel.add(goalLabel, BorderLayout.NORTH);
-            goalDisplayPanel.add(descriptionScrollPane, BorderLayout.CENTER);
+            goalDisplayPanel.add(goalToDisplayPanel, BorderLayout.CENTER);
 
             greetingLabel = new JLabel("Good " + timeOfDay + ", ");
             greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
@@ -110,17 +124,17 @@ public class HomeFrame extends JFrame implements ActionListener {
             setVisible(true);
         }
         else {
-            greetingLabel = new JLabel("Good " + timeOfDay + ", ");
+            greetingLabel = new JLabel("Good " + timeOfDay + ", " + currentUser.getFirstName());
             greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
             greetingLabel.setHorizontalAlignment(JLabel.LEFT);
 
-            nameLabel = new JLabel(user.getFirstName());
-            nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
-            nameLabel.setHorizontalAlignment(JLabel.LEFT);
+//            nameLabel = new JLabel(user.getFirstName());
+//            nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
+//            nameLabel.setHorizontalAlignment(JLabel.LEFT);
 
             JPanel topPanel = new JPanel(new GridLayout(2, 1));
             topPanel.add(greetingLabel);
-            topPanel.add(nameLabel);
+//            topPanel.add(nameLabel);
 
             // create buttons
             addGoalButton = new JButton("Add Goal");

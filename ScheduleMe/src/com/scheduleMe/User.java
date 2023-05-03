@@ -2,7 +2,7 @@ package com.scheduleMe;
 
 import java.util.ArrayList;
 
-public class User {
+public class User { //TODO maybe create a trophy page for completing x amount of goals?
     private String username;
     private String password;
     private String email;

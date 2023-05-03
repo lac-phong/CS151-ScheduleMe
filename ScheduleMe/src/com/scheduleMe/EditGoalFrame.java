@@ -154,7 +154,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                     formPanel.add(component);
                 }
                 //timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
-               // timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
+                // timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
             } else if (selectedTime.equals("Definite")){
                 List<Component> components = timeComponents.get(selectedTime);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -243,7 +243,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-               // physicalComboBox.setSelectedItem(((PhysicalGoal) goal.getType()).getActivity());
+                // physicalComboBox.setSelectedItem(((PhysicalGoal) goal.getType()).getActivity());
             } else if (selectedCategory.equals("Relationship")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -301,7 +301,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-               // educationalComboBox.setSelectedItem(((EducationalGoal) goal.getType()).getActivity());
+                // educationalComboBox.setSelectedItem(((EducationalGoal) goal.getType()).getActivity());
             }
             else {
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
@@ -379,11 +379,35 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
 
-            JOptionPane.showMessageDialog(this, name + " created!");
+            JOptionPane.showMessageDialog(this, goalToModify.getName() + " modified!");
             UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
             UserList.getGoalList(currentUser).remove(index);
             try {
+                if (goalToModify.getType().getCategory().equals("Financial")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
+                } else if (category.equals("Educational")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                } else if (category.equals("Relationship")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                } else if (category.equals("Physical")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                } else if (category.equals("General")) {
+                    goalsCSVHandler = new PersonalGoalsCSVHandler();
+                }
+
                 goalsCSVHandler.performDelete(goalToModify,currentUser);
+
+                if (newGoal.getType().getCategory().equals("Financial")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
+                } else if (newGoal.getType().getCategory().equals("Educational")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                } else if (newGoal.getType().getCategory().equals("Relationship")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                } else if (newGoal.getType().getCategory().equals("Physical")) {
+                    goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                } else if (category.equals("General")) {
+                    goalsCSVHandler = new PersonalGoalsCSVHandler();
+                }
                 goalsCSVHandler.performWrite(newGoal, currentUser);
 
             } catch (IOException ex) {

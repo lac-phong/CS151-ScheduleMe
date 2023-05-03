@@ -1,5 +1,5 @@
 package com.scheduleMe;
-
+//TODO add in a counter to track the user's number of times accomplishing per unit of time
 public class IndefiniteGoal implements GoalInterval {
     private final String interval = "Indefinite";
     private String recurrence;

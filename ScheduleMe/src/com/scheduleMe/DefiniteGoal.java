@@ -1,7 +1,7 @@
 package com.scheduleMe;
 
 import java.time.LocalDate;
-
+//TODO we need to create something that tracks how many times this was done and maybe automnatically completes the goal if it reaches its total.
 public class DefiniteGoal implements GoalInterval {
     private final String interval = "Definite";
     private LocalDate dueDate;

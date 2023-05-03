@@ -16,11 +16,15 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
     private final ArrayList<Goal> goals;
     private final ArrayList<Goal> completedGoals;
-    
+    private int startIndex = 0;
+    private int endIndex;
+    private JLabel rangeLabel;
+
 
     public ViewGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
         goals = currentUser.goals;
+        endIndex = Math.min(4, goals.size() - 1);
         completedGoals = currentUser.completedGoals;
 
         setTitle("View Goals");
@@ -54,9 +58,11 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         JPanel goalsPanel = new JPanel();
         goalsPanel.setLayout(new BoxLayout(goalsPanel, BoxLayout.Y_AXIS));
 
-        //we should create a button on the side of each goal that changes the boolean isComplete
-        // add in check for loop to ignore goals that have the isComplete = true value
-        // maybe add in button that allows user to see past completed goals
+//        rangeLabel = new JLabel("Showing goals " + (startIndex + 1) + "-" + (endIndex + 1) + " of " + goals.size());
+//        rangeLabel.setBorder(new EmptyBorder(10, 10, 10, 10));
+//        goalsPanel.add(rangeLabel);
+
+
         for (Goal goal : goals) {
             JLabel nameLabel2 = new JLabel(goal.getName());
             nameLabel2.setFont(new Font(nameLabel2.getFont().getName(), Font.BOLD, 14));
@@ -85,7 +91,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             }
 
             JButton editButton, completeButton, deleteButton;
-            
+
             JPanel goalContainer = new JPanel();
             goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
             goalContainer.add(goalPanel);
@@ -104,7 +110,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             optionsPanel.add(deleteButton);
             completeButton.setActionCommand("complete_" + Integer.toString(goals.indexOf(goal)));
             editButton.setActionCommand("edit_" + Integer.toString(goals.indexOf(goal)));
-            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));  
+            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));
             goalContainer.add(optionsPanel);
 
             goalsPanel.add(goalContainer);
@@ -153,11 +159,28 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
         if (e.getActionCommand().startsWith("complete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(9));
             Goal goal = goals.get(index);
+            GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
             goal.getInterval().setIsComplete(true);
             if (goal.getInterval().getString().equals("Definite")) {
                 ((DefiniteGoal) goal.getInterval()).setCompleteDate(LocalDate.now());
             }
-            goals.remove(index);
+            if (goals.get(index).getType().getCategory().equals("Relationship")){
+                goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+            } else if (goals.get(index).getType().getCategory().equals("Physical")) {
+                goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+            }
+            else if (goals.get(index).getType().getCategory().equals("Educational")) {
+                goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+            }
+            try {
+                goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                goalsCSVHandler.performWrite(goals.get(index),currentUser);
+
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            UserList.getGoalList(currentUser).remove(index);
             completedGoals.add(goal);
             dispose();
             new ViewGoalsFrame(currentUser);

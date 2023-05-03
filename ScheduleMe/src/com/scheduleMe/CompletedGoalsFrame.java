@@ -1,10 +1,15 @@
 package com.scheduleMe;
 
+import com.scheduleMe.utility.goalsCSVHandler.CompletedGoalsCSVHandler;
+import com.scheduleMe.utility.goalsCSVHandler.FinancialGoalsCSVHandler;
+import com.scheduleMe.utility.goalsCSVHandler.GoalsCSVHandler;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class CompletedGoalsFrame extends JFrame implements ActionListener {
@@ -122,7 +127,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    @Override
+    @Override //TODO FIX DELETE
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Back")) {
             dispose();
@@ -130,6 +135,12 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
         }
         if (e.getActionCommand().startsWith("delete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(7));
+            GoalsCSVHandler goalsCSVHandler = new CompletedGoalsCSVHandler();
+            try {
+                goalsCSVHandler.performDelete(goals.get(index), currentUser);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             goals.remove(index);
             dispose();
             new CompletedGoalsFrame(currentUser);

@@ -1,6 +1,7 @@
 package com.scheduleMe;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User { //TODO maybe create a trophy page for completing x amount of goals?
     private String username;
@@ -11,6 +12,14 @@ public class User { //TODO maybe create a trophy page for completing x amount of
 
     public ArrayList<Goal> goals;
     public ArrayList<Goal> completedGoals;
+
+    public int numOfFinancialGoalsCompleted;
+    public int numOfEducationalGoalsCompleted;
+    public int numOfPhysicalGoalsCompleted;
+    public int numOfRelationshipGoalsCompleted;
+    public int numOfTotalGoalsComplete;
+
+    public HashMap<String, Achievement> achievements;
 
     public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;

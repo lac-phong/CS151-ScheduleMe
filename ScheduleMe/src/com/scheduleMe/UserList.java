@@ -14,7 +14,7 @@ public class UserList {
 
     public static HashMap getInstance() throws IOException {
         if (userHashMap == null) {
-            userHashMap = new HashMap<>(UserCSVHandler.CSVToHashMap("output.csv"));
+            userHashMap = new HashMap<>(UserCSVHandler.CSVToHashMap());
         }
         return userHashMap;
     }

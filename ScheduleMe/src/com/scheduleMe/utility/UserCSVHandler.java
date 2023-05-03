@@ -13,7 +13,8 @@ public class UserCSVHandler {
     public static void WriteToCSV(HashMap<String, User> users) throws IOException {
         String csvFilePath = "output.csv";
         FileWriter writer = new FileWriter(csvFilePath);
-        writer.write("Username,Password,First_Name,Last_Name,Email\n"); // writes the header row
+        writer.write("Username,Password,First_Name,Last_Name,Email,NumOfFinancialGoals,NumOfEducationalGoals,NumOfPhysicalGoals," +
+                "NumOfRelationshipGoals,numOfTotalGoals\n"); // writes the header row
 
         for (Map.Entry<String, User> entry : users.entrySet()) {
             String username = entry.getKey();
@@ -22,15 +23,19 @@ public class UserCSVHandler {
             String email = entry.getValue().getEmail();
             String password = entry.getValue().getPassword();
 
-            writer.write(username + "," + password + "," + firstName + "," + lastName + "," + email + "\n"); // need to change this to include goals
+            writer.write(username + "," + password + "," + firstName + "," + lastName + "," + email + "," +
+                    entry.getValue().numOfFinancialGoalsCompleted + "," + entry.getValue().numOfEducationalGoalsCompleted +
+                    "," + entry.getValue().numOfPhysicalGoalsCompleted + "," + entry.getValue().numOfRelationshipGoalsCompleted + "," +
+                    entry.getValue().numOfTotalGoalsComplete + "\n"); // need to change this to include goals
         }
 
         writer.close();
     }
 
-    public static Map<String, User> CSVToHashMap(String fileName) throws IOException {
+    public static Map<String, User> CSVToHashMap() throws IOException {
+        String csvFilePath = "output.csv";
         HashMap<String, User> users = new HashMap<>();
-        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
         String line = reader.readLine();  // skip the header row
 
         while ((line = reader.readLine()) != null) {
@@ -40,12 +45,25 @@ public class UserCSVHandler {
             String firstName = String.copyValueOf(fields[2].toCharArray());
             String lastName = String.copyValueOf(fields[3].toCharArray());
             String email = String.copyValueOf(fields[4].toCharArray());
+            int numOfFinancialGoalsCompleted = Integer.parseInt(String.copyValueOf(fields[5].toCharArray()));
+            int numOfEducationalGoalsCompleted = Integer.parseInt(String.copyValueOf(fields[6].toCharArray()));
+            int numOfPhysicalGoalsCompleted = Integer.parseInt(String.copyValueOf(fields[7].toCharArray()));
+            int numOfRelationshipGoalsCompleted = Integer.parseInt(String.copyValueOf(fields[8].toCharArray()));
+            int numOfTotalGoalsCompleted = Integer.parseInt(String.copyValueOf(fields[9].toCharArray()));
+
+
 
             users.put(username, new User(username, password, email, firstName, lastName));
+            users.get(username).numOfTotalGoalsComplete = numOfTotalGoalsCompleted;
+            users.get(username).numOfFinancialGoalsCompleted = numOfFinancialGoalsCompleted;
+            users.get(username).numOfEducationalGoalsCompleted = numOfEducationalGoalsCompleted;
+            users.get(username).numOfPhysicalGoalsCompleted = numOfPhysicalGoalsCompleted;
+            users.get(username).numOfRelationshipGoalsCompleted = numOfRelationshipGoalsCompleted;
+
 
             //create csv files
 
-            String csvFilePath = username + "_Financial_goals.csv";
+            csvFilePath = username + "_Financial_goals.csv";
             File file = new File(csvFilePath);
             if (!file.exists()) {
                 file.createNewFile();

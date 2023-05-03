@@ -15,6 +15,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+//TODO CREATE POP UPS IF CATEGORIES ENTERED ARE NULL OR OTHERWISE INVALID
 public class CreateGoalFrame extends JFrame implements ActionListener {
     private JTextField nameField;
     private JComboBox<String> categoryComboBox;

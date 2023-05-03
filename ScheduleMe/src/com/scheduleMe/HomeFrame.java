@@ -16,6 +16,8 @@ public class HomeFrame extends JFrame implements ActionListener {
     private JLabel greetingLabel;
     private JLabel nameLabel;
 
+    private JButton viewAchievementsButton;
+
     private User currentUser;
     private Goal goalToDisplay;
 
@@ -88,10 +90,14 @@ public class HomeFrame extends JFrame implements ActionListener {
             logoutButton = new JButton("Logout");
             logoutButton.addActionListener(this);
 
+            viewAchievementsButton = new JButton(("View Achievements"));
+            viewAchievementsButton.addActionListener(this);
+
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
             buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             buttonPanel.add(addGoalButton);
             buttonPanel.add(viewGoalsButton);
+            buttonPanel.add(viewAchievementsButton);
             buttonPanel.add(logoutButton);
 
             JPanel contentPane = new JPanel(new BorderLayout(10, 10));
@@ -129,10 +135,14 @@ public class HomeFrame extends JFrame implements ActionListener {
             logoutButton = new JButton("Logout");
             logoutButton.addActionListener(this);
 
+            viewAchievementsButton = new JButton(("View Achievements"));
+            viewAchievementsButton.addActionListener(this);
+
             JPanel buttonPanel = new JPanel(new GridLayout(2, 1, 10, 10));
             buttonPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             buttonPanel.add(addGoalButton);
             buttonPanel.add(viewGoalsButton);
+            buttonPanel.add(viewAchievementsButton);
 
             JPanel contentPane = new JPanel(new BorderLayout(10, 10));
             contentPane.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
@@ -170,6 +180,9 @@ public class HomeFrame extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
+        } else if (e.getSource() == viewAchievementsButton) {
+            dispose();
+            new ViewAchievementsFrame(currentUser);
         }
     }
 

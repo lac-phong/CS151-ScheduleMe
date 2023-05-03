@@ -650,6 +650,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             } else if (category.equals("General")) {
                 newGoal.setType(new GeneralGoal());
                 goalsCSVHandler = new PersonalGoalsCSVHandler();
+            } else {
             }
 
             String interval = (String) timeComboBox.getSelectedItem();
@@ -662,19 +663,26 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
-
-            JOptionPane.showMessageDialog(this, name + " created!");
             UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
-            try {
-                goalsCSVHandler.performWrite(newGoal, currentUser);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            if (goalsCSVHandler == null){
+                JOptionPane.showMessageDialog(this,"No Category Selected, please select!");
             }
-            dispose();
-            try {
-                new HomeFrame(currentUser);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
+            if (interval.equals("Choose type")){
+                JOptionPane.showMessageDialog(this,"No Interval Selected, please select!");
+            }
+            else {
+                try {
+                    JOptionPane.showMessageDialog(this, name + " created!");
+                    goalsCSVHandler.performWrite(newGoal, currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                dispose();
+                try {
+                    new HomeFrame(currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
         } else if (e.getActionCommand().startsWith("finaledit_")) {
             Goal goal = currentUser.goals.get(Integer.parseInt(e.getActionCommand().substring(10)));

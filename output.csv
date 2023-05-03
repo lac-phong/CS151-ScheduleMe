@@ -1,5 +1,5 @@
-Username,Password,First_Name,Last_Name,Email
-test,12345,testF,testL,test@gmail.com
-signupTest,signupTest,signupTest,signupTest,signupTest
-Test33,1234,test,testlast,Test33@gmail.com
-bobsm,1234,bob,smith,bob@gmail.com
+Username,Password,First_Name,Last_Name,Email,NumOfFinancialGoals,NumOfEducationalGoals,NumOfPhysicalGoals,NumOfRelationshipGoals,numOfTotalGoals
+fdgfddf,fdfg,fgddgf,fdgg,fgd,0,0,0,0,0
+dfgfdgdfg,dfggdf,ddfgfd,gfdfdgdfgdfg,dfgfdg,0,0,0,0,0
+dfgfdgdg,dfggdf,ddfgfd,gfdfdgdfgdfg,dfgfdg,0,0,0,0,0
+bobsm,1234,bob,smith,bob@gmail.com,1,100,0,0,1

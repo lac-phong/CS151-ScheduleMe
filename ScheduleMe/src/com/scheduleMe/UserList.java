@@ -22,5 +22,7 @@ public class UserList {
     public static ArrayList<Goal> getGoalList(User user){
         return userHashMap.get(user.getUsername()).goals;
     }
-
+    public static HashMap<String, Achievement> getAchievementList(User user){
+        return userHashMap.get(user.getUsername()).achievements;
+    }
 }

@@ -22,6 +22,7 @@ public class HomeFrame extends JFrame implements ActionListener {
     public HomeFrame(User user) throws IOException {
         currentUser = user;
         populateGoals();
+        Achievement.validateAchievements(currentUser);
         if (!currentUser.goals.isEmpty()){
             goalToDisplay = findNextGoal();
         }

@@ -29,6 +29,8 @@ public class User { //TODO maybe create a trophy page for completing x amount of
         this.lastName = lastName;
         goals = new ArrayList<>();
         completedGoals = new ArrayList<>();
+        achievements = Achievement.generateAchievements();
+
     }
 
     public String getUsername() {

@@ -70,8 +70,6 @@ public class HomeFrame extends JFrame implements ActionListener {
             greetingLabel.setHorizontalAlignment(JLabel.LEFT);
 
 
-
-
             nameLabel = new JLabel(user.getFirstName());
             nameLabel.setFont(new Font("Arial", Font.BOLD, 24));
             nameLabel.setHorizontalAlignment(JLabel.LEFT);
@@ -112,7 +110,6 @@ public class HomeFrame extends JFrame implements ActionListener {
             setVisible(true);
         }
         else {
-
             greetingLabel = new JLabel("Good " + timeOfDay + ", ");
             greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
             greetingLabel.setHorizontalAlignment(JLabel.LEFT);

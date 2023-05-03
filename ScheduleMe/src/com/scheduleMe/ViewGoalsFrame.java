@@ -191,27 +191,38 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             if (currentUser.numOfPhysicalGoalsCompleted == 5 && currentUser.achievements.get("Juggernaut").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Juggernaut Achievement!");
                 currentUser.achievements.get("Juggernaut").achievementFlashed = true;
+                currentUser.achievements.get("Juggernaut").setDateUnlocked(LocalDate.now());
             }
             if (currentUser.numOfEducationalGoalsCompleted == 5 && currentUser.achievements.get("Scholar").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Scholar Achievement!");
                 currentUser.achievements.get("Scholar").achievementFlashed = true;
+                currentUser.achievements.get("Scholar").setDateUnlocked(LocalDate.now());
+
             }
             if (currentUser.numOfFinancialGoalsCompleted == 5 && currentUser.achievements.get("Debt Collector").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Debt Collector Achievement!");
                 currentUser.achievements.get("Debt Collector").achievementFlashed = true;
+                currentUser.achievements.get("Debt Collector").setDateUnlocked(LocalDate.now());
+
             }
             if (currentUser.numOfRelationshipGoalsCompleted == 5 && currentUser.achievements.get("Suave").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Suave Achievement!");
                 currentUser.achievements.get("Suave").achievementFlashed = true;
+                currentUser.achievements.get("Suave").setDateUnlocked(LocalDate.now());
+
             }
             if (currentUser.numOfTotalGoalsComplete == 5 && currentUser.achievements.get("Dedicated").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Dedicated Achievement!");
                 currentUser.achievements.get("Dedicated").achievementFlashed = true;
+                currentUser.achievements.get("Dedicated").setDateUnlocked(LocalDate.now());
             }
             if (currentUser.numOfPhysicalGoalsCompleted == 3 && currentUser.numOfEducationalGoalsCompleted == 3
                     && currentUser.numOfFinancialGoalsCompleted >= 3 && currentUser.numOfRelationshipGoalsCompleted >= 3
             && currentUser.achievements.get("Variety").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Variety Achievement!");
+                currentUser.achievements.get("Variety").achievementFlashed = true;
+                currentUser.achievements.get("Variety").setDateUnlocked(LocalDate.now());
+
             }
 
             try {

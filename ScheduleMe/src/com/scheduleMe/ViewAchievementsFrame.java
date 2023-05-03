@@ -45,6 +45,7 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
             Achievement achievement = achievements.get(key);
             JLabel titleLabel = new JLabel(achievement.getTitle(), SwingConstants.LEFT);
             JLabel descriptionLabel = new JLabel("Description: " + achievement.getDescription(), SwingConstants.LEFT);
+            JLabel dateLabel;
             if (achievement.isUnlocked()) {
                 titleLabel.setForeground(new Color(34, 139, 34));
                 titleLabel.setText(titleLabel.getText() + " - Unlocked!");
@@ -89,7 +90,10 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
                 JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")");
                 achievementPanel.add(progressLabel);
             }
-
+            if (achievement.getDateUnlocked() != null){
+                dateLabel = new JLabel("Date unlocked: " + achievement.getDateUnlocked().toString());
+                achievementPanel.add(dateLabel);
+            }
         }
     }
 

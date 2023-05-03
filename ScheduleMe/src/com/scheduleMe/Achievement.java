@@ -41,22 +41,28 @@ public class Achievement {
     public static void validateAchievements(User user){
         if(user.numOfPhysicalGoalsCompleted >= 5){
             user.achievements.get("Juggernaut").setUnlocked(true);
+            user.achievements.get("Juggernaut").achievementFlashed = true;
         }
         if(user.numOfEducationalGoalsCompleted >= 5){
             user.achievements.get("Scholar").setUnlocked(true);
+            user.achievements.get("Scholar").achievementFlashed = true;
         }
         if(user.numOfRelationshipGoalsCompleted >= 5){
             user.achievements.get("Suave").setUnlocked(true);
+            user.achievements.get("Suave").achievementFlashed = true;
         }
         if(user.numOfFinancialGoalsCompleted >= 5){
             user.achievements.get("Debt Collector").setUnlocked(true);
+            user.achievements.get("Debt Collector").achievementFlashed = true;
         }
         if(user.numOfTotalGoalsComplete >= 25){
             user.achievements.get("Dedicated").setUnlocked(true);
+            user.achievements.get("Dedicated").achievementFlashed = true;
         }
         if(user.numOfPhysicalGoalsCompleted >= 3 && user.numOfFinancialGoalsCompleted >= 3 && user.numOfRelationshipGoalsCompleted >= 3
         && user.numOfRelationshipGoalsCompleted >= 3 && user.numOfEducationalGoalsCompleted >= 3){
             user.achievements.get("Variety").setUnlocked(true);
+            user.achievements.get("Variety").achievementFlashed = true;
         }
     }
 

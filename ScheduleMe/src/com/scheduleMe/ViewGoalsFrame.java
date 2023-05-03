@@ -188,6 +188,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             currentUser.numOfTotalGoalsComplete++;
 
             //check to see if any achievements were earned to display pop up
+            //TODO write these to be stored!!!
             if (currentUser.numOfPhysicalGoalsCompleted == 5 && currentUser.achievements.get("Juggernaut").achievementFlashed == false){
                 JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Juggernaut Achievement!");
                 currentUser.achievements.get("Juggernaut").achievementFlashed = true;

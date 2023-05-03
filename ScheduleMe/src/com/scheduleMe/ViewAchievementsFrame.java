@@ -21,7 +21,7 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
 
         // Set up the window
         setTitle("Achievements");
-        setSize(700, 550);
+        setSize(700, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
@@ -44,7 +44,7 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
         for (String key : achievements.keySet()) {
             Achievement achievement = achievements.get(key);
             JLabel titleLabel = new JLabel(achievement.getTitle(), SwingConstants.LEFT);
-            JLabel descriptionLabel = new JLabel(achievement.getDescription(), SwingConstants.LEFT);
+            JLabel descriptionLabel = new JLabel("Description: " + achievement.getDescription(), SwingConstants.LEFT);
             if (achievement.isUnlocked()) {
                 titleLabel.setForeground(new Color(34, 139, 34));
                 titleLabel.setText(titleLabel.getText() + " - Unlocked!");
@@ -57,26 +57,26 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
             if (achievement.getTitle().equals("Juggernaut")) {
                 int numCompleted = currentUser.numOfPhysicalGoalsCompleted;
                 int requiredNum = 5;
-                JLabel progressLabel = new JLabel("(" + numCompleted + "/" + requiredNum + ")");
+                JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")");
                 achievementPanel.add(progressLabel);
             } else if (achievement.getTitle().equals("Scholar")) {
                 int numCompleted = currentUser.numOfEducationalGoalsCompleted;
                 int requiredNum = 5;
-                JLabel progressLabel = new JLabel("(" + numCompleted + "/" + requiredNum + ")" + " Educational goals completed");
+                JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")" + " Educational goals completed");
                 achievementPanel.add(progressLabel);
             } else if (achievement.getTitle().equals("Debt Collector")) {
                 int numCompleted = currentUser.numOfFinancialGoalsCompleted;
                 int requiredNum = 5;
-                JLabel progressLabel = new JLabel("(" + numCompleted + "/" + requiredNum + ")");
+                JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")");
                 achievementPanel.add(progressLabel);
             } else if (achievement.getTitle().equals("Suave")) {
                 int numCompleted = currentUser.numOfRelationshipGoalsCompleted;
                 int requiredNum = 5;
-                JLabel progressLabel = new JLabel("(" + numCompleted + "/" + requiredNum + ")");
+                JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")");
                 achievementPanel.add(progressLabel);
             } else if (achievement.getTitle().equals("Variety")) {
                 int requiredNum = 3;
-                JLabel progressLabel = new JLabel("(" + user.numOfPhysicalGoalsCompleted + "/" +
+                JLabel progressLabel = new JLabel("Progress: " + "(" + user.numOfPhysicalGoalsCompleted + "/" +
                         requiredNum + ")" + "(" + user.numOfRelationshipGoalsCompleted + "/" +
                         requiredNum + ")" + "(" + user.numOfFinancialGoalsCompleted + "/" +
                         requiredNum + ")" + "(" + user.numOfEducationalGoalsCompleted + "/" +
@@ -86,7 +86,7 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
             else if (achievement.getTitle().equals("Dedicated")) {
                 int numCompleted = currentUser.numOfTotalGoalsComplete;
                 int requiredNum = 25;
-                JLabel progressLabel = new JLabel("(" + numCompleted + "/" + requiredNum + ")");
+                JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")");
                 achievementPanel.add(progressLabel);
             }
 

@@ -49,12 +49,12 @@ public class HomeFrame extends JFrame implements ActionListener {
         // If there is a goal to display, show it on homescreen to serve as reminder.
         if (goalToDisplay != null){
 
-            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " going? It is " +
+            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " goal going? It is " +
                     "marked as due on: " + ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate());
             goalLabel.setFont(new Font("Arial", Font.BOLD, 18));
             goalLabel.setHorizontalAlignment(JLabel.CENTER);
 
-            JTextArea descriptionArea = new JTextArea(goalToDisplay.getDescription());
+            JTextArea descriptionArea = new JTextArea("Description: " + goalToDisplay.getDescription());
             descriptionArea.setEditable(false);
             descriptionArea.setLineWrap(true);
             descriptionArea.setWrapStyleWord(true);

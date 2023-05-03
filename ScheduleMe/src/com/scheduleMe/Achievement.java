@@ -9,8 +9,9 @@ public class Achievement {
     String description;
     boolean isUnlocked;
 
+    boolean achievementFlashed;
 
-    LocalDate dateUnlocked;
+    LocalDate dateUnlocked; //TODO add in this
 
     public Achievement(String title, String description, boolean isUnlocked){
         this.title = title;

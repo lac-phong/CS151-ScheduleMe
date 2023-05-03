@@ -186,6 +186,34 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 currentUser.numOfEducationalGoalsCompleted++;
             }
             currentUser.numOfTotalGoalsComplete++;
+
+            //check to see if any achievements were earned to display pop up
+            if (currentUser.numOfPhysicalGoalsCompleted == 5 && currentUser.achievements.get("Juggernaut").achievementFlashed == false){
+                JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Juggernaut Achievement!");
+                currentUser.achievements.get("Juggernaut").achievementFlashed = true;
+            }
+            if (currentUser.numOfEducationalGoalsCompleted == 5 && currentUser.achievements.get("Scholar").achievementFlashed == false){
+                JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Scholar Achievement!");
+                currentUser.achievements.get("Scholar").achievementFlashed = true;
+            }
+            if (currentUser.numOfFinancialGoalsCompleted == 5 && currentUser.achievements.get("Debt Collector").achievementFlashed == false){
+                JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Debt Collector Achievement!");
+                currentUser.achievements.get("Debt Collector").achievementFlashed = true;
+            }
+            if (currentUser.numOfRelationshipGoalsCompleted == 5 && currentUser.achievements.get("Suave").achievementFlashed == false){
+                JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Suave Achievement!");
+                currentUser.achievements.get("Suave").achievementFlashed = true;
+            }
+            if (currentUser.numOfTotalGoalsComplete == 5 && currentUser.achievements.get("Dedicated").achievementFlashed == false){
+                JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Dedicated Achievement!");
+                currentUser.achievements.get("Dedicated").achievementFlashed = true;
+            }
+            if (currentUser.numOfPhysicalGoalsCompleted == 3 && currentUser.numOfEducationalGoalsCompleted == 3
+                    && currentUser.numOfFinancialGoalsCompleted >= 3 && currentUser.numOfRelationshipGoalsCompleted >= 3
+            && currentUser.achievements.get("Variety").achievementFlashed == false){
+                JOptionPane.showMessageDialog(this,"Way to go! You have unlocked the Variety Achievement!");
+            }
+
             try {
                 UserCSVHandler.WriteToCSV(UserList.getInstance());
             } catch (IOException ex) {

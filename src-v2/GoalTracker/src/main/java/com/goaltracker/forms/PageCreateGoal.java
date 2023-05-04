@@ -317,7 +317,7 @@ public class PageCreateGoal extends javax.swing.JPanel {
 
     private void createGoalButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_createGoalButtonMouseClicked
         String description = descriptionTextField.getText();
-        if (description.contains("")) {
+        if (description.equals("")) {
             description = "Some Unspecified Goal";
         }
         Object sel = priorityComboBox.getSelectedItem();

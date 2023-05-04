@@ -7,6 +7,8 @@ import com.scheduleme.utility.goalscsvhandler.behavior.WriteCompletedGoal;
 import com.scheduleme.utility.goalscsvhandler.behavior.WriteEducationalGoal;
 import com.scheduleme.utility.goalscsvhandler.behavior.WritePhysicalGoal;
 import com.scheduleme.utility.goalscsvhandler.behavior.WriteRelationshipGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.WritePersonalGoal;
+
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -177,13 +179,13 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 try {
                     goal.getInterval().setIsComplete(true);
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     UserList.getGoalList(currentUser).remove(index);
                     completedGoals.add(goal);
                     dispose();
                     new ViewGoalsFrame(currentUser);
-                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
-                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
-                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     currentUser.numOfRelationshipGoalsCompleted++;
 
                 } catch (IOException ex) {
@@ -193,13 +195,13 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 try {
                     goal.getInterval().setIsComplete(true);
                     goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     UserList.getGoalList(currentUser).remove(index);
                     completedGoals.add(goal);
                     dispose();
                     new ViewGoalsFrame(currentUser);
-                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
-                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
-                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     currentUser.numOfPhysicalGoalsCompleted++;
 
                 } catch (IOException ex) {
@@ -209,13 +211,13 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 try {
                     goal.getInterval().setIsComplete(true);
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     UserList.getGoalList(currentUser).remove(index);
                     completedGoals.add(goal);
                     dispose();
                     new ViewGoalsFrame(currentUser);
-                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
-                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
-                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     currentUser.numOfEducationalGoalsCompleted++;
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -259,13 +261,15 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 worker.execute();
             } else {
                 try {
+                    goal.getInterval().setIsComplete(true);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WritePersonalGoal());
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                     UserList.getGoalList(currentUser).remove(index);
                     completedGoals.add(goal);
                     dispose();
                     new ViewGoalsFrame(currentUser);
-                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
-                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
-                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -315,16 +319,40 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             int index = Integer.parseInt(e.getActionCommand().substring(7));
             if (goals.get(index).getType().getCategory().equals("Relationship")) {
                 goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                try {
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if (goals.get(index).getType().getCategory().equals("Physical")) {
                 goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                try {
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if (goals.get(index).getType().getCategory().equals("Educational")) {
                 goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                try {
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else if (goals.get(index).getType().getCategory().equals("General")) {
+                goalsCSVHandler.setGoalsWriteBehavior(new WritePersonalGoal());
+                try {
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else {
+                try {
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
-            try {
-                goalsCSVHandler.performDelete(goals.get(index), currentUser);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
+            
             goals.remove(index);
             dispose();
             new ViewGoalsFrame(currentUser);

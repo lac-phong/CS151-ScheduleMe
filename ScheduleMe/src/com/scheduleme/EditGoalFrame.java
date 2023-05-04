@@ -163,8 +163,10 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
-                timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
+                if (goal.getInterval().getString().equals("Indefinite")){
+                    timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
+                    timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
+                }
             } else if (selectedTime.equals("Definite")) {
                 List<Component> components = timeComponents.get(selectedTime);
                 int rows = ((GridLayout) formPanel.getLayout()).getRows();
@@ -184,7 +186,9 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
+                if (goal.getInterval().getString().equals("Definite")) {
+                    dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
+                }
             } else {
                 int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));

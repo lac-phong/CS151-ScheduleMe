@@ -24,6 +24,10 @@ public class UserList {
         return userHashMap.get(user.getUsername()).getGoals();
     }
 
+    public static ArrayList<Goal> getCompletedGoalList(User user) {
+        return userHashMap.get(user.getUsername()).getCompletedGoals();
+    }
+
     public static HashMap<String, Achievement> getAchievementList(User user) {
         return userHashMap.get(user.getUsername()).achievements;
     }

@@ -6,6 +6,8 @@ import com.scheduleme.IndefiniteGoal;
 import com.scheduleme.User;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class WritePersonalGoal implements GoalsWriteBehavior {
 
@@ -64,6 +66,29 @@ public class WritePersonalGoal implements GoalsWriteBehavior {
 
     @Override
     public void deleteFromCSV(Goal goal, User user) throws IOException {
+        System.out.println("Deleted Personal Goal!");
+        String csvFilePath = user.getUsername() + "_Personal_goals.csv";
+        File file = new File(csvFilePath);
+
+        if (file.exists()) {
+            //store these
+            List<String> rows = new ArrayList<>();
+            BufferedReader reader = new BufferedReader(new FileReader(csvFilePath));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (!line.startsWith(user.getUsername() + "," + goal.getType().getCategory() + "," + goal.getName())) {
+                    rows.add(line);
+                }
+            }
+            reader.close();
+
+            // reimplment the rows so that there is no blank space
+            FileWriter writer = new FileWriter(csvFilePath);
+            for (String row : rows) {
+                writer.write(row + "\n");
+            }
+            writer.close();
+        }
     }
 
 }

@@ -38,10 +38,9 @@ public class HomeFrame extends JFrame implements ActionListener {
         currentUser = user;
         populateGoals();
         Achievement.validateAchievements(currentUser);
-        if (!goals.isEmpty()){
+        if (!goals.isEmpty()) {
             goalToDisplay = findNextGoal();
-        }
-        else {
+        } else {
             goalToDisplay = null;
         }
         setTitle("ScheduleMe");
@@ -60,14 +59,14 @@ public class HomeFrame extends JFrame implements ActionListener {
         }
 
         // If there is a goal to display, show it on homescreen to serve as reminder.
-        if (goalToDisplay != null){
+        if (goalToDisplay != null) {
 
             LocalDate today = LocalDate.now();
             LocalDate dueDate = ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate();
             Period period = Period.between(today, dueDate);
             int daysUntilDue = period.getDays();
             String stringDaysUntilDue;
-            if (daysUntilDue == 0){
+            if (daysUntilDue == 0) {
                 stringDaysUntilDue = "It is due today!";
             } else if (daysUntilDue == 1) {
                 stringDaysUntilDue = "It is due tomorrow!";
@@ -75,7 +74,7 @@ public class HomeFrame extends JFrame implements ActionListener {
                 stringDaysUntilDue = "It is due in " + daysUntilDue + " days!";
             }
 
-            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " goal, " +goalToDisplay.getName() + " going? " +
+            JLabel goalLabel = new JLabel("How is your " + goalToDisplay.getType().getCategory() + " goal, " + goalToDisplay.getName() + " going? " +
                     stringDaysUntilDue);
             goalLabel.setFont(new Font("Arial", Font.BOLD, 18));
             goalLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -135,8 +134,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             pack();
             setLocationRelativeTo(null);
             setVisible(true);
-        }
-        else {
+        } else {
             greetingLabel = new JLabel("Good " + timeOfDay + ", " + currentUser.getFirstName());
             greetingLabel.setFont(new Font("Arial", Font.BOLD, 24));
             greetingLabel.setHorizontalAlignment(JLabel.LEFT);
@@ -180,6 +178,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             setVisible(true);
         }
     }
+
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == addGoalButton) {
 
@@ -222,7 +221,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             goalsCSVHandler.performRead(currentUser);
 
         }
-        if (currentUser.getCompletedGoals().isEmpty()){
+        if (currentUser.getCompletedGoals().isEmpty()) {
             goalsCSVHandler.setGoalsReadBehavior(new ReadCompletedGoal());
             goalsCSVHandler.performRead(currentUser);
         }
@@ -234,7 +233,7 @@ public class HomeFrame extends JFrame implements ActionListener {
         Goal homeScreenDisplayGoal = null;
 
         for (Goal goal : UserList.getGoalList(currentUser)) {
-            if (goal.getInterval().getString().equals("Definite")){
+            if (goal.getInterval().getString().equals("Definite")) {
                 LocalDate today = LocalDate.now();
                 long diff = Math.abs(ChronoUnit.DAYS.between(((DefiniteGoal) goal.getInterval()).getDueDate(), today));
                 if (diff < closestDiff) {

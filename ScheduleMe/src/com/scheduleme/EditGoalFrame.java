@@ -44,9 +44,9 @@ public class EditGoalFrame extends JFrame implements ActionListener {
     private int index;
     private Goal goalToModify;
 
-    public EditGoalFrame(User currentUser, Goal goal, int index){
+    public EditGoalFrame(User currentUser, Goal goal, int index) {
         this.index = index;
-        this.currentUser =currentUser;
+        this.currentUser = currentUser;
         this.goalToModify = goal;
         JLabel actionLabel = new JLabel("Type of Activity");
         actionLabel.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -145,18 +145,18 @@ public class EditGoalFrame extends JFrame implements ActionListener {
             String selectedTime = (String) timeComboBox.getSelectedItem();
             if (selectedTime.equals("Indefinite")) {
                 List<Component> components = timeComponents.get(selectedTime);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(dueDateLabel)){
+                if (formComponents.contains(dueDateLabel)) {
                     formPanel.remove(dueDateLabel);
                     formPanel.remove(dueDateSpinner);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                     formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
                 } else if (formComponents.contains(timeFrameLabel)) {
                     formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
                 } else {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                     formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
                 }
 
@@ -165,19 +165,19 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 }
                 timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
                 timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
-            } else if (selectedTime.equals("Definite")){
+            } else if (selectedTime.equals("Definite")) {
                 List<Component> components = timeComponents.get(selectedTime);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(timeFrameLabel)){
+                if (formComponents.contains(timeFrameLabel)) {
                     formPanel.remove(timeFrameLabel);
                     formPanel.remove(timeFrameComboBox);
                     formPanel.remove(timeFreqLabel);
                     formPanel.remove(timeFreqSpinner);
                     rows -= 2;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(dueDateLabel)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -185,9 +185,8 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                     formPanel.add(component);
                 }
                 dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
-            }
-            else {
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+            } else {
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
             }
             formPanel.revalidate();
@@ -196,28 +195,28 @@ public class EditGoalFrame extends JFrame implements ActionListener {
 
         categoryComboBox.addActionListener(e -> {
             String selectedCategory = (String) categoryComboBox.getSelectedItem();
-            if (selectedCategory.equals("Financial")){
+            if (selectedCategory.equals("Financial")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(relationshipComboBox)){
+                if (formComponents.contains(relationshipComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(educationalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(educationalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(financialComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -228,26 +227,26 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 amountSpinner.setValue(((FinancialGoal) goal.getType()).getAmount());
             } else if (selectedCategory.equals("Physical")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(financialComboBox)){
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(relationshipComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(educationalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(educationalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(physicalComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -257,26 +256,26 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 physicalComboBox.setSelectedItem(goal.getType().getActivity());
             } else if (selectedCategory.equals("Relationship")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(financialComboBox)){
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(educationalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(educationalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(relationshipComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -286,26 +285,26 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 relationshipComboBox.setSelectedItem(goal.getType().getActivity());
             } else if (selectedCategory.equals("Educational")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(financialComboBox)){
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(relationshipComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(educationalComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -313,15 +312,14 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                     formPanel.add(component);
                 }
                 educationalComboBox.setSelectedItem(goal.getType().getActivity());
-            }
-            else {
+            } else {
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
-                if (formComponents.contains(financialComboBox)){
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     rows -= 1;
-                } else if (formComponents.contains(physicalComboBox)){
+                } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
@@ -406,7 +404,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                     goalsCSVHandler = new PersonalGoalsCSVHandler();
                 }
 
-                goalsCSVHandler.performDelete(goalToModify,currentUser);
+                goalsCSVHandler.performDelete(goalToModify, currentUser);
 
                 if (goalToModify.getType().getCategory().equals("Financial")) {
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
@@ -430,6 +428,6 @@ public class EditGoalFrame extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-        } 
+        }
     }
 }

@@ -41,5 +41,5 @@ public class EducationalGoal implements GoalType {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'trackActivity'");
     }
-    
+
 }

@@ -38,7 +38,7 @@ public class ReadCompletedGoal implements GoalsReadBehavior {
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
 
-            if (category.equals("Financial")){
+            if (category.equals("Financial")) {
                 newGoal.setType(new FinancialGoal(activity));
             } else if (category.equals("Educational")) {
                 newGoal.setType(new EducationalGoal(activity));

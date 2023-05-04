@@ -40,7 +40,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
 
 
     public CreateGoalFrame(User currentUser) {
-        this.currentUser =currentUser;
+        this.currentUser = currentUser;
         JLabel actionLabel = new JLabel("Type of Activity");
         actionLabel.setFont(new Font("Arial", Font.PLAIN, 16));
         financialComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
@@ -133,46 +133,45 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             String selectedTime = (String) timeComboBox.getSelectedItem();
             if (selectedTime.equals("Indefinite")) {
                 List<Component> components = timeComponents.get(selectedTime);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(dueDateLabel)){
+                if (formComponents.contains(dueDateLabel)) {
                     formPanel.remove(dueDateLabel);
                     formPanel.remove(dueDateSpinner);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                     formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
                 } else if (formComponents.contains(timeFrameLabel)) {
                     formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
                 } else {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                     formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
                 }
 
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-            } else if (selectedTime.equals("Definite")){
+            } else if (selectedTime.equals("Definite")) {
                 List<Component> components = timeComponents.get(selectedTime);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(timeFrameLabel)){
+                if (formComponents.contains(timeFrameLabel)) {
                     formPanel.remove(timeFrameLabel);
                     formPanel.remove(timeFrameComboBox);
                     formPanel.remove(timeFreqLabel);
                     formPanel.remove(timeFreqSpinner);
                     rows -= 2;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(dueDateLabel)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-            }
-            else {
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+            } else {
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
             }
             formPanel.revalidate();
@@ -181,28 +180,28 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
 
         categoryComboBox.addActionListener(e -> {
             String selectedCategory = (String) categoryComboBox.getSelectedItem();
-            if (selectedCategory.equals("Financial")){
+            if (selectedCategory.equals("Financial")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(relationshipComboBox)){
+                if (formComponents.contains(relationshipComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(educationalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(educationalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(financialComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -211,28 +210,28 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 }
             } else if (selectedCategory.equals("Physical")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(financialComboBox)){
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     formPanel.remove(amountLabel);
                     formPanel.remove(amountSpinner);
                     rows -= 2;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(relationshipComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(educationalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(educationalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(physicalComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -241,28 +240,28 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 }
             } else if (selectedCategory.equals("Relationship")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(financialComboBox)){
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     formPanel.remove(amountLabel);
                     formPanel.remove(amountSpinner);
                     rows -= 2;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(educationalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(educationalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(relationshipComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
@@ -271,45 +270,44 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 }
             } else if (selectedCategory.equals("Educational")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
 
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                if (formComponents.contains(financialComboBox)){
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     formPanel.remove(amountLabel);
                     formPanel.remove(amountSpinner);
                     rows -= 2;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (formComponents.contains(relationshipComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(relationshipComboBox);
                     rows -= 1;
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 } else if (!formComponents.contains(educationalComboBox)) {
-                    rows += components.size()/2;
+                    rows += components.size() / 2;
                 }
                 formPanel.setLayout(new GridLayout(rows, 2, 10, 10));
 
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-            }
-            else {
+            } else {
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
-                int rows = ((GridLayout)formPanel.getLayout()).getRows();
-                if (formComponents.contains(financialComboBox)){
+                int rows = ((GridLayout) formPanel.getLayout()).getRows();
+                if (formComponents.contains(financialComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(financialComboBox);
                     formPanel.remove(amountLabel);
                     formPanel.remove(amountSpinner);
                     rows -= 2;
-                } else if (formComponents.contains(physicalComboBox)){
+                } else if (formComponents.contains(physicalComboBox)) {
                     formPanel.remove(actionLabel);
                     formPanel.remove(physicalComboBox);
                     rows -= 1;
@@ -328,7 +326,6 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             formPanel.repaint();
         });
 
-        
 
         setContentPane(contentPane);
         pack();
@@ -373,7 +370,6 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
             } else if (category.equals("General")) {
                 newGoal.setType(new GeneralGoal());
                 goalsCSVHandler = new PersonalGoalsCSVHandler();
-            } else {
             }
 
             String interval = (String) timeComboBox.getSelectedItem();
@@ -381,19 +377,25 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 String timeFrame = (String) timeFrameComboBox.getSelectedItem();
                 int freq = (int) timeFreqSpinner.getValue();
                 newGoal.setInterval(new IndefiniteGoal(timeFrame, freq));
-            } else if (interval.equals("Definite")) {
+            } else {
                 Date date = (Date) dueDateSpinner.getValue();
                 LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
             UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
-            if (goalsCSVHandler == null){
-                JOptionPane.showMessageDialog(this,"No Category Selected, please select!");
+
+            boolean categorySelected = true;
+            boolean intervalSelected = true;
+
+            if (goalsCSVHandler == null) {
+                JOptionPane.showMessageDialog(this, "No Category Selected, please select!");
+                categorySelected = false;
             }
-            if (interval.equals("Choose type")){
-                JOptionPane.showMessageDialog(this,"No Interval Selected, please select!");
+            if (interval.equals("Choose type")) {
+                JOptionPane.showMessageDialog(this, "No Interval Selected, please select!");
+                intervalSelected = false;
             }
-            else {
+            if (categorySelected == true && intervalSelected == true) {
                 try {
                     JOptionPane.showMessageDialog(this, name + " created!");
                     goalsCSVHandler.performWrite(newGoal, currentUser);

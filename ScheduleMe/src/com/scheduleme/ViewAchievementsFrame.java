@@ -83,23 +83,18 @@ public class ViewAchievementsFrame extends JFrame implements ActionListener {
                         requiredNum + ")" + "(" + user.numOfEducationalGoalsCompleted + "/" +
                         requiredNum + ")");
                 achievementPanel.add(progressLabel);
-            }
-            else if (achievement.getTitle().equals("Dedicated")) {
+            } else if (achievement.getTitle().equals("Dedicated")) {
                 int numCompleted = currentUser.numOfTotalGoalsComplete;
                 int requiredNum = 25;
                 JLabel progressLabel = new JLabel("Progress: " + "(" + numCompleted + "/" + requiredNum + ")");
                 achievementPanel.add(progressLabel);
-            }
-            if (achievement.getDateUnlocked() != null){
-                dateLabel = new JLabel("Date unlocked: " + achievement.getDateUnlocked().toString());
-                achievementPanel.add(dateLabel);
             }
         }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == backButton){
+        if (e.getSource() == backButton) {
             dispose();
             try {
                 new HomeFrame(currentUser);

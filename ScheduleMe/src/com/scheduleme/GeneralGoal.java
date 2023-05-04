@@ -28,12 +28,12 @@ public class GeneralGoal implements GoalType {
 
     @Override
     public void setActivity(String activity) {
-        
+
     }
 
     @Override
     public void trackActivity() {
-        
+
     }
-    
+
 }

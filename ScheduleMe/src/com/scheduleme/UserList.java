@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class UserList {
 
-    private static HashMap<String, User> userHashMap ;
+    private static HashMap<String, User> userHashMap;
 
     public static HashMap getInstance() throws IOException {
         if (userHashMap == null) {
@@ -18,11 +18,13 @@ public class UserList {
         }
         return userHashMap;
     }
+
     //helper method to retrieve goal list
-    public static ArrayList<Goal> getGoalList(User user){
+    public static ArrayList<Goal> getGoalList(User user) {
         return userHashMap.get(user.getUsername()).getGoals();
     }
-    public static HashMap<String, Achievement> getAchievementList(User user){
+
+    public static HashMap<String, Achievement> getAchievementList(User user) {
         return userHashMap.get(user.getUsername()).achievements;
     }
 }

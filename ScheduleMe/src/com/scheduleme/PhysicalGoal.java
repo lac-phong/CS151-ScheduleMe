@@ -39,7 +39,7 @@ public class PhysicalGoal implements GoalType {
     @Override
     public void trackActivity() {
         // TODO Auto-generated method stub
-        
+
     }
-    
+
 }

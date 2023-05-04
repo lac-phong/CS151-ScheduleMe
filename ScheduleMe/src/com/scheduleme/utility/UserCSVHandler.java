@@ -51,7 +51,6 @@ public class UserCSVHandler {
             int numOfTotalGoalsCompleted = Integer.parseInt(String.copyValueOf(fields[9].toCharArray()));
 
 
-
             users.put(username, new User(username, password, email, firstName, lastName));
             users.get(username).numOfTotalGoalsComplete = numOfTotalGoalsCompleted;
             users.get(username).numOfFinancialGoalsCompleted = numOfFinancialGoalsCompleted;
@@ -105,9 +104,8 @@ public class UserCSVHandler {
         return users;
 
 
-
-
     }
+
     public static void generateCSV(User user) throws IOException {
         String username = user.getUsername();
 
@@ -147,6 +145,7 @@ public class UserCSVHandler {
             writer.close();
         }
     }
+
     public static void createUserCSV() {
         try {
             File outputFile = new File("output.csv");

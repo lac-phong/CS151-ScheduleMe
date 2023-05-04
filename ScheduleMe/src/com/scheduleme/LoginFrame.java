@@ -85,7 +85,7 @@ public class LoginFrame extends JFrame implements ActionListener {
                     throw new RuntimeException(exc);
                 }
             } catch (IOException ex) {
-  
+
                 throw new RuntimeException(ex);
             }
 

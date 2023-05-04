@@ -24,7 +24,7 @@ public class SignUpFrame extends JFrame implements ActionListener {
         users = UserList.getInstance();
         setTitle("Sign Up");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        this.setSize(600,1200);
+        this.setSize(600, 1200);
 
         JLabel titleLabel = new JLabel("Sign Up!");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
@@ -94,30 +94,23 @@ public class SignUpFrame extends JFrame implements ActionListener {
             String lastName = lastNameField.getText();
 
 
-
-
-            if (username.isEmpty()){
+            if (username.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Username is empty!");
             } else if (password.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Password is empty!");
-            }
-            else if (email.isEmpty()) {
+            } else if (email.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Email is empty!");
-            }
-            else if (firstName.isEmpty()) {
+            } else if (firstName.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "First name is empty!");
 
-            }
-            else if (lastName.isEmpty()) {
+            } else if (lastName.isEmpty()) {
                 JOptionPane.showMessageDialog(this, "Last name is empty!");
-            }
-            else if (users.containsKey(username)){
+            } else if (users.containsKey(username)) {
                 JOptionPane.showMessageDialog(this, "Username already taken!");
-            }
-            else {
-                User user = new User(username,password,email,firstName,lastName);
+            } else {
+                User user = new User(username, password, email, firstName, lastName);
                 System.out.println(user.getFirstName());
-                users.put(user.getUsername(),user);
+                users.put(user.getUsername(), user);
                 try {
                     UserCSVHandler.WriteToCSV(users);
                     System.out.println("wrote!");
@@ -137,7 +130,6 @@ public class SignUpFrame extends JFrame implements ActionListener {
                     throw new RuntimeException(ex);
                 }
             }
-
 
 
         } else if (e.getSource() == backButton) {

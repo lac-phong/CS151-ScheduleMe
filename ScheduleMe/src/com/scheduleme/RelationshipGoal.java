@@ -28,7 +28,7 @@ public class RelationshipGoal implements GoalType {
     @Override
     public void trackActivity() {
         // TODO Auto-generated method stub
-        
+
     }
 
     @Override
@@ -42,5 +42,5 @@ public class RelationshipGoal implements GoalType {
         // TODO Auto-generated method stub
         return trackingDone;
     }
-    
+
 }

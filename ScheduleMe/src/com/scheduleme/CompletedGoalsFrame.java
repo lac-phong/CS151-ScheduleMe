@@ -15,7 +15,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
     private final User currentUser;
     private final ArrayList<Goal> goals;
     private final ArrayList<Goal> incompleteGoals;
-    
+
 
     public CompletedGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
@@ -27,10 +27,9 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
 
         String goalsDisplay;
 
-        if (goals.isEmpty()){
+        if (goals.isEmpty()) {
             goalsDisplay = "You have no completed goals right now, ";
-        }
-        else {
+        } else {
             goalsDisplay = "Here are your completed goals, ";
         }
 
@@ -81,7 +80,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             }
 
             JButton incompleteButton, deleteButton;
-            
+
             JPanel goalContainer = new JPanel();
             goalContainer.setLayout(new GridLayout(1, 2, 5, 0));
             goalContainer.add(goalPanel);
@@ -96,7 +95,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             deleteButton.addActionListener(this);
             optionsPanel.add(deleteButton);
             incompleteButton.setActionCommand("incomplete_" + Integer.toString(goals.indexOf(goal)));
-            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));  
+            deleteButton.setActionCommand("delete_" + Integer.toString(goals.indexOf(goal)));
             goalContainer.add(optionsPanel);
 
             goalsPanel.add(goalContainer);
@@ -139,18 +138,16 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             goals.remove(index);
             dispose();
             new CompletedGoalsFrame(currentUser);
-        } else if (e.getActionCommand().startsWith("incomplete_")){
+        } else if (e.getActionCommand().startsWith("incomplete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(11));
             Goal goal = goals.get(index);
-            if (goals.get(index).getType().getCategory().equals("Relationship")){
+            if (goals.get(index).getType().getCategory().equals("Relationship")) {
                 currentUser.numOfRelationshipGoalsCompleted--;
             } else if (goals.get(index).getType().getCategory().equals("Financial")) {
                 currentUser.numOfFinancialGoalsCompleted--;
-            }
-            else if (goals.get(index).getType().getCategory().equals("Physical")) {
+            } else if (goals.get(index).getType().getCategory().equals("Physical")) {
                 currentUser.numOfPhysicalGoalsCompleted--;
-            }
-            else if (goals.get(index).getType().getCategory().equals("Educational")) {
+            } else if (goals.get(index).getType().getCategory().equals("Educational")) {
                 currentUser.numOfEducationalGoalsCompleted--;
             }
             currentUser.numOfTotalGoalsComplete--;

@@ -16,7 +16,6 @@ public class ScheduleMeFrame extends JFrame implements ActionListener {
     private HashMap<String, User> users;
 
 
-
     public ScheduleMeFrame() throws IOException {
 
         // on start up populate the users hashmap with values from csv
@@ -49,7 +48,7 @@ public class ScheduleMeFrame extends JFrame implements ActionListener {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-        setSize(500,500);
+        setSize(500, 500);
 
     }
 

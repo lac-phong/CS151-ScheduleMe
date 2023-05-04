@@ -1,4 +1,5 @@
 package com.scheduleme;
+
 //TODO add in a counter to track the user's number of times accomplishing per unit of time
 public class IndefiniteGoal implements GoalInterval {
     private final String interval = "Indefinite";
@@ -36,7 +37,7 @@ public class IndefiniteGoal implements GoalInterval {
         return isComplete;
     }
 
-    public void setIsComplete(boolean isComplete){
+    public void setIsComplete(boolean isComplete) {
         this.isComplete = isComplete;
     }
 

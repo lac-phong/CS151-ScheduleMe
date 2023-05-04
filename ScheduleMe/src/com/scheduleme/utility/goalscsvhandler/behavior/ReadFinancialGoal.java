@@ -40,7 +40,6 @@ public class ReadFinancialGoal implements GoalsReadBehavior {
                 amount = Integer.parseInt(String.copyValueOf(fields[7].toCharArray()));
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
-            //TODO change this code so that is sets to relevant behavior of the class, we don't need this if statement
             newGoal.setType(new FinancialGoal(activity, amount));
             user.getGoals().add(newGoal);
         }

@@ -9,7 +9,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class WriteCompletedGoal implements GoalsWriteBehavior{
+public class WriteCompletedGoal implements GoalsWriteBehavior {
     @Override
     public void writeToCSV(Goal goal, User user) throws IOException {
         System.out.println("Wrote Completed Goal!");

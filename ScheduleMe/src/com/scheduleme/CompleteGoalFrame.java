@@ -17,7 +17,7 @@ public class CompleteGoalFrame extends JFrame implements ActionListener {
         this.completionListener = completionListener;
         setTitle("Your progress");
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        
+
         JPanel contentPane = new JPanel(new BorderLayout());
         JLabel amountLabel = new JLabel("Amount To " + type.getActivity());
         amountSpinner = new JSpinner(new SpinnerNumberModel(0, 0, Integer.MAX_VALUE, 100));
@@ -27,7 +27,7 @@ public class CompleteGoalFrame extends JFrame implements ActionListener {
         contentPane.add(amountLabel, BorderLayout.NORTH);
         contentPane.add(amountSpinner, BorderLayout.CENTER);
         contentPane.add(saveButton, BorderLayout.SOUTH);
-        
+
         setContentPane(contentPane);
         pack();
         setLocationRelativeTo(null);
@@ -51,15 +51,15 @@ public class CompleteGoalFrame extends JFrame implements ActionListener {
         if (e.getSource() == saveButton) {
             int amountInput = (Integer) amountSpinner.getValue();
             int totalAmount = ((FinancialGoal) type).getAmount();
-            int amount = totalAmount-amountInput;
+            int amount = totalAmount - amountInput;
             ((FinancialGoal) type).setAmount(amount);
-            if (amount==0) {
+            if (amount == 0) {
                 setCompleted(true);
             }
             completionListener.onGoalCompleted(completed);
             dispose();
         }
-        
+
     }
-    
+
 }

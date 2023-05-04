@@ -36,4 +36,9 @@ public class GeneralGoal implements GoalType {
 
     }
 
+    @Override
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+
 }

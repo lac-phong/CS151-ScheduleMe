@@ -43,4 +43,9 @@ public class RelationshipGoal implements GoalType {
         return trackingDone;
     }
 
+    @Override
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+
 }

@@ -74,7 +74,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             if (!goal.getType().getCategory().equals("General")) {
                 goalPanel.add(activityLabel);
                 if (goal.getType().getCategory().equals("Financial")) {
-                    JLabel amountLabel = new JLabel("Amount: " + ((FinancialGoal) goal.getType()).getAmount());
+                    JLabel amountLabel = new JLabel("Amount: " + ((FinancialGoal) goal.getType()).getInitialAmount());
                     goalPanel.add(amountLabel);
                 } 
             }
@@ -168,7 +168,9 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
                 }   
             } else if (goals.get(index).getType().getCategory().equals("Financial")) {
                 try{
+                    ((FinancialGoal) goal.getType()).setAmount(((FinancialGoal) goal.getType()).getInitialAmount());
                     goal.getInterval().setIsComplete(false);
+                    goal.getType().setIsComplete(false);
                     goalsCSVHandler.performDelete(goals.get(index), currentUser);
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
                     goalsCSVHandler.performWrite(goals.get(index), currentUser);

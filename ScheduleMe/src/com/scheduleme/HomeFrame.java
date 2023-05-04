@@ -5,6 +5,7 @@ import com.scheduleme.utility.goalscsvhandler.behavior.ReadCompletedGoal;
 import com.scheduleme.utility.goalscsvhandler.behavior.ReadEducationalGoal;
 import com.scheduleme.utility.goalscsvhandler.behavior.ReadPhysicalGoal;
 import com.scheduleme.utility.goalscsvhandler.behavior.ReadRelationshipGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.ReadPersonalGoal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -218,6 +219,8 @@ public class HomeFrame extends JFrame implements ActionListener {
             goalsCSVHandler.setGoalsReadBehavior(new ReadPhysicalGoal());
             goalsCSVHandler.performRead(currentUser);
             goalsCSVHandler.setGoalsReadBehavior(new ReadEducationalGoal());
+            goalsCSVHandler.performRead(currentUser);
+            goalsCSVHandler.setGoalsReadBehavior(new ReadPersonalGoal());
             goalsCSVHandler.performRead(currentUser);
 
         }

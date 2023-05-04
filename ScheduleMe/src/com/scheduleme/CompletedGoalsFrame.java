@@ -1,7 +1,14 @@
 package com.scheduleme;
 
 import com.scheduleme.utility.UserCSVHandler;
+import com.scheduleme.utility.goalscsvhandler.FinancialGoalsCSVHandler;
 import com.scheduleme.utility.goalscsvhandler.*;
+import com.scheduleme.utility.goalscsvhandler.behavior.WriteFinancialGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.WriteCompletedGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.WriteEducationalGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.WritePhysicalGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.WriteRelationshipGoal;
+import com.scheduleme.utility.goalscsvhandler.behavior.WritePersonalGoal;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -141,23 +148,72 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
         } else if (e.getActionCommand().startsWith("incomplete_")) {
             int index = Integer.parseInt(e.getActionCommand().substring(11));
             Goal goal = goals.get(index);
+            GoalsCSVHandler goalsCSVHandler = new CompletedGoalsCSVHandler();
             if (goals.get(index).getType().getCategory().equals("Relationship")) {
-                currentUser.numOfRelationshipGoalsCompleted--;
+                try{
+                    goal.getInterval().setIsComplete(false);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
+                    UserList.getCompletedGoalList(currentUser).remove(index);
+                    incompleteGoals.add(goal);
+                    currentUser.numOfRelationshipGoalsCompleted--;
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }   
             } else if (goals.get(index).getType().getCategory().equals("Financial")) {
-                currentUser.numOfFinancialGoalsCompleted--;
+                try{
+                    goal.getInterval().setIsComplete(false);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
+                    UserList.getCompletedGoalList(currentUser).remove(index);
+                    incompleteGoals.add(goal);
+                    currentUser.numOfFinancialGoalsCompleted--;
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if (goals.get(index).getType().getCategory().equals("Physical")) {
-                currentUser.numOfPhysicalGoalsCompleted--;
+                try{
+                    goal.getInterval().setIsComplete(false);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
+                    UserList.getCompletedGoalList(currentUser).remove(index);
+                    incompleteGoals.add(goal);
+                    currentUser.numOfPhysicalGoalsCompleted--;
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }   
             } else if (goals.get(index).getType().getCategory().equals("Educational")) {
-                currentUser.numOfEducationalGoalsCompleted--;
+                try{
+                    goal.getInterval().setIsComplete(false);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
+                    UserList.getCompletedGoalList(currentUser).remove(index);
+                    incompleteGoals.add(goal);
+                    currentUser.numOfEducationalGoalsCompleted--;
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }   
+            } else {
+                try{
+                    goal.getInterval().setIsComplete(false);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WritePersonalGoal());
+                    goalsCSVHandler.performWrite(goals.get(index), currentUser);
+                    UserList.getCompletedGoalList(currentUser).remove(index);
+                    incompleteGoals.add(goal);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }   
             }
-            currentUser.numOfTotalGoalsComplete--;
             try {
                 UserCSVHandler.WriteToCSV(UserList.getInstance());
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-            goals.remove(index);
-            incompleteGoals.add(goal);
             dispose();
             new CompletedGoalsFrame(currentUser);
         }

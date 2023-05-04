@@ -81,31 +81,22 @@ To install this project, navigate to an ideally empty directory and
 execute the following command:
 
     $ git clone https://github.com/lac-phong/CS151-ScheduleMe
-    $ cd ...
+    
 
 #### Running from terminal
 ```
-1
-2
-3
-4
-5
-6
+1 Navigate to directory in which ScheduleMe was cloned into
+2 cd ScheduleMe/src/com/scheduleme
+3 java Main
+
 ```
-#### Running .JAR file
+#### Running from IDE
 ```
-1
-2
-3
-4
-5
-6
+1 open CS151-ScheduleMe in IDE of choice
+2 navigate to ScheduleMe/src/com/scheduleme/main
+3 run main function
+
 ```
-
-
-
-    
-
 
 ## Snapshot of program running
 

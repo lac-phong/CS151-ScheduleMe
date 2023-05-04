@@ -36,6 +36,10 @@ public class DefiniteGoal implements GoalInterval {
         return isComplete;
     }
 
+    public LocalDate getCompleteDate() {
+        return completedDate;
+    }
+
     public void setIsComplete(boolean isComplete) {
         this.isComplete = isComplete;
     }

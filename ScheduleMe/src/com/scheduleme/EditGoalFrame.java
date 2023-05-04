@@ -163,7 +163,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                if (goal.getInterval().getString().equals("Indefinite")){
+                if (goal.getInterval().getString().equals("Indefinite")) {
                     timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
                     timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
                 }
@@ -227,8 +227,10 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                financialComboBox.setSelectedItem(((FinancialGoal) goal.getType()).getActivity());
-                amountSpinner.setValue(((FinancialGoal) goal.getType()).getAmount());
+                if (goal.getType().getCategory().equals("Financial")) {
+                    financialComboBox.setSelectedItem(goal.getType().getActivity());
+                    amountSpinner.setValue(((FinancialGoal) goal.getType()).getAmount());
+                }
             } else if (selectedCategory.equals("Physical")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout) formPanel.getLayout()).getRows();

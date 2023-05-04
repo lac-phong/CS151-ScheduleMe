@@ -20,7 +20,7 @@ public class ScheduleMeFrame extends JFrame implements ActionListener {
     public ScheduleMeFrame() throws IOException {
 
         // on start up populate the users hashmap with values from csv
-        users = (HashMap<String, User>) UserCSVHandler.CSVToHashMap("output.csv");
+        users = (HashMap<String, User>) UserCSVHandler.CSVToHashMap();
 
 
         setTitle("ScheduleMe");

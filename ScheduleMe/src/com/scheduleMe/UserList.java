@@ -14,7 +14,7 @@ public class UserList {
 
     public static HashMap getInstance() throws IOException {
         if (userHashMap == null) {
-            userHashMap = new HashMap<>(UserCSVHandler.CSVToHashMap("output.csv"));
+            userHashMap = new HashMap<>(UserCSVHandler.CSVToHashMap());
         }
         return userHashMap;
     }
@@ -22,5 +22,7 @@ public class UserList {
     public static ArrayList<Goal> getGoalList(User user){
         return userHashMap.get(user.getUsername()).getGoals();
     }
-
+    public static HashMap<String, Achievement> getAchievementList(User user){
+        return userHashMap.get(user.getUsername()).achievements;
+    }
 }

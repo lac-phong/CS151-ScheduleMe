@@ -76,10 +76,16 @@ public class LoginFrame extends JFrame implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this, "Password does not match username!");
                 }
-            } //catch (NullPointerException ex) {
-                //JOptionPane.showMessageDialog(this, "No such username!");
-            //} 
-            catch (IOException ex) {
+            } catch (NullPointerException ex) {
+                JOptionPane.showMessageDialog(this, "No such username!");
+                dispose();
+                try {
+                    new ScheduleMeFrame();
+                } catch (IOException exc) {
+                    throw new RuntimeException(exc);
+                }
+            } catch (IOException ex) {
+  
                 throw new RuntimeException(ex);
             }
 

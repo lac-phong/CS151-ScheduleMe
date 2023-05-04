@@ -1,8 +1,7 @@
 package com.scheduleMe;
 
-import com.scheduleMe.utility.goalsCSVHandler.CompletedGoalsCSVHandler;
-import com.scheduleMe.utility.goalsCSVHandler.FinancialGoalsCSVHandler;
-import com.scheduleMe.utility.goalsCSVHandler.GoalsCSVHandler;
+import com.scheduleMe.utility.UserCSVHandler;
+import com.scheduleMe.utility.goalsCSVHandler.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -123,7 +122,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    @Override //TODO FIX DELETE
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("Back")) {
             dispose();
@@ -143,6 +142,23 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
         } else if (e.getActionCommand().startsWith("incomplete_")){
             int index = Integer.parseInt(e.getActionCommand().substring(11));
             Goal goal = goals.get(index);
+            if (goals.get(index).getType().getCategory().equals("Relationship")){
+                currentUser.numOfRelationshipGoalsCompleted--;
+            } else if (goals.get(index).getType().getCategory().equals("Financial")) {
+                currentUser.numOfFinancialGoalsCompleted--;
+            }
+            else if (goals.get(index).getType().getCategory().equals("Physical")) {
+                currentUser.numOfPhysicalGoalsCompleted--;
+            }
+            else if (goals.get(index).getType().getCategory().equals("Educational")) {
+                currentUser.numOfEducationalGoalsCompleted--;
+            }
+            currentUser.numOfTotalGoalsComplete--;
+            try {
+                UserCSVHandler.WriteToCSV(UserList.getInstance());
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
             goals.remove(index);
             incompleteGoals.add(goal);
             dispose();

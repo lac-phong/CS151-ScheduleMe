@@ -73,6 +73,10 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             goalPanel.add(categoryLabel);
             if (!goal.getType().getCategory().equals("General")) {
                 goalPanel.add(activityLabel);
+                if (goal.getType().getCategory().equals("Financial")) {
+                    JLabel amountLabel = new JLabel("Amount: " + ((FinancialGoal) goal.getType()).getAmount());
+                    goalPanel.add(amountLabel);
+                } 
             }
             goalPanel.add(descriptionLabel);
 
@@ -82,7 +86,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
                 goalPanel.add(recurrenceLabel);
                 goalPanel.add(frequencyLabel);
             } else if (goal.getInterval().getString().equals("Definite")) {
-                JLabel dueDateLabel = new JLabel("Due Date: " + ((DefiniteGoal) goal.getInterval()).getDueDate());
+                JLabel dueDateLabel = new JLabel("Complete Date: " + ((DefiniteGoal) goal.getInterval()).getCompleteDate());
                 goalPanel.add(dueDateLabel);
             }
 

@@ -92,9 +92,9 @@ execute the following command:
 ```
 #### Running from IDE
 ```
-1 open CS151-ScheduleMe in IDE of choice
-2 navigate to ScheduleMe/src/com/scheduleme/main
-3 run main function
+1 Open CS151-ScheduleMe in IDE of choice
+2 Navigate to ScheduleMe/src/com/scheduleme/main
+3 Run main function
 
 ```
 

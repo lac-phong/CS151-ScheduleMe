@@ -89,6 +89,13 @@ public class UserCSVHandler {
                 FileWriter writer = new FileWriter(csvFilePath);
                 writer.close();
             }
+            csvFilePath = username + "_Personal_goals.csv";
+            file = new File(csvFilePath);
+            if (!file.exists()) {
+                file.createNewFile();
+                FileWriter writer = new FileWriter(csvFilePath);
+                writer.close();
+            }
             csvFilePath = username + "_Completed_goals.csv";
             file = new File(csvFilePath);
             if (!file.exists()) {
@@ -131,6 +138,13 @@ public class UserCSVHandler {
             writer.close();
         }
         csvFilePath = username + "_Educational_goals.csv";
+        file = new File(csvFilePath);
+        if (!file.exists()) {
+            file.createNewFile();
+            FileWriter writer = new FileWriter(csvFilePath);
+            writer.close();
+        }
+        csvFilePath = username + "_Personal_goals.csv";
         file = new File(csvFilePath);
         if (!file.exists()) {
             file.createNewFile();

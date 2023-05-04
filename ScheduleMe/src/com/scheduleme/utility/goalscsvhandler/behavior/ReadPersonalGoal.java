@@ -38,7 +38,7 @@ public class ReadPersonalGoal implements GoalsReadBehavior {
             newGoal.setType(new GeneralGoal());
             user.getGoals().add(newGoal);
         }
-
+        System.out.println("Passed");
         reader.close();
     }
 }

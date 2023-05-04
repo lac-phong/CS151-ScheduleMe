@@ -22,6 +22,7 @@ public interface GoalsReadBehavior{
      void ReadFromCSV(User user) throws IOException;
 }
 class ReadFinancialGoal implements GoalsReadBehavior{
+     private int amount;
      @Override
      public void ReadFromCSV(User user) throws IOException {
           System.out.println("Read goals!");
@@ -32,25 +33,27 @@ class ReadFinancialGoal implements GoalsReadBehavior{
           while ((line = reader.readLine()) != null) {
 
                String[] fields = line.split(",");
-               String category = String.copyValueOf(fields[1].toCharArray());
                String name = String.copyValueOf(fields[2].toCharArray());
                String description = String.copyValueOf(fields[3].toCharArray());
                String activity = String.copyValueOf(fields[4].toCharArray());
                String interval = String.copyValueOf(fields[5].toCharArray());
+               
                Goal newGoal = new Goal(name, description);
 
                if (interval.equals("Indefinite")) {
                     String recurrence = String.copyValueOf(fields[6].toCharArray());
                     int freq = Integer.parseInt(String.copyValueOf(fields[7].toCharArray()));
                     newGoal.setInterval(new IndefiniteGoal(recurrence, freq));
+                    amount = Integer.parseInt(String.copyValueOf(fields[8].toCharArray()));
                } else {
                     String dueDateString = String.copyValueOf(fields[6].toCharArray());
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     LocalDate dueDate = LocalDate.parse(dueDateString, formatter);
+                    amount = Integer.parseInt(String.copyValueOf(fields[7].toCharArray()));
                     newGoal.setInterval(new DefiniteGoal(dueDate));
                }
                //TODO change this code so that is sets to relevant behavior of the class, we don't need this if statement
-              newGoal.setType(new FinancialGoal(activity));
+              newGoal.setType(new FinancialGoal(activity, amount));
 //                } else if (category.equals("Educational")) {
 //                    newGoal.setType(new EducationalGoal(activity));
 //                } else if (category.equals("Relationship")) {
@@ -60,7 +63,7 @@ class ReadFinancialGoal implements GoalsReadBehavior{
 //                } else if (category.equals("General")) {
 //                    newGoal.setType(new GeneralGoal());
 //                }
-               user.goals.add(newGoal);
+               user.getGoals().add(newGoal);
           }
 
           reader.close();

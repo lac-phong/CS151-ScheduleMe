@@ -1,6 +1,7 @@
 package com.scheduleMe.utility.goalsCSVHandler;
 
 import com.scheduleMe.DefiniteGoal;
+import com.scheduleMe.FinancialGoal;
 import com.scheduleMe.Goal;
 import com.scheduleMe.IndefiniteGoal;
 import com.scheduleMe.User;
@@ -46,16 +47,17 @@ public class WriteFinancialGoal implements GoalsWriteBehavior {
             String name = goal.getName();
             String description = goal.getDescription();
             String activity = goal.getType().getActivity();
+            int amount = ((FinancialGoal) goal.getType()).getAmount();
             String interval = goal.getInterval().getString();
             if (goal.getInterval().getString().equals("Definite")) {
                 String dueDate = ((DefiniteGoal) goal.getInterval()).getDueDate().toString();
-                writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + "," + dueDate + "," + "\n");
+                writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + "," + dueDate + "," + amount + "," + "\n");
             } else {
                 String recurrence = ((IndefiniteGoal) goal.getInterval()).getRecurrence();
                 int frequency = ((IndefiniteGoal) goal.getInterval()).getFreq();
 
                 writer.write(username + "," + category + "," + name + "," + description + "," + activity + "," + interval + "," + recurrence + ","
-                        + frequency + "," + "\n");
+                        + frequency + "," + amount + "," + "\n");
             }
         }
         writer.close();

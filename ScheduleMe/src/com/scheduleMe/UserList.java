@@ -20,7 +20,7 @@ public class UserList {
     }
     //helper method to retrieve goal list
     public static ArrayList<Goal> getGoalList(User user){
-        return userHashMap.get(user.getUsername()).goals;
+        return userHashMap.get(user.getUsername()).getGoals();
     }
 
 }

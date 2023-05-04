@@ -9,8 +9,8 @@ public class User { //TODO maybe create a trophy page for completing x amount of
     private String firstName;
     private String lastName;
 
-    public ArrayList<Goal> goals;
-    public ArrayList<Goal> completedGoals;
+    private ArrayList<Goal> goals;
+    private ArrayList<Goal> completedGoals;
 
     public User(String username, String password, String email, String firstName, String lastName) {
         this.username = username;
@@ -20,6 +20,14 @@ public class User { //TODO maybe create a trophy page for completing x amount of
         this.lastName = lastName;
         goals = new ArrayList<>();
         completedGoals = new ArrayList<>();
+    }
+
+    public ArrayList<Goal> getGoals() {
+        return goals;
+    }
+
+    public ArrayList<Goal> getCompletedGoals() {
+        return completedGoals;
     }
 
     public String getUsername() {

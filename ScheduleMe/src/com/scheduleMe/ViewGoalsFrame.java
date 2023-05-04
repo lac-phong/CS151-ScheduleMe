@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.time.LocalDate;
@@ -23,9 +24,9 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
 
     public ViewGoalsFrame(User currentUser) {
         this.currentUser = currentUser;
-        goals = currentUser.goals;
+        goals = currentUser.getGoals();
         endIndex = Math.min(4, goals.size() - 1);
-        completedGoals = currentUser.completedGoals;
+        completedGoals = currentUser.getCompletedGoals();
 
         setTitle("View Goals");
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -77,6 +78,10 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             goalPanel.add(categoryLabel);
             if (!goal.getType().getCategory().equals("General")) {
                 goalPanel.add(activityLabel);
+                if (goal.getType().getCategory().equals("Financial")) {
+                    JLabel amountLabel = new JLabel("Amount: " + String.valueOf(((FinancialGoal) goal.getType()).getAmount()));
+                    goalPanel.add(amountLabel);
+                }
             }
             goalPanel.add(descriptionLabel);
 
@@ -160,30 +165,100 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
             int index = Integer.parseInt(e.getActionCommand().substring(9));
             Goal goal = goals.get(index);
             GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
-            goal.getInterval().setIsComplete(true);
             if (goal.getInterval().getString().equals("Definite")) {
                 ((DefiniteGoal) goal.getInterval()).setCompleteDate(LocalDate.now());
             }
             if (goals.get(index).getType().getCategory().equals("Relationship")){
-                goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                try {
+                    goal.getInterval().setIsComplete(true);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
+                    UserList.getGoalList(currentUser).remove(index);
+                    completedGoals.add(goal);
+                    dispose();
+                    new ViewGoalsFrame(currentUser);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index),currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             } else if (goals.get(index).getType().getCategory().equals("Physical")) {
-                goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                try {
+                    goal.getInterval().setIsComplete(true);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
+                    UserList.getGoalList(currentUser).remove(index);
+                    completedGoals.add(goal);
+                    dispose();
+                    new ViewGoalsFrame(currentUser);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index),currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
             else if (goals.get(index).getType().getCategory().equals("Educational")) {
-                goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                try {
+                    goal.getInterval().setIsComplete(true);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
+                    UserList.getGoalList(currentUser).remove(index);
+                    completedGoals.add(goal);
+                    dispose();
+                    new ViewGoalsFrame(currentUser);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index),currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+            } else if (goal.getType().getCategory().equals("Financial")) {
+                goal.getType().trackActivity();
+                SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        while (!goal.getType().getTrackingDone()) {
+                            Thread.sleep(100); // wait for 100 milliseconds before checking again
+                        }
+                        return null;
+                    }
+                    @Override
+                    protected void done() {
+                        try {
+                            if (goal.getType().getIsComplete()) {
+                                goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                                goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                                goalsCSVHandler.performWrite(goals.get(index),currentUser);
+                                goal.getInterval().setIsComplete(true);
+                                UserList.getGoalList(currentUser).remove(index);
+                                completedGoals.add(goal);
+                                dispose();
+                                new ViewGoalsFrame(currentUser).setVisible(true); // Reinitialize the frame\
+                            } else {
+                                GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
+                                goalsCSVHandler.performDelete(goal,currentUser);
+                                goalsCSVHandler.performWrite(goal, currentUser);
+                                dispose();
+                                new ViewGoalsFrame(currentUser).setVisible(true); // Reinitialize the frame
+                            }
+                        } catch (IOException ex) {
+                            throw new RuntimeException(ex);
+                        }
+                    }
+                };
+                worker.execute();
+            } else {
+                try {
+                    UserList.getGoalList(currentUser).remove(index);
+                    completedGoals.add(goal);
+                    dispose();
+                    new ViewGoalsFrame(currentUser);
+                    goalsCSVHandler.performDelete(goals.get(index), currentUser);
+                    goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
+                    goalsCSVHandler.performWrite(goals.get(index),currentUser);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }
-            try {
-                goalsCSVHandler.performDelete(goals.get(index), currentUser);
-                goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
-                goalsCSVHandler.performWrite(goals.get(index),currentUser);
-
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
-            UserList.getGoalList(currentUser).remove(index);
-            completedGoals.add(goal);
-            dispose();
-            new ViewGoalsFrame(currentUser);
         }
         if (e.getActionCommand().startsWith("delete_")) {
             GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();

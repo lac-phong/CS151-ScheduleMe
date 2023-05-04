@@ -65,7 +65,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             LocalDate today = LocalDate.now();
             LocalDate dueDate = ((DefiniteGoal) goalToDisplay.getInterval()).getDueDate();
             Period period = Period.between(today, dueDate);
-            int daysUntilDue = period.getDays();
+            int daysUntilDue = period.getDays() + period.getMonths() * 30 + period.getYears() * 365;
             String stringDaysUntilDue;
             if (daysUntilDue == 0) {
                 stringDaysUntilDue = "It is due today!";

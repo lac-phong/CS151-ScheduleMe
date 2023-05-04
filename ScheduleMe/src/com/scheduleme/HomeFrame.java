@@ -79,13 +79,13 @@ public class HomeFrame extends JFrame implements ActionListener {
                     stringDaysUntilDue);
             goalLabel.setFont(new Font("Arial", Font.BOLD, 18));
             goalLabel.setHorizontalAlignment(JLabel.CENTER);
-
-            JLabel descriptionLabel = new JLabel("Description: " + goalToDisplay.getDescription());
-
-            JLabel activityLabel = new JLabel("Activity: " + goalToDisplay.getType().getActivity());
             JPanel goalToDisplayPanel = new JPanel();
+            JLabel descriptionLabel = new JLabel("Description: " + goalToDisplay.getDescription());
             goalToDisplayPanel.add(descriptionLabel);
-            goalToDisplayPanel.add(activityLabel);
+            if (!goalToDisplay.getType().getCategory().equals("General")){
+                JLabel activityLabel = new JLabel("Activity: " + goalToDisplay.getType().getActivity());
+                goalToDisplayPanel.add(activityLabel);
+            }
 
             JPanel goalDisplayPanel = new JPanel(new BorderLayout(10, 10));
             goalDisplayPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));

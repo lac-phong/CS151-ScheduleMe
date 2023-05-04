@@ -150,6 +150,7 @@ public class CompletedGoalsFrame extends JFrame implements ActionListener {
             dispose();
             new CompletedGoalsFrame(currentUser);
         } else if (e.getActionCommand().startsWith("incomplete_")) {
+            currentUser.numOfTotalGoalsComplete--;
             int index = Integer.parseInt(e.getActionCommand().substring(11));
             Goal goal = goals.get(index);
             GoalsCSVHandler goalsCSVHandler = new CompletedGoalsCSVHandler();

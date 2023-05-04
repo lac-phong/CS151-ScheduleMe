@@ -5,12 +5,10 @@ ScheduleMe is an application designed to help users maintain and track goals mad
 * [Contributions to presentation](#Contributions-to-presentation)
 * [Contributions to code](#Contributions-to-code)
 * [Issue](#Issue)
-* [Previous Works](#Previous-works)
 * [Assumptions](#Assumptions)
 * [Operations](#Operations)
 * [How to run code](#How-to-run-code)
 * [Snapshot of program running](#Snapshot-of-program-running)
-* [References](#References)
 
 
 ## Team #11
@@ -40,7 +38,6 @@ this solution doesn't fit everyone. ScheduleMe aims to make it easy for users
 who do not wish to track goals or habits on their phone to do so on their 
 computer.
 
-## Previous works
 
 ## Assumptions
 ScheduleMe is designed as a standalone computer program.
@@ -100,5 +97,4 @@ execute the following command:
 
 ## Snapshot of program running
 
-## References
 

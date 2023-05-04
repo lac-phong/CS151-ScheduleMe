@@ -42,4 +42,9 @@ public class PhysicalGoal implements GoalType {
 
     }
 
+    @Override
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
+    }
+
 }

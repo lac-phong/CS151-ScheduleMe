@@ -3,6 +3,7 @@ package com.scheduleme;
 public class FinancialGoal implements GoalType, GoalCompletionListener {
     private final String category = "Financial";
     private String activity;
+    private int initialAmount;
     private int amount;
     private boolean isComplete;
     private boolean trackingDone;
@@ -17,12 +18,29 @@ public class FinancialGoal implements GoalType, GoalCompletionListener {
         this.amount = amount;
     }
 
+    public int getInitialAmount() {
+        return initialAmount;
+    }
+
+    public void setInitialAmount(int initialAmount) {
+        this.initialAmount = initialAmount;
+    }
+
     public int getAmount() {
         return amount;
     }
 
     public void setAmount(int amount) {
         this.amount = amount;
+    }
+
+    public void setTrackingDone(boolean trackingDone) {
+        this.trackingDone = trackingDone;
+    }
+
+    @Override
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
 
     @Override

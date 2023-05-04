@@ -1,9 +1,11 @@
 Username,Password,First_Name,Last_Name,Email,NumOfFinancialGoals,NumOfEducationalGoals,NumOfPhysicalGoals,NumOfRelationshipGoals,numOfTotalGoals
 test,1234,test,test,test@mail.com,0,0,0,0,0
+pokemon,1234,pikachu,rapidash,gengar@gmail.com,0,0,0,0,3
+run,1234,run,run,run,0,0,0,0,0
 gaikwadabhishek,1234,Abhishek,Gaikwada,abishek.gaikwa@sjsu.edu,0,0,0,0,0
 test1,1234,test,test,test,0,0,0,0,0
 demo,1234,Demon,Slayer,demo.mail.com,3,0,0,0,4
-lac,1234,lac,lac,random,5,2,2,7,23
+lac,1234,lac,lac,random,4,2,2,7,22
 weird,1234,weird,weird,weird,0,0,0,0,0
 test2,1234,test,test,test@gmail.com,0,0,0,0,0
 test3,1234,test,test,test@email.com,0,0,0,0,0

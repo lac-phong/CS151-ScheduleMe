@@ -353,6 +353,7 @@ public class CreateGoalFrame extends JFrame implements ActionListener {
                 String activity = (String) financialComboBox.getSelectedItem();
                 int amount = (Integer) amountSpinner.getValue();
                 newGoal.setType(new FinancialGoal(activity));
+                ((FinancialGoal) newGoal.getType()).setInitialAmount(amount);
                 ((FinancialGoal) newGoal.getType()).setAmount(amount);
                 goalsCSVHandler = new FinancialGoalsCSVHandler();
             } else if (category.equals("Educational")) {

@@ -5,6 +5,7 @@ public interface GoalType {
     String getActivity();
     boolean getIsComplete();
     boolean getTrackingDone();
+    void setIsComplete(boolean isComplete);
     void setActivity(String activity);
     void trackActivity();
 }

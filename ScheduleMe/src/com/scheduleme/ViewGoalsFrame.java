@@ -187,6 +187,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     dispose();
                     new ViewGoalsFrame(currentUser);
                     currentUser.numOfRelationshipGoalsCompleted++;
+                    currentUser.numOfTotalGoalsComplete++;
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -203,6 +204,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     dispose();
                     new ViewGoalsFrame(currentUser);
                     currentUser.numOfPhysicalGoalsCompleted++;
+                    currentUser.numOfTotalGoalsComplete++;
 
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -219,6 +221,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     dispose();
                     new ViewGoalsFrame(currentUser);
                     currentUser.numOfEducationalGoalsCompleted++;
+                    currentUser.numOfTotalGoalsComplete++;
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -238,6 +241,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                         try {
                             if (goal.getType().getIsComplete()) {
                                 currentUser.numOfFinancialGoalsCompleted++;
+                                currentUser.numOfTotalGoalsComplete++;
                                 goalsCSVHandler.performDelete(goals.get(index), currentUser);
                                 goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
                                 goalsCSVHandler.performWrite(goals.get(index), currentUser);
@@ -259,6 +263,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     }
                 };
                 worker.execute();
+                ((FinancialGoal) goal.getType()).setTrackingDone(false);
             } else {
                 try {
                     goal.getInterval().setIsComplete(true);
@@ -270,6 +275,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     completedGoals.add(goal);
                     dispose();
                     new ViewGoalsFrame(currentUser);
+                    currentUser.numOfTotalGoalsComplete++;
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -311,7 +317,6 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                 currentUser.achievements.get("Variety").achievementFlashed = true;
 
             }
-            currentUser.numOfTotalGoalsComplete++;
 
         }
         if (e.getActionCommand().startsWith("delete_")) {

@@ -38,8 +38,12 @@ public class EducationalGoal implements GoalType {
 
     @Override
     public void trackActivity() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'trackActivity'");
+    }
+
+    @Override
+    public void setIsComplete(boolean isComplete) {
+        this.isComplete = isComplete;
     }
 
 }

@@ -10,8 +10,8 @@ public class User { //TODO maybe create a trophy page for completing x amount of
     private String firstName;
     private String lastName;
 
-    public ArrayList<Goal> goals;
-    public ArrayList<Goal> completedGoals;
+    private ArrayList<Goal> goals;
+    private ArrayList<Goal> completedGoals;
 
     public int numOfFinancialGoalsCompleted;
     public int numOfEducationalGoalsCompleted;
@@ -31,6 +31,14 @@ public class User { //TODO maybe create a trophy page for completing x amount of
         completedGoals = new ArrayList<>();
         achievements = Achievement.generateAchievements();
 
+    }
+
+    public ArrayList<Goal> getGoals() {
+        return goals;
+    }
+
+    public ArrayList<Goal> getCompletedGoals() {
+        return completedGoals;
     }
 
     public String getUsername() {

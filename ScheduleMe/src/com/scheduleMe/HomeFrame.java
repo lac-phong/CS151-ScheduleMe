@@ -8,6 +8,7 @@ import java.awt.event.*;
 import java.io.IOException;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
 
 public class HomeFrame extends JFrame implements ActionListener {
     private JButton addGoalButton;
@@ -22,10 +23,18 @@ public class HomeFrame extends JFrame implements ActionListener {
     private Goal goalToDisplay;
 
     public HomeFrame(User user) throws IOException {
+        ArrayList<Goal> goals = user.getGoals();
+        for (Goal goal : goals) {
+            if (goal.getInterval().getString().equals("Definite")) {
+                ((DefiniteGoal) goal.getInterval()).setName(goal.getName());
+                ((DefiniteGoal) goal.getInterval()).timeToComplete();
+            }
+        }
+
         currentUser = user;
         populateGoals();
         Achievement.validateAchievements(currentUser);
-        if (!currentUser.goals.isEmpty()){
+        if (!goals.isEmpty()){
             goalToDisplay = findNextGoal();
         }
         else {
@@ -96,7 +105,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             addGoalButton = new JButton("Add Goal");
             addGoalButton.addActionListener(this);
 
-            viewGoalsButton = new JButton("View Current Goals");
+            viewGoalsButton = new JButton("View All Goals");
             viewGoalsButton.addActionListener(this);
 
             logoutButton = new JButton("Logout");
@@ -140,7 +149,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             addGoalButton = new JButton("Add Goal");
             addGoalButton.addActionListener(this);
 
-            viewGoalsButton = new JButton("View Current Goals");
+            viewGoalsButton = new JButton("View All Goals");
             viewGoalsButton.addActionListener(this);
 
             logoutButton = new JButton("Logout");
@@ -199,7 +208,7 @@ public class HomeFrame extends JFrame implements ActionListener {
 
     private void populateGoals() throws IOException {
         GoalsCSVHandler goalsCSVHandler = new FinancialGoalsCSVHandler();
-        if (currentUser.goals.isEmpty()) {
+        if (currentUser.getGoals().isEmpty()) {
             goalsCSVHandler.performRead(currentUser);
             goalsCSVHandler.setGoalsReadBehavior(new ReadRelationshipGoal());
             goalsCSVHandler.performRead(currentUser);
@@ -209,7 +218,7 @@ public class HomeFrame extends JFrame implements ActionListener {
             goalsCSVHandler.performRead(currentUser);
 
         }
-        if (currentUser.completedGoals.isEmpty()){
+        if (currentUser.getCompletedGoals().isEmpty()){
             goalsCSVHandler.setGoalsReadBehavior(new ReadCompletedGoal());
             goalsCSVHandler.performRead(currentUser);
         }

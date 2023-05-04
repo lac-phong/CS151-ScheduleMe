@@ -47,7 +47,7 @@ public class ReadRelationshipGoal implements GoalsReadBehavior {
 //                } else if (category.equals("General")) {
 //                    newGoal.setType(new GeneralGoal());
 //                }
-            user.goals.add(newGoal);
+            user.getGoals().add(newGoal);
         }
 
         reader.close();

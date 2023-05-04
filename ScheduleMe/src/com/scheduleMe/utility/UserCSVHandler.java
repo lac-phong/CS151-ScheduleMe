@@ -148,5 +148,13 @@ public class UserCSVHandler {
             writer.close();
         }
     }
-
+    public static void createUserCSV() {
+        try {
+            File outputFile = new File("output.csv");
+            if (outputFile.createNewFile()) {
+            } else {
+            }
+        } catch (IOException e) {
+        }
+    }
 }

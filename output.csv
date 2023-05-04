@@ -1,6 +1,7 @@
 Username,Password,First_Name,Last_Name,Email,NumOfFinancialGoals,NumOfEducationalGoals,NumOfPhysicalGoals,NumOfRelationshipGoals,numOfTotalGoals
 weird,1234,weird,weird,weird,0,0,0,0,0
 test2,1234,test,test,test@gmail.com,0,0,0,0,0
+test3,1234,test,test,test@email.com,0,0,0,0,0
 test,1234,test,test,test@mail.com,0,0,0,0,0
 yo,1234,yo,yo,yo,0,0,0,0,0
 gaikwadabhishek,1234,Abhishek,Gaikwada,abishek.gaikwa@sjsu.edu,0,0,0,0,0

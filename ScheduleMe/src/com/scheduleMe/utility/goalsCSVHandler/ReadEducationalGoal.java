@@ -37,7 +37,7 @@ public class ReadEducationalGoal implements GoalsReadBehavior {
                 newGoal.setInterval(new DefiniteGoal(dueDate));
             }
             newGoal.setType(new EducationalGoal(activity));
-            user.goals.add(newGoal);
+            user.getGoals().add(newGoal);
         }
 
         reader.close();

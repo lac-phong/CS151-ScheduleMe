@@ -49,7 +49,7 @@ public class ReadCompletedGoal implements GoalsReadBehavior {
             } else if (category.equals("General")) {
                 newGoal.setType(new GeneralGoal());
             }
-            user.completedGoals.add(newGoal);
+            user.getCompletedGoals().add(newGoal);
         }
 
         reader.close();

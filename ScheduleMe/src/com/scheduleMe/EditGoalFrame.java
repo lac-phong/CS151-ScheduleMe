@@ -35,9 +35,10 @@ public class EditGoalFrame extends JFrame implements ActionListener {
     private String[] timeFrames = {"Daily", "Weekly", "Monthly", "Yearly"};
     private JComboBox<String> timeFrameComboBox = new JComboBox<>(timeFrames);
     private JSpinner timeFreqSpinner;
+    private JSpinner amountSpinner;
 
-    int index;
-    Goal goalToModify;
+    private int index;
+    private Goal goalToModify;
 
     public EditGoalFrame(User currentUser, Goal goal, int index){
         this.index = index;
@@ -49,8 +50,13 @@ public class EditGoalFrame extends JFrame implements ActionListener {
         physicalComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         relationshipComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
         educationalComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+        timeFrameComboBox.setFont(new Font("Arial", Font.PLAIN, 16));
+        JLabel amountLabel = new JLabel("Amount: ");
+        amountLabel.setFont(new Font("Arial", Font.PLAIN, 16));
+        SpinnerModel amountModel = new SpinnerNumberModel(1, 1, 1000000, 1);
+        amountSpinner = new JSpinner(amountModel);
 
-        categoryComponents.put("Financial", Arrays.asList(actionLabel, financialComboBox));
+        categoryComponents.put("Financial", Arrays.asList(actionLabel, financialComboBox, amountLabel, amountSpinner));
         categoryComponents.put("Physical", Arrays.asList(actionLabel, physicalComboBox));
         categoryComponents.put("Relationship", Arrays.asList(actionLabel, relationshipComboBox));
         categoryComponents.put("Educational", Arrays.asList(actionLabel, educationalComboBox));
@@ -153,8 +159,8 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                //timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
-                // timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
+                timeFrameComboBox.setSelectedItem(((IndefiniteGoal) goal.getInterval()).getRecurrence());
+                timeFreqSpinner.setValue(((IndefiniteGoal) goal.getInterval()).getFreq());
             } else if (selectedTime.equals("Definite")){
                 List<Component> components = timeComponents.get(selectedTime);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -174,7 +180,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                //dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
+                dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
             }
             else {
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -214,7 +220,8 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                //financialComboBox.setSelectedItem(((FinancialGoal) goal.getType()).getActivity());
+                financialComboBox.setSelectedItem(((FinancialGoal) goal.getType()).getActivity());
+                amountSpinner.setValue(((FinancialGoal) goal.getType()).getAmount());
             } else if (selectedCategory.equals("Physical")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -243,7 +250,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                // physicalComboBox.setSelectedItem(((PhysicalGoal) goal.getType()).getActivity());
+                physicalComboBox.setSelectedItem(goal.getType().getActivity());
             } else if (selectedCategory.equals("Relationship")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -272,7 +279,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                //relationshipComboBox.setSelectedItem(((RelationshipGoal) goal.getType()).getActivity());
+                relationshipComboBox.setSelectedItem(goal.getType().getActivity());
             } else if (selectedCategory.equals("Educational")) {
                 List<Component> components = categoryComponents.get(selectedCategory);
                 int rows = ((GridLayout)formPanel.getLayout()).getRows();
@@ -301,7 +308,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                 for (Component component : components) {
                     formPanel.add(component);
                 }
-                // educationalComboBox.setSelectedItem(((EducationalGoal) goal.getType()).getActivity());
+                educationalComboBox.setSelectedItem(goal.getType().getActivity());
             }
             else {
                 List<Component> formComponents = Arrays.asList(formPanel.getComponents());
@@ -344,27 +351,29 @@ public class EditGoalFrame extends JFrame implements ActionListener {
             String name = nameField.getText();
             String description = descriptionArea.getText();
             GoalsCSVHandler goalsCSVHandler = null; //prepare assignment for goalhandler
-
-            Goal newGoal = new Goal(name, description);
+            goalToModify.setName(name);
+            goalToModify.setDescription(description);
             String category = (String) categoryComboBox.getSelectedItem();
             if (category.equals("Financial")) {
                 String activity = (String) financialComboBox.getSelectedItem();
-                newGoal.setType(new FinancialGoal(activity));
+                int amount = (Integer) amountSpinner.getValue();
+                goalToModify.setType(new FinancialGoal(activity));
+                ((FinancialGoal) goalToModify.getType()).setAmount(amount);
                 goalsCSVHandler = new FinancialGoalsCSVHandler();
             } else if (category.equals("Educational")) {
                 String activity = (String) financialComboBox.getSelectedItem();
-                newGoal.setType(new EducationalGoal(activity));
+                goalToModify.setType(new EducationalGoal(activity));
                 goalsCSVHandler = new EducationalGoalsCSVHandler();
             } else if (category.equals("Relationship")) {
                 String activity = (String) financialComboBox.getSelectedItem();
-                newGoal.setType(new RelationshipGoal(activity));
+                goalToModify.setType(new RelationshipGoal(activity));
                 goalsCSVHandler = new RelationshipGoalsCSVHandler();
             } else if (category.equals("Physical")) {
                 String activity = (String) physicalComboBox.getSelectedItem();
-                newGoal.setType(new PhysicalGoal(activity));
+                goalToModify.setType(new PhysicalGoal(activity));
                 goalsCSVHandler = new PhysicalGoalsCSVHandler();
             } else if (category.equals("General")) {
-                newGoal.setType(new GeneralGoal());
+                goalToModify.setType(new GeneralGoal());
                 goalsCSVHandler = new PersonalGoalsCSVHandler();
             }
 
@@ -372,16 +381,14 @@ public class EditGoalFrame extends JFrame implements ActionListener {
             if (interval.equals("Indefinite")) {
                 String timeFrame = (String) timeFrameComboBox.getSelectedItem();
                 int freq = (int) timeFreqSpinner.getValue();
-                newGoal.setInterval(new IndefiniteGoal(timeFrame, freq));
+                goalToModify.setInterval(new IndefiniteGoal(timeFrame, freq));
             } else if (interval.equals("Definite")) {
                 Date date = (Date) dueDateSpinner.getValue();
                 LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                newGoal.setInterval(new DefiniteGoal(dueDate));
+                goalToModify.setInterval(new DefiniteGoal(dueDate));
             }
 
             JOptionPane.showMessageDialog(this, goalToModify.getName() + " modified!");
-            UserList.getGoalList(currentUser).add(newGoal); // maybe pass in anonymous declaration?
-            UserList.getGoalList(currentUser).remove(index);
             try {
                 if (goalToModify.getType().getCategory().equals("Financial")) {
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
@@ -397,18 +404,18 @@ public class EditGoalFrame extends JFrame implements ActionListener {
 
                 goalsCSVHandler.performDelete(goalToModify,currentUser);
 
-                if (newGoal.getType().getCategory().equals("Financial")) {
+                if (goalToModify.getType().getCategory().equals("Financial")) {
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteFinancialGoal());
-                } else if (newGoal.getType().getCategory().equals("Educational")) {
+                } else if (goalToModify.getType().getCategory().equals("Educational")) {
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteEducationalGoal());
-                } else if (newGoal.getType().getCategory().equals("Relationship")) {
+                } else if (goalToModify.getType().getCategory().equals("Relationship")) {
                     goalsCSVHandler.setGoalsWriteBehavior(new WriteRelationshipGoal());
-                } else if (newGoal.getType().getCategory().equals("Physical")) {
+                } else if (goalToModify.getType().getCategory().equals("Physical")) {
                     goalsCSVHandler.setGoalsWriteBehavior(new WritePhysicalGoal());
                 } else if (category.equals("General")) {
                     goalsCSVHandler = new PersonalGoalsCSVHandler();
                 }
-                goalsCSVHandler.performWrite(newGoal, currentUser);
+                goalsCSVHandler.performWrite(goalToModify, currentUser);
 
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
@@ -419,40 +426,6 @@ public class EditGoalFrame extends JFrame implements ActionListener {
             } catch (IOException ex) {
                 throw new RuntimeException(ex);
             }
-        } else if (e.getActionCommand().startsWith("finaledit_")) {
-            Goal goal = currentUser.goals.get(Integer.parseInt(e.getActionCommand().substring(10)));
-            goal.setName(nameField.getText());
-            goal.setDescription(descriptionArea.getText());
-            String category = (String) categoryComboBox.getSelectedItem();
-            if (category.equals("Financial")) {
-                String activity = (String) financialComboBox.getSelectedItem();
-                goal.setType(new FinancialGoal(activity));
-            } else if (category.equals("Educational")) {
-                String activity = (String) financialComboBox.getSelectedItem();
-                goal.setType(new EducationalGoal(activity));
-            } else if (category.equals("Relationship")) {
-                String activity = (String) financialComboBox.getSelectedItem();
-                goal.setType(new RelationshipGoal(activity));
-            } else if (category.equals("Physical")) {
-                String activity = (String) physicalComboBox.getSelectedItem();
-                goal.setType(new PhysicalGoal(activity));
-            } else if (category.equals("General")) {
-                goal.setType(new GeneralGoal());
-            }
-
-            String interval = (String) timeComboBox.getSelectedItem();
-            if (interval.equals("Indefinite")) {
-                String timeFrame = (String) timeFrameComboBox.getSelectedItem();
-                int freq = (int) timeFreqSpinner.getValue();
-                goal.setInterval(new IndefiniteGoal(timeFrame, freq));
-            } else if (interval.equals("Definite")) {
-                Date date = (Date) dueDateSpinner.getValue();
-                LocalDate dueDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                goal.setInterval(new DefiniteGoal(dueDate));
-            }
-
-            dispose();
-            new ViewGoalsFrame(currentUser);
-        }
+        } 
     }
 }

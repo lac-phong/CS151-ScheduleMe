@@ -96,5 +96,6 @@ execute the following command:
 ```
 
 ## Snapshot of program running
+![image](https://drive.google.com/uc?export=view&id=1OC-5xacdAGbdpuee7Zi7GWjIo_vj7xMq)
 
 

@@ -24,7 +24,8 @@ ScheduleMe is an application designed to help users maintain and track goals mad
 * Tyler Moquin:
 
 ## Contributions to code
-* Steven Stansberry: Login and signup functionality, Storage and retrieval of user information (CSVs),
+* Steven Stansberry: Login and signup functionality, Storage and retrieval of user information via
+, implemtnation of the strategy design pattern for behavior of write and reads for CSVHandler classes.
   GUI for homeFrame, startUpFrame, signUpFrame, loginFrame, and achievementsFrame. User and
   achievement class.
 * Lac-Phong Nguyen: Created and implemented Goal object with GoalType (General, Financial, Relationship, Educational, Physical) and GoalInterval (Indefinite, Definite) functionality through strategy design pattern, created and implemented notification window for goals within 1 day of being due, implemented method of tracking financial goal progress, general bug fixes, created GUI for ViewGoalsFrame, CompletedGoalsFrame, CreateGoalFrame, and EditGoalFrame

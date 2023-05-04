@@ -187,7 +187,7 @@ public class EditGoalFrame extends JFrame implements ActionListener {
                     formPanel.add(component);
                 }
                 if (goal.getInterval().getString().equals("Definite")) {
-                    dueDateSpinner.setValue(((DefiniteGoal) goal.getInterval()).getDueDate());
+                    dueDateSpinner.setValue(Date.from(((DefiniteGoal) goal.getInterval()).getDueDate().atStartOfDay(ZoneId.systemDefault()).toInstant()));
                 }
             } else {
                 int rows = ((GridLayout) formPanel.getLayout()).getRows();

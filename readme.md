@@ -57,9 +57,14 @@ also incorporates an achievement system as an incentive to motivate the user.
 - Add goal: The user is able to create a goal with custom name, description,
 category, activity, time interval, due date or frequency depending on the 
 time interval set
-- 2
-- 3
-- 4
+- Modify goal: Once a goal is created, the user will be able to modify its attributes
+- Delete goal: Deletes a goal
+- Complete goal: By marking a goal as complete, it will be removed from the view goals frame
+and moved into the view completed goals frame. Completing a goal will allow users to earn achievements
+- Achievements: Users are able to earn achievements by completing a certain number of 
+goals within a given category. On the achievements page, the user will also be able to see
+some of their statistics regarding number of goals completed as well as their progress
+towards these achievements
 
 ## Solution
 Since ScheduleMe is designed to be used on the computer, it gives users a 

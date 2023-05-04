@@ -223,7 +223,6 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     throw new RuntimeException(ex);
                 }
             } else if (goal.getType().getCategory().equals("Financial")) {
-                currentUser.numOfFinancialGoalsCompleted++;
                 goal.getType().trackActivity();
                 SwingWorker<Void, Void> worker = new SwingWorker<Void, Void>() {
                     @Override
@@ -238,6 +237,7 @@ public class ViewGoalsFrame extends JFrame implements ActionListener {
                     protected void done() {
                         try {
                             if (goal.getType().getIsComplete()) {
+                                currentUser.numOfFinancialGoalsCompleted++;
                                 goalsCSVHandler.performDelete(goals.get(index), currentUser);
                                 goalsCSVHandler.setGoalsWriteBehavior(new WriteCompletedGoal());
                                 goalsCSVHandler.performWrite(goals.get(index), currentUser);

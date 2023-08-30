@@ -27,7 +27,7 @@ ScheduleMe is an application designed to help users maintain and track goals mad
   GUI for homeFrame, startUpFrame, signUpFrame, loginFrame, and achievementsFrame. User and
   achievement class. Incorporated singleton design pattern for handling the instance of accounts.
 * Lac-Phong Nguyen: Created and implemented Goal object with GoalType (General, Financial, Relationship, Educational, Physical) and GoalInterval (Indefinite, Definite) functionality through strategy design pattern, created and implemented notification window for goals within 1 day of being due, implemented method of tracking financial goal progress, general bug fixes, created GUI for ViewGoalsFrame, CompletedGoalsFrame, CreateGoalFrame, and EditGoalFrame
-* Tyler Moquin: Designed and implemented the original architecture for the project, which was moved by someone else into the Backend folder recently and mostly not used in the final project. Designed and implemented an entire, complete version called Goal Tracker, which is locaed in the /src-v2 folder and which satisfies the original design criteria.
+* Tyler Moquin: Designed and implemented the original architecture for the project, which was moved by someone else into the Backend folder recently and mostly not used in the final project.
 
 ## Issue
 There are a plethora of habit or goal related apps, However
